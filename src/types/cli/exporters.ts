@@ -33,8 +33,8 @@ export interface RelatorioJson {
       exclude?: string[];
       globalExclude?: string[];
     };
-    /** Versão do Oráculo */
-    oraculoVersion?: string;
+    /** Versão do Doutor */
+    doutorVersion?: string;
     /** Nome do projeto */
     projectName?: string;
   };

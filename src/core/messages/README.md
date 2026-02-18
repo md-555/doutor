@@ -1,8 +1,8 @@
-> Proveniência e Autoria: Este documento integra o projeto Oráculo (licença MIT).
+> Proveniência e Autoria: Este documento integra o projeto Doutor (licença MIT).
 
-# Sistema de Mensagens Centralizado do Oráculo
+# Sistema de Mensagens Centralizado do Doutor
 
-Este diretório centraliza **TODAS** as mensagens, logs, ícones e sugestões do Oráculo.
+Este diretório centraliza **TODAS** as mensagens, logs, ícones e sugestões do Doutor.
 
 ## Arquitetura
 

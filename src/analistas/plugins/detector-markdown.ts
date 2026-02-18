@@ -64,7 +64,7 @@ const DEFAULT_WHITELIST: MarkdownWhitelistConfig = {
   patterns: ['**/relatorios/**', 'docs/historico/**', 'tests/**', 'tmp*.md'],
   dirs: [
     'pre-public',
-    'preview-oraculo',
+    'preview-doutor',
     '.abandonados',
     '.deprecados',
     'relatorios',
@@ -150,11 +150,11 @@ function hasRiskReferenceMarker(content: string): boolean {
   return /<!--\s*RISCO_REFERENCIA_OK\s*-->/i.test(content);
 }
 
-function hasOraculoIgnoreMarker(content: string, key: string): boolean {
-  // Ex.: <!-- oraculo-ignore: license-check -->
+function hasDoutorIgnoreMarker(content: string, key: string): boolean {
+  // Ex.: <!-- doutor-ignore: license-check -->
   const escaped = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   return new RegExp(
-    `<!--\\s*oraculo-ignore\\s*:\\s*${escaped}\\s*-->`,
+    `<!--\\s*doutor-ignore\\s*:\\s*${escaped}\\s*-->`,
     'i',
   ).test(content);
 }
@@ -250,7 +250,7 @@ async function analisarArquivoMarkdown(
     content,
     options.headerLines || 30,
   );
-  const ignoreLicenseCheck = hasOraculoIgnoreMarker(content, 'license-check');
+  const ignoreLicenseCheck = hasDoutorIgnoreMarker(content, 'license-check');
 
   // Verificar proveniência
   if (options.checkProveniencia !== false && !temProveniencia && !whitelisted) {
@@ -342,7 +342,7 @@ async function analisarArquivoMarkdown(
 }
 
 /**
- * Converte análise para ocorrências do Oráculo
+ * Converte análise para ocorrências do Doutor
  */
 function converterParaOcorrencias(
   analise: MarkdownAnaliseArquivo,

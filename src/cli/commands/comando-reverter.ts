@@ -15,7 +15,7 @@ export function registrarComandoReverter(program: Command): void {
     .command('reverter')
     .description('Gerencia mapa de reversão para moves aplicados')
     .hook('preAction', async () => {
-      if (process.env.ORACULO_TEST_FAST === '1') {
+      if (process.env.DOUTOR_TEST_FAST === '1') {
         try {
           await mapaReversao.carregar();
         } catch (err) {

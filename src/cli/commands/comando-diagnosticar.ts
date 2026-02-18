@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// @oraculo-disable tipo-literal-inline-complexo
+// @doutor-disable tipo-literal-inline-complexo
 // Justificativa: tipos inline para opções de comando CLI são locais e não precisam de extração
 import { optionsDiagnosticar } from '@cli/options-diagnosticar.js';
 import { processarDiagnostico } from '@cli/processamento-diagnostico.js';
@@ -86,7 +86,7 @@ export function comandoDiagnosticar(
       }
 
       // Fast mode de teste: retorna estrutura mínima simulada sem executar análise completa
-      if (process.env.ORACULO_TEST_FAST === '1') {
+      if (process.env.DOUTOR_TEST_FAST === '1') {
         if (opts.json) {
           // Estrutura mínima para satisfazer consumidores dos testes
           console.log(

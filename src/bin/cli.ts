@@ -20,7 +20,7 @@ import type { CommanderError } from 'commander';
 import { Command } from 'commander';
 
 // 🌐 Flags globais aplicáveis em todos os comandos
-import type { ErrorLike, OraculoGlobalFlags } from '@';
+import type { ErrorLike, DoutorGlobalFlags } from '@';
 import { extrairMensagemErro } from '@';
 
 // caminho do módulo (usado para localizar arquivos de configuração)
@@ -46,7 +46,7 @@ const program = new Command();
 
 // �️ Função para aplicar flags globais
 async function aplicarFlagsGlobais(opts: unknown) {
-  const flags = opts as OraculoGlobalFlags;
+  const flags = opts as DoutorGlobalFlags;
   // Sanitização e normalização (pode lançar)
   try {
     // lazy import para não criar ciclo
@@ -66,7 +66,7 @@ async function aplicarFlagsGlobais(opts: unknown) {
     (flags as Record<string, unknown>)['exportFull'],
   );
   const debugAtivo =
-    Boolean(flags.debug) || process.env.ORACULO_DEBUG === 'true';
+    Boolean(flags.debug) || process.env.DOUTOR_DEBUG === 'true';
   config.DEV_MODE = debugAtivo;
   config.SCAN_ONLY = Boolean(flags.scanOnly);
   // Se silence está ativo, verbose é sempre falso
@@ -94,8 +94,8 @@ export async function mainCli(): Promise<void> {
   // Inicializa memória de conversas
 
   // Handler de rejeições não tratadas com mensagem identificável (usado por testes e ops)
-  function __oraculo_unhandledRejectionHandler(err: ErrorLike) {
-    const MARKER = 'Oraculo: unhandled rejection';
+  function __doutor_unhandledRejectionHandler(err: ErrorLike) {
+    const MARKER = 'Doutor: unhandled rejection';
     const mensagem = extrairMensagemErro(err);
 
     console.error(MARKER, mensagem);
@@ -107,7 +107,7 @@ export async function mainCli(): Promise<void> {
     }
   }
 
-  process.on('unhandledRejection', __oraculo_unhandledRejectionHandler);
+  process.on('unhandledRejection', __doutor_unhandledRejectionHandler);
 
   // Mantemos handler para exceções não capturadas — garante comportamento crítico em produção
   process.on('uncaughtException', (err: ErrorLike) => {
@@ -134,7 +134,7 @@ export async function mainCli(): Promise<void> {
           __dirname,
           '..',
           '..',
-          'oraculo.config.safe.json',
+          'doutor.config.safe.json',
         );
         const raw = await lerArquivoTexto(safeCfgPath);
         const safeCfg = raw ? JSON.parse(raw) : {};
@@ -176,7 +176,7 @@ export async function mainCli(): Promise<void> {
       console.log(chalk.cyan('\n📊 RESUMO DA CONVERSA'));
       console.log(`Total: ${resumo.totalMessages}`);
       console.log(`Usuário: ${resumo.userMessages}`);
-      console.log(`Oráculo: ${resumo.assistantMessages}`);
+      console.log(`Doutor: ${resumo.assistantMessages}`);
       if (resumo.firstMessage) console.log(`Primeira: ${resumo.firstMessage}`);
       if (resumo.lastMessage) console.log(`Última: ${resumo.lastMessage}`);
       console.log('');
@@ -223,8 +223,8 @@ export async function mainCli(): Promise<void> {
 
 // Global handler para reduzir falsos-positivos e capturar rejeições não tratadas.
 // A mensagem contém um marcador único para que testes possam verificar o registro.
-function __oraculo_unhandledRejectionHandler(err: ErrorLike) {
-  const MARKER = 'Oraculo: unhandled rejection';
+function __doutor_unhandledRejectionHandler(err: ErrorLike) {
+  const MARKER = 'Doutor: unhandled rejection';
   const mensagem = extrairMensagemErro(err);
   // Mensagem identificável: usada pelos testes unitários para detectar o handler
   // e por operadores para diagnóstico rápido.
@@ -240,7 +240,7 @@ function __oraculo_unhandledRejectionHandler(err: ErrorLike) {
     process.exit(1);
   }
 }
-process.on('unhandledRejection', __oraculo_unhandledRejectionHandler);
+process.on('unhandledRejection', __doutor_unhandledRejectionHandler);
 
 // Invoca a função principal apenas quando o arquivo for executado como entrypoint.
 // Isso evita efeitos colaterais ao importar o módulo em testes ou ferramentas de análise.

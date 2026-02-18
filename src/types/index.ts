@@ -40,7 +40,7 @@ export type {
   ModoOperacao,
   NivelLog,
   OpcoesProcessamentoFiltros,
-  OraculoGlobalFlags,
+  DoutorGlobalFlags,
   OtimizarSvgOptions,
   ResultadoValidacao,
   TipoLinguagemProjeto,

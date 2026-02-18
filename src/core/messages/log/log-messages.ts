@@ -18,7 +18,7 @@ import {
 export const LogMessages = {
   sistema: {
     inicializacao: {
-      sucesso: `${ICONES_FEEDBACK.foguete} Oráculo inicializado em {tempo}ms`,
+      sucesso: `${ICONES_FEEDBACK.foguete} Doutor inicializado em {tempo}ms`,
       falha: `${ICONES_STATUS.falha} Falha na inicialização: {erro}`,
       configuracao: `${ICONES_ARQUIVO.config} Configuração carregada: {fonte} ({campos} campos)`,
     },
@@ -93,7 +93,7 @@ export const LogMessages = {
       avisos_encontrados: `${ICONES_RELATORIO.warning} {total} avisos encontrados`,
       quick_fixes_muitos: `${ICONES_ACAO.correcao} {total} correções automáticas disponíveis:`,
       quick_fixes_comando:
-        '   → ORACULO_ALLOW_MUTATE_FS=1 npm run diagnosticar --fix',
+        '   → DOUTOR_ALLOW_MUTATE_FS=1 npm run diagnosticar --fix',
       quick_fixes_executar: '   (comando pronto para executar)',
       todos_muitos: `${ICONES_RELATORIO.lista} {total} TODOs encontrados - considere --include para focar em área específica`,
       todos_poucos: `${ICONES_RELATORIO.lista} {total} TODOs encontrados - bom controle!`,
@@ -184,7 +184,7 @@ export const LogMessages = {
     integridade_ok: `${ICONES_DIAGNOSTICO.guardian} ${ICONES_STATUS.ok} Guardian: integridade preservada.`,
     baseline_criado: `${ICONES_DIAGNOSTICO.guardian} ${ICONES_NIVEL.info} Guardian baseline criado.`,
     baseline_aceito: `${ICONES_DIAGNOSTICO.guardian} ${ICONES_NIVEL.aviso} Guardian: novo baseline aceito — execute novamente.`,
-    alteracoes_detectadas: `${ICONES_DIAGNOSTICO.guardian} ${ICONES_NIVEL.erro} Guardian: alterações suspeitas detectadas! Considere executar 'oraculo guardian --diff'.`,
+    alteracoes_detectadas: `${ICONES_DIAGNOSTICO.guardian} ${ICONES_NIVEL.erro} Guardian: alterações suspeitas detectadas! Considere executar 'doutor guardian --diff'.`,
     bloqueado: `${ICONES_DIAGNOSTICO.guardian} ${ICONES_STATUS.falha} Guardian bloqueou: alterações suspeitas ou erro fatal.`,
     modo_permissivo: `${ICONES_DIAGNOSTICO.guardian} ${ICONES_NIVEL.aviso} Modo permissivo: prosseguindo sob risco.`,
     scan_only: `${ICONES_DIAGNOSTICO.guardian} ${ICONES_NIVEL.info} Modo scan-only: {arquivos} arquivos mapeados.`,
@@ -194,13 +194,13 @@ export const LogMessages = {
     full_scan_warning_baseline: `${ICONES_NIVEL.aviso} --full-scan ativo, mas será criado baseline com escopo expandido temporariamente.`,
     aceitando_baseline: `\n${ICONES_COMANDO.atualizar} Aceitando novo baseline de integridade...\n`,
     baseline_aceito_sucesso: `${ICONES_STATUS.ok} Novo baseline de integridade aceito com sucesso!`,
-    comparando_integridade: `\n${ICONES_DIAGNOSTICO.stats} Comparando integridade do Oráculo com o baseline...\n`,
+    comparando_integridade: `\n${ICONES_DIAGNOSTICO.stats} Comparando integridade do Doutor com o baseline...\n`,
     diferencas_detectadas: `${ICONES_RELATORIO.error} Diferenças detectadas:`,
     diferenca_item: '  - {diferenca}',
     comando_diff_recomendado:
       'Execute com --diff para mostrar diferenças detalhadas ou --accept para aceitar novo baseline.',
     integridade_preservada: `${ICONES_STATUS.ok} Nenhuma diferença detectada. Integridade preservada.`,
-    verificando_integridade: `\n${ICONES_DIAGNOSTICO.guardian} Verificando integridade do Oráculo...\n`,
+    verificando_integridade: `\n${ICONES_DIAGNOSTICO.guardian} Verificando integridade do Doutor...\n`,
     baseline_criado_console: `${ICONES_DIAGNOSTICO.guardian} Guardian baseline criado`,
     baseline_atualizado: `${ICONES_DIAGNOSTICO.guardian} Baseline atualizado e aceito`,
     alteracoes_suspeitas: `${ICONES_DIAGNOSTICO.guardian} ${ICONES_NIVEL.erro} Alterações suspeitas detectadas!`,

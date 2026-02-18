@@ -9,7 +9,7 @@ import { formatarPrettierMinimo } from '@shared/impar/formater.js';
 
 import { criarAnalista, criarOcorrencia } from '@';
 
-const disableEnv = process.env.ORACULO_DISABLE_PLUGIN_FORMATADOR === '1';
+const disableEnv = process.env.DOUTOR_DISABLE_PLUGIN_FORMATADOR === '1';
 
 type Msg = ReturnType<typeof criarOcorrencia>;
 
@@ -47,7 +47,7 @@ export const analistaFormatador = criarAnalista({
   nome: 'analista-formatador',
   categoria: 'formatacao',
   descricao:
-    'Verifica formatação mínima interna do Oráculo (JSON/Markdown/YAML).',
+    'Verifica formatação mínima interna do Doutor (JSON/Markdown/YAML).',
   global: false,
   test: (relPath: string): boolean =>
     /\.(json|md|markdown|ya?ml)$/i.test(relPath),

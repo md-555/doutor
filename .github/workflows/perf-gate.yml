@@ -85,9 +85,9 @@ jobs:
 
       - name: Run Diagnostic Benchmark
         run: |
-          echo "## Benchmark: oraculo diagnosticar"
+          echo "## Benchmark: doutor diagnosticar"
           time node dist/bin/index.js diagnosticar --json > /dev/null 2>&1 || true
 
           echo ""
-          echo "## Benchmark: oraculo diagnosticar --fast"
+          echo "## Benchmark: doutor diagnosticar --fast"
           time node dist/bin/index.js diagnosticar --fast --json > /dev/null 2>&1 || true

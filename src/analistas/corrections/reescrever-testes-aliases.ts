@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// @oraculo-disable tipo-literal-inline-complexo
+// @doutor-disable tipo-literal-inline-complexo
 // Justificativa: tipos locais usados internamente para parsing de caminhos
 import fsSync from 'node:fs';
 import path from 'node:path';

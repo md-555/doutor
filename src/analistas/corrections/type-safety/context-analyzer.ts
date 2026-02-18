@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// @oraculo-disable problema-documentacao
+// @doutor-disable problema-documentacao
 // Justificativa: funções estão tipadas, detector está identificando falsos positivos
 /**
  * Analisador de contexto para Type Safety Auto-Fix

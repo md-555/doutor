@@ -168,7 +168,7 @@ async function salvarArquetipo(
     };
 
     // Salvar em arquivo
-    const outputPath = path.join(baseDir, 'oraculo.repo.arquetipo.json');
+    const outputPath = path.join(baseDir, 'doutor.repo.arquetipo.json');
     await fs.writeFile(outputPath, JSON.stringify(arquetipo, null, 2), 'utf-8');
 
     if (!silent) {

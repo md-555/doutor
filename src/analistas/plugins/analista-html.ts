@@ -12,7 +12,7 @@ import { parseDocument } from 'htmlparser2';
 
 import { criarAnalista, criarOcorrencia } from '@';
 
-const disableEnv = process.env.ORACULO_DISABLE_PLUGIN_HTML === '1';
+const disableEnv = process.env.DOUTOR_DISABLE_PLUGIN_HTML === '1';
 
 type Msg = ReturnType<typeof criarOcorrencia>;
 

@@ -111,7 +111,7 @@ export interface ParserOptions {
 }
 
 export interface BabelFileExtra extends BabelFile {
-  oraculoExtra?: {
+  doutorExtra?: {
     lang: string;
     rawAst: RawAst;
     metadata?: ParserMetadata;

@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
-// @oraculo-disable tipo-literal-inline-complexo
+// @doutor-disable tipo-literal-inline-complexo
 // Justificativa: tipos locais para arquétipos personalizados
 /**
- * Sistema de Arquétipos Personalizados do Oráculo
+ * Sistema de Arquétipos Personalizados do Doutor
  *
  * Permite que usuários criem arquétipos personalizados para seus projetos,
  * mantendo compatibilidade com arquétipos oficiais e oferecendo sugestões
@@ -16,25 +16,25 @@ import { ARQUETIPOS } from '@analistas/estrategistas/arquetipos-defs.js';
 // NOTA: parseFileAST ainda não foi implementado no módulo de parsing
 // import { parseFileAST } from '@core/parsing/parser.js';
 import { log } from '@core/messages/index.js';
-import { ORACULO_FILES } from '@core/registry/paths.js';
+import { DOUTOR_FILES } from '@core/registry/paths.js';
 import { lerEstado, salvarEstado } from '@shared/persistence/persistencia.js';
 
 import type { ArquetipoEstruturaDef, ArquetipoPersonalizado } from '@';
 
 // Nome do arquivo legado (para compatibilidade)
-const ARQUETIPO_PERSONALIZADO_FILENAME = 'oraculo.repo.arquetipo.json';
+const ARQUETIPO_PERSONALIZADO_FILENAME = 'doutor.repo.arquetipo.json';
 
 /**
  * Carrega o arquétipo personalizado do projeto atual
- * Tenta primeiro o novo caminho (.oraculo/estrutura.arquetipo.json),
- * depois o legado (raiz/oraculo.repo.arquetipo.json)
+ * Tenta primeiro o novo caminho (.doutor/estrutura.arquetipo.json),
+ * depois o legado (raiz/doutor.repo.arquetipo.json)
  */
 
 export async function carregarArquetipoPersonalizado(
   baseDir: string = process.cwd(),
 ): Promise<ArquetipoPersonalizado | null> {
   // Tentar novo caminho primeiro
-  const novoCaminho = ORACULO_FILES.ESTRUTURA_ARQUETIPO;
+  const novoCaminho = DOUTOR_FILES.ESTRUTURA_ARQUETIPO;
   const caminhoLegado = path.join(baseDir, ARQUETIPO_PERSONALIZADO_FILENAME);
 
   try {
@@ -80,7 +80,7 @@ export async function carregarArquetipoPersonalizado(
 }
 /**
  * Salva o arquétipo personalizado do projeto atual
- * Usa o novo caminho (.oraculo/estrutura.arquetipo.json)
+ * Usa o novo caminho (.doutor/estrutura.arquetipo.json)
  */
 export async function salvarArquetipoPersonalizado(
   arquetipo: Omit<ArquetipoPersonalizado, 'metadata'>,
@@ -96,12 +96,12 @@ export async function salvarArquetipoPersonalizado(
   };
 
   // Usar novo caminho centralizado
-  const novoCaminho = ORACULO_FILES.ESTRUTURA_ARQUETIPO;
+  const novoCaminho = DOUTOR_FILES.ESTRUTURA_ARQUETIPO;
 
-  // Garantir que o diretório .oraculo existe
-  const oraculoDir = path.dirname(novoCaminho);
+  // Garantir que o diretório .doutor existe
+  const doutorDir = path.dirname(novoCaminho);
   try {
-    await fs.mkdir(oraculoDir, { recursive: true });
+    await fs.mkdir(doutorDir, { recursive: true });
   } catch {
     // Diretório já existe
   }
@@ -121,7 +121,7 @@ export async function existeArquetipoPersonalizado(
 ): Promise<boolean> {
   // Verificar novo caminho primeiro
   try {
-    await fs.access(ORACULO_FILES.ESTRUTURA_ARQUETIPO);
+    await fs.access(DOUTOR_FILES.ESTRUTURA_ARQUETIPO);
     return true;
   } catch {
     // Tentar caminho legado
@@ -166,7 +166,7 @@ export function gerarSugestaoArquetipoPersonalizado(projetoDesconhecido: {
   const sugestao = `
 🌟 Projeto personalizado detectado: "${projetoDesconhecido.nome}"
 
-O Oráculo identificou uma estrutura de projeto que não corresponde a arquétipos oficiais,
+O Doutor identificou uma estrutura de projeto que não corresponde a arquétipos oficiais,
 mas você pode criar um arquétipo personalizado para receber sugestões otimizadas!
 
 📁 Estrutura detectada:
@@ -180,10 +180,10 @@ ${projetoDesconhecido.arquivosRaiz
 ${projetoDesconhecido.arquivosRaiz.length > 5 ? `  • ... e mais ${projetoDesconhecido.arquivosRaiz.length - 5} arquivos` : ''}
 
 💡 Para criar seu arquétipo personalizado, execute:
-   oraculo diagnosticar --criar-arquetipo
+   doutor diagnosticar --criar-arquetipo
 
-Isso criará um arquivo 'oraculo.repo.arquetipo.json' com base na estrutura atual,
-que o Oráculo usará para oferecer sugestões personalizadas mantendo as melhores práticas.
+Isso criará um arquivo 'doutor.repo.arquetipo.json' com base na estrutura atual,
+que o Doutor usará para oferecer sugestões personalizadas mantendo as melhores práticas.
 `;
 
   return sugestao;

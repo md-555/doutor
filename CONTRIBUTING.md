@@ -1,13 +1,13 @@
-> **Proveniência e Autoria**: Este documento integra o projeto Oráculo (licença MIT).
+> **Proveniência e Autoria**: Este documento integra o projeto Doutor (licença MIT).
 > Nada aqui implica cessão de direitos morais/autorais.
 > Conteúdos de terceiros não licenciados de forma compatível não devem ser incluídos.
 > Referências a materiais externos devem ser linkadas e reescritas com palavras próprias.
 
-# 🤝 Guia de Contribuição para o Projeto Oráculo
+# 🤝 Guia de Contribuição para o Projeto Doutor
 
-**Agradecemos seu interesse em contribuir para o Oráculo!** 🎉
+**Agradecemos seu interesse em contribuir para o Doutor!** 🎉
 
-O Oráculo é uma ferramenta de análise de código estático desenvolvida para ajudar desenvolvedores a manterem código de alta qualidade. Valorizamos todas as formas de contribuição, desde correções de bugs e novas funcionalidades até melhorias na documentação e relatórios de issues.
+O Doutor é uma ferramenta de análise de código estático desenvolvida para ajudar desenvolvedores a manterem código de alta qualidade. Valorizamos todas as formas de contribuição, desde correções de bugs e novas funcionalidades até melhorias na documentação e relatórios de issues.
 
 Este guia visa facilitar sua participação no projeto, garantindo que suas contribuições sejam eficazes e alinhadas com nossos padrões de qualidade.
 
@@ -32,11 +32,11 @@ Antes de começar a contribuir, certifique-se de que possui:
 # Fork o repositório no GitHub (botão "Fork" no canto superior direito)
 
 # Clone seu fork (substitua SEU-USUARIO pelo seu nome de usuário)
-git clone https://github.com/SEU-USUARIO/oraculo.git
-cd oraculo
+git clone https://github.com/SEU-USUARIO/doutor.git
+cd doutor
 
 # Adicione o repositório upstream como remote
-git remote add upstream https://github.com/ascentusoss/oraculo.git
+git remote add upstream https://github.com/ascentusoss/doutor.git
 ```
 
 ### 2. Instalação de Dependências
@@ -77,8 +77,8 @@ git checkout -b feature/sua-contribuicao-descritiva
 
 ### 🐛 Correção de Bugs
 
-- Issues com label [`bug`](https://github.com/ascentusoss/oraculo/labels/bug)
-- Issues com label [`good-first-issue`](https://github.com/ascentusoss/oraculo/labels/good-first-issue)
+- Issues com label [`bug`](https://github.com/ascentusoss/doutor/labels/bug)
+- Issues com label [`good-first-issue`](https://github.com/ascentusoss/doutor/labels/good-first-issue)
 - Priorize bugs críticos e regressions
 
 ### ✨ Novas Funcionalidades
@@ -309,4 +309,4 @@ Ao contribuir para este projeto, você concorda que suas contribuições serão 
 
 ---
 
-**Obrigado por contribuir para o Oráculo!**
+**Obrigado por contribuir para o Doutor!**

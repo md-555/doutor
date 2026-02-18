@@ -15,7 +15,7 @@ export const JsonMessages = {
     },
     versao: {
       label: 'versao',
-      descricao: 'Versão do Oráculo que gerou este relatório',
+      descricao: 'Versão do Doutor que gerou este relatório',
     },
     schemaVersion: {
       label: 'schemaVersion',

@@ -38,7 +38,7 @@ export function comandoFormatar(
 ): Command {
   return new Command('formatar')
     .description(
-      'Aplica a formatação interna estilo Oráculo (whitespace, seções, finais de linha)',
+      'Aplica a formatação interna estilo Doutor (whitespace, seções, finais de linha)',
     )
     .option(
       '--check',
@@ -80,7 +80,7 @@ export function comandoFormatar(
         const check = write ? false : Boolean(opts.check ?? true);
 
         const engineRaw = String(
-          opts.engine || process.env.ORACULO_FORMAT_ENGINE || 'auto',
+          opts.engine || process.env.DOUTOR_FORMAT_ENGINE || 'auto',
         ).trim();
         const engine =
           engineRaw === 'interno' ||

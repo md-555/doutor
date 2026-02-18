@@ -335,7 +335,7 @@ export async function processarDiagnostico(
     if (config.GUARDIAN_ENABLED) {
       // Usa optional chaining para evitar erro quando o mock não prover `fase`
       (log as typeof log & LogExtensions).fase?.(
-        'Verificando integridade do Oráculo',
+        'Verificando integridade do Doutor',
       );
       try {
         const resultado = await scanSystemIntegrity(fileEntries, {
@@ -393,10 +393,10 @@ export async function processarDiagnostico(
           const dir =
             typeof config.REPORT_OUTPUT_DIR === 'string'
               ? config.REPORT_OUTPUT_DIR
-              : path.join(baseDir, 'oraculo-reports');
+              : path.join(baseDir, 'doutor-reports');
           const fs = await import('node:fs');
           await fs.promises.mkdir(dir, { recursive: true });
-          const nome = `oraculo-scan-${ts}`;
+          const nome = `doutor-scan-${ts}`;
           const resumo = {
             modo: 'scan-only',
             totalArquivos: fileEntries.length,
@@ -631,7 +631,7 @@ export async function processarDiagnostico(
         }
       }
     } catch {}
-    // Aplicar supressões configuradas em oraculo.config.json
+    // Aplicar supressões configuradas em doutor.config.json
     ocorrenciasFiltradas = aplicarSupressaoOcorrencias(
       ocorrenciasFiltradas,
       (config as unknown as FiltrosConfig) || undefined,
@@ -815,7 +815,7 @@ export async function processarDiagnostico(
 
             // Validação ESLint pós-auto-fix para harmonia total
             if (
-              process.env.ORACULO_ESLINT_VALIDATION !== '0' &&
+              process.env.DOUTOR_ESLINT_VALIDATION !== '0' &&
               autoFixConfig.validateAfterFix
             ) {
               try {
@@ -1697,10 +1697,10 @@ export async function processarDiagnostico(
         // Ler parse erros das variáveis globais (para testes e cenários especiais)
         const parseErrosGlobais =
           ((globalThis as Record<string, unknown>)
-            .__ORACULO_PARSE_ERROS__ as unknown[]) || [];
+            .__DOUTOR_PARSE_ERROS__ as unknown[]) || [];
         const parseErrosOriginais =
           ((globalThis as Record<string, unknown>)
-            .__ORACULO_PARSE_ERROS_ORIGINAIS__ as number) || 0;
+            .__DOUTOR_PARSE_ERROS_ORIGINAIS__ as number) || 0;
 
         // Adicionar parse erros globais à contagem
         if (parseErrosGlobais.length > 0 || parseErrosOriginais > 0) {
@@ -1801,7 +1801,7 @@ export async function processarDiagnostico(
           // Adicionar metadados de versão do schema e timestamp para compatibilidade
           const schemaMeta = {
             schemaVersion: '1.0.0',
-            oraculoVersion: '0.0.0',
+            doutorVersion: '0.0.0',
             timestamp: new Date().toISOString(),
           };
           const saidaComMeta = { ...schemaMeta, ...saidaJson };
@@ -1920,12 +1920,12 @@ export async function processarDiagnostico(
         // Emitir 'Tudo pronto' apenas uma vez
         if (
           !config.COMPACT_MODE &&
-          !process.env.__ORACULO_TUDO_PRONTO_EMITIDO
+          !process.env.__DOUTOR_TUDO_PRONTO_EMITIDO
         ) {
           log.info(CliProcessamentoDiagnosticoMessages.tudoPronto);
           (
             process.env as unknown as Record<string, string>
-          ).__ORACULO_TUDO_PRONTO_EMITIDO = '1';
+          ).__DOUTOR_TUDO_PRONTO_EMITIDO = '1';
         }
 
         // Log de diagnóstico concluído para testes
@@ -1953,12 +1953,12 @@ export async function processarDiagnostico(
           const dir =
             typeof config.REPORT_OUTPUT_DIR === 'string'
               ? config.REPORT_OUTPUT_DIR
-              : path.join(baseDir, 'oraculo-reports');
+              : path.join(baseDir, 'doutor-reports');
 
           const fs = await import('node:fs');
           await fs.promises.mkdir(dir, { recursive: true });
 
-          const outputPath = path.join(dir, `oraculo-diagnostico-${ts}.md`);
+          const outputPath = path.join(dir, `doutor-diagnostico-${ts}.md`);
           const resultadoCompleto = {
             ...resultadoExecucao,
             fileEntries: fileEntriesComAst,
@@ -2043,7 +2043,7 @@ export async function processarDiagnostico(
 
             const salvar = await getSalvarEstado();
             await salvar(
-              path.join(dir, `oraculo-relatorio-summary-${ts}.json`),
+              path.join(dir, `doutor-relatorio-summary-${ts}.json`),
               relatorioSummary,
             );
 
@@ -2085,7 +2085,7 @@ export async function processarDiagnostico(
               } catch {
                 // Fallback: salvar como único arquivo caso a fragmentação falhe
                 await salvar(
-                  path.join(dir, `oraculo-relatorio-full-${ts}.json`),
+                  path.join(dir, `doutor-relatorio-full-${ts}.json`),
                   relatorioFull,
                 );
               }
@@ -2179,12 +2179,12 @@ export async function processarDiagnostico(
 
         if (
           !config.COMPACT_MODE &&
-          !process.env.__ORACULO_TUDO_PRONTO_EMITIDO
+          !process.env.__DOUTOR_TUDO_PRONTO_EMITIDO
         ) {
           log.info(CliProcessamentoDiagnosticoMessages.tudoPronto);
           (
             process.env as unknown as Record<string, string>
-          ).__ORACULO_TUDO_PRONTO_EMITIDO = '1';
+          ).__DOUTOR_TUDO_PRONTO_EMITIDO = '1';
         }
       } catch {}
     }
@@ -2260,10 +2260,10 @@ export async function processarDiagnostico(
 
       const parseErrosGlobais =
         ((globalThis as Record<string, unknown>)
-          .__ORACULO_PARSE_ERROS__ as unknown[]) || [];
+          .__DOUTOR_PARSE_ERROS__ as unknown[]) || [];
       const parseErrosOriginais =
         ((globalThis as Record<string, unknown>)
-          .__ORACULO_PARSE_ERROS_ORIGINAIS__ as number) || 0;
+          .__DOUTOR_PARSE_ERROS_ORIGINAIS__ as number) || 0;
       if (parseErrosGlobais.length > 0 || parseErrosOriginais > 0) {
         parseErros.totalOriginais = Math.max(
           parseErros.totalOriginais,
@@ -2346,7 +2346,7 @@ export async function processarDiagnostico(
           } catch {}
           const schemaMeta = {
             schemaVersion: '1.0.0',
-            oraculoVersion: pkgVersion,
+            doutorVersion: pkgVersion,
             timestamp: new Date().toISOString(),
           };
           const saidaComMeta = { ...schemaMeta, ...saidaJson };
@@ -2364,12 +2364,12 @@ export async function processarDiagnostico(
               const dir =
                 typeof config.REPORT_OUTPUT_DIR === 'string'
                   ? config.REPORT_OUTPUT_DIR
-                  : path.join(baseDir, 'oraculo-reports');
+                  : path.join(baseDir, 'doutor-reports');
               const fs = await import('node:fs');
               await fs.promises.mkdir(dir, { recursive: true });
               const salvar = await getSalvarEstado();
               await salvar(
-                path.join(dir, `oraculo-diagnostico-${ts}.json`),
+                path.join(dir, `doutor-diagnostico-${ts}.json`),
                 saidaComMeta,
               );
               log.sucesso(

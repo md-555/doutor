@@ -8,8 +8,8 @@ export const CliComandoGuardianMessages = {
     `Detectadas ${drift} mudança(s) desde o baseline.`,
 
   diffComoAceitarMudancas:
-    'Execute `oraculo guardian --accept-baseline` para aceitar essas mudanças.',
+    'Execute `doutor guardian --accept-baseline` para aceitar essas mudanças.',
 
   baselineCriadoComoAceitar:
-    'Execute `oraculo guardian --accept-baseline` para aceitá-lo ou `oraculo diagnosticar` novamente.',
+    'Execute `doutor guardian --accept-baseline` para aceitá-lo ou `doutor diagnosticar` novamente.',
 } as const;

@@ -10,7 +10,7 @@ export type MemoryMessage = {
   metadata?: Record<string, unknown>;
 };
 
-export type OraculoRunRecord = {
+export type DoutorRunRecord = {
   id: string;
   timestamp: string;
   cwd: string;
@@ -22,8 +22,8 @@ export type OraculoRunRecord = {
   error?: string;
 };
 
-export type OraculoContextState = {
+export type DoutorContextState = {
   schemaVersion: 1;
-  lastRuns: OraculoRunRecord[];
+  lastRuns: DoutorRunRecord[];
   preferences: Record<string, unknown>;
 };

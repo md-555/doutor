@@ -9,7 +9,7 @@ import { createLineLookup } from '@shared/helpers/line-lookup.js';
 
 import { criarAnalista, criarOcorrencia } from '@';
 
-const disableEnv = process.env.ORACULO_DISABLE_PLUGIN_TAILWIND === '1';
+const disableEnv = process.env.DOUTOR_DISABLE_PLUGIN_TAILWIND === '1';
 
 type Msg = ReturnType<typeof criarOcorrencia>;
 

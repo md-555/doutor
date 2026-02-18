@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: 2025 Oráculo Contributors
+// SPDX-FileCopyrightText: 2025 Doutor Contributors
 
 /**
  * @module cli/diagnostico/exporters/json-exporter
@@ -50,7 +50,7 @@ export function gerarRelatorioJson(
       schemaVersion: '1.0.0',
       modo: 'full',
       flags: [],
-      oraculoVersion: (() => {
+      doutorVersion: (() => {
         try {
           // Evita dependência direta de package.json fora do build
           // Em runtime, pode ser enriquecido pela CLI

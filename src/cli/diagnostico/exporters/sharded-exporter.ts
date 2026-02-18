@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: 2025 Oráculo Contributors
-// @oraculo-disable tipo-literal-inline-complexo
+// SPDX-FileCopyrightText: 2025 Doutor Contributors
+// @doutor-disable tipo-literal-inline-complexo
 // Justificativa: tipos locais para manipulação de shards
 
 /**

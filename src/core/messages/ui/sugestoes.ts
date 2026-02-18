@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
-// @oraculo-disable tipo-literal-inline-complexo
+// @doutor-disable tipo-literal-inline-complexo
 // Justificativa: tipos inline para sistema de sugestões
 /**
  * Sistema Centralizado de Sugestões e Dicas
  *
- * Centraliza TODAS as sugestões contextuais do Oráculo:
+ * Centraliza TODAS as sugestões contextuais do Doutor:
  * - Dicas de uso de comandos
  * - Sugestões baseadas em contexto
  * - Mensagens de ajuda rápida
@@ -37,7 +37,7 @@ export const SUGESTOES_COMANDOS = {
 export const SUGESTOES_DIAGNOSTICO = {
   modoExecutivo: `${ICONES.diagnostico.executive} Modo executivo: mostrando apenas problemas críticos`,
   primeiraVez: [
-    `${ICONES.feedback.dica} Primeira vez? Comece com: oraculo diagnosticar --full`,
+    `${ICONES.feedback.dica} Primeira vez? Comece com: doutor diagnosticar --full`,
     `${ICONES.feedback.dica} Use --help para ver todas as opções disponíveis`,
   ],
   projetoGrande: [
@@ -180,7 +180,7 @@ export const SUGESTOES_ZELADOR = {
   ],
   estrutura: [
     `${ICONES.feedback.dica} Zelador de estrutura organiza arquivos por padrão`,
-    `${ICONES.feedback.dica} Configure padrões em oraculo.config.json`,
+    `${ICONES.feedback.dica} Configure padrões em doutor.config.json`,
   ],
 } as const;
 

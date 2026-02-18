@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// @oraculo-disable tipo-literal-inline-complexo
+// @doutor-disable tipo-literal-inline-complexo
 // Justificativa: tipos inline para helpers de mensagens
 /**
  * Mensagens do Comando Diagnosticar
@@ -87,7 +87,7 @@ export const MENSAGENS_ERRO = {
  * Mensagens de aviso
  */
 export const MENSAGENS_AVISO = {
-  modoFast: `${ICONES_DIAGNOSTICO.info} Modo fast ativo (ORACULO_TEST_FAST=1)`,
+  modoFast: `${ICONES_DIAGNOSTICO.info} Modo fast ativo (DOUTOR_TEST_FAST=1)`,
   semMutateFS: `${ICONES_DIAGNOSTICO.aviso} Auto-fix desabilitado.`,
   guardianDesabilitado: `${ICONES_DIAGNOSTICO.info} Guardian não executado`,
   arquetiposTimeout: `${ICONES_DIAGNOSTICO.aviso} Detecção de arquetipos expirou (timeout)`,

@@ -56,7 +56,7 @@ export async function scanAndApplyFixMdFences(root: string): Promise<number> {
       const fullPath = path.join(dir, entry.name);
       if (entry.isDirectory()) {
         if (
-          /^(node_modules|dist|coverage|pre-public|preview-oraculo|\.git)$/i.test(
+          /^(node_modules|dist|coverage|pre-public|preview-doutor|\.git)$/i.test(
             entry.name,
           )
         )

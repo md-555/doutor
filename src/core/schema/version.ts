@@ -2,7 +2,7 @@
 /**
  * Sistema de Versionamento de Schema para Relatórios JSON
  *
- * Este módulo gerencia versões de schema para relatórios JSON do Oráculo,
+ * Este módulo gerencia versões de schema para relatórios JSON do Doutor,
  * garantindo compatibilidade futura e evolução controlada dos formatos.
  */
 

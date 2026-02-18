@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 /**
- * 🔌 Plugins do Oráculo
+ * 🔌 Plugins do Doutor
  *
  * Analistas e detectores especializados que podem ser habilitados/desabilitados.
  * São opcionais e carregados dinamicamente pelo registry.

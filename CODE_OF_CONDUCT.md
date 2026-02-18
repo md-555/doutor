@@ -1,15 +1,15 @@
-> **Proveniência e Autoria**: Este documento integra o projeto Oráculo (licença MIT).
+> **Proveniência e Autoria**: Este documento integra o projeto Doutor (licença MIT).
 > Nada aqui implica cessão de direitos morais/autorais.
 > Conteúdos de terceiros não licenciados de forma compatível não devem ser incluídos.
 > Referências a materiais externos devem ser linkadas e reescritas com palavras próprias.
 
 Arquivo gerado/atualizado automaticamente via `scripts/add-disclaimer-md.js`.
 
-# Código de Conduta do Projeto Oráculo
+# Código de Conduta do Projeto Doutor
 
 ## Nossa Promessa
 
-Como membros, colaboradores e líderes do projeto Oráculo, comprometemo-nos a tornar a participação em nossa comunidade uma experiência livre de assédio para todos, independentemente de idade, tamanho corporal, deficiência visível ou invisível, etnia, características sexuais, identidade e expressão de gênero, nível de experiência, educação, status socioeconômico, nacionalidade, aparência pessoal, raça, religião ou orientação sexual.
+Como membros, colaboradores e líderes do projeto Doutor, comprometemo-nos a tornar a participação em nossa comunidade uma experiência livre de assédio para todos, independentemente de idade, tamanho corporal, deficiência visível ou invisível, etnia, características sexuais, identidade e expressão de gênero, nível de experiência, educação, status socioeconômico, nacionalidade, aparência pessoal, raça, religião ou orientação sexual.
 
 Comprometemo-nos a agir e interagir de maneiras que contribuam para uma comunidade aberta, acolhedora, diversa, inclusiva e saudável.
 

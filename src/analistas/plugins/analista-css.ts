@@ -24,7 +24,7 @@ import { criarAnalista, criarOcorrencia } from '@';
 
 const disableEnv =
   (globalThis as { process?: { env?: Record<string, string | undefined> } })
-    .process?.env?.ORACULO_DISABLE_PLUGIN_CSS === '1';
+    .process?.env?.DOUTOR_DISABLE_PLUGIN_CSS === '1';
 
 type Msg = ReturnType<typeof criarOcorrencia>;
 
@@ -587,7 +587,7 @@ function collectCssIssuesFromPostCssAst(root: Root, relPath: string): Msg[] {
 export const analistaCss = criarAnalista({
   nome: 'analista-css',
   categoria: 'estilo',
-  descricao: 'Lint de CSS do Oráculo (com fallback heurístico).',
+  descricao: 'Lint de CSS do Doutor (com fallback heurístico).',
   global: false,
   test: (relPath: string): boolean => /\.(css|scss|sass)$/i.test(relPath),
   aplicar: async (src, relPath): Promise<Msg[] | null> => {
@@ -599,7 +599,7 @@ export const analistaCss = criarAnalista({
       ? roots.flatMap((r) => collectCssIssuesFromPostCssAst(r, relPath))
       : [];
 
-    // Mantém regras stylelint-like para CSS puro (pipeline atual do Oráculo).
+    // Mantém regras stylelint-like para CSS puro (pipeline atual do Doutor).
     const cssLint = isCss
       ? (collectCssIssuesLikeStylelint(src, relPath) ?? [])
       : [];

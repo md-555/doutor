@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// @oraculo-disable problema-documentacao
+// @doutor-disable problema-documentacao
 // Justificativa: types com any são propositais para tipagem genérica de wrappers
 /**
  * @fileoverview Tipos para funções de persistência e mocking de testes

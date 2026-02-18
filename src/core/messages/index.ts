@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 /**
- * Sistema de Mensagens Centralizado do Oráculo
+ * Sistema de Mensagens Centralizado do Doutor
  *
  * Este módulo centraliza TODAS as mensagens, logs e templates do sistema.
  * Organizado em subpastas por domínio:

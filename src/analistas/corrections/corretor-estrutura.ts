@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// @oraculo-disable tipo-inseguro-unknown tipo-literal-inline-complexo
+// @doutor-disable tipo-inseguro-unknown tipo-literal-inline-complexo
 // Justificativa: unknown é usado para tipagem defensiva de erros e módulos dinâmicos
 import { promises as fs } from 'node:fs';
 import path from 'node:path';

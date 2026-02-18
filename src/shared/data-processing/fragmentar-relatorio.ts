@@ -76,7 +76,7 @@ export async function fragmentarRelatorio(
   // Manifest que descreve as partes geradas
   const manifest: Manifest = {
     generatedAt: new Date().toISOString(),
-    baseName: `oraculo-relatorio-full-${ts}`,
+    baseName: `doutor-relatorio-full-${ts}`,
     parts: [],
   };
 
@@ -87,7 +87,7 @@ export async function fragmentarRelatorio(
     delete r.ocorrencias;
     delete r.fileEntries;
   }
-  const metaFilename = `oraculo-relatorio-full-${ts}-meta.json.gz`;
+  const metaFilename = `doutor-relatorio-full-${ts}-meta.json.gz`;
   const metaBuf = Buffer.from(JSON.stringify(meta, null, 2), 'utf-8');
   const metaGz = gzipSync(metaBuf);
   await salvarBinario(path.join(dir, metaFilename), metaGz);
@@ -101,7 +101,7 @@ export async function fragmentarRelatorio(
   if (ocorrencias.length > 0) {
     const occChunks = chunkArray(ocorrencias, maxOcorrencias);
     for (let i = 0; i < occChunks.length; i++) {
-      const fname = `oraculo-relatorio-full-${ts}-ocorrencias-part-${i + 1}.json.gz`;
+      const fname = `doutor-relatorio-full-${ts}-ocorrencias-part-${i + 1}.json.gz`;
       const payload = {
         shard: { kind: 'ocorrencias', index: i + 1, total: occChunks.length },
         count: occChunks[i].length,
@@ -153,7 +153,7 @@ export async function fragmentarRelatorio(
   if (fileEntries.length > 0) {
     const feChunks = chunkArray(fileEntries, maxFileEntries);
     for (let i = 0; i < feChunks.length; i++) {
-      const fname = `oraculo-relatorio-full-${ts}-fileentries-part-${i + 1}.json.gz`;
+      const fname = `doutor-relatorio-full-${ts}-fileentries-part-${i + 1}.json.gz`;
       const payload = {
         shard: { kind: 'fileEntries', index: i + 1, total: feChunks.length },
         count: feChunks[i].length,
@@ -197,7 +197,7 @@ export async function fragmentarRelatorio(
   }
 
   // Salva o manifest final
-  const manifestFilename = `oraculo-relatorio-full-${ts}-manifest.json`;
+  const manifestFilename = `doutor-relatorio-full-${ts}-manifest.json`;
   await salvar(path.join(dir, manifestFilename), manifest);
 
   return { manifestFile: manifestFilename, manifest };

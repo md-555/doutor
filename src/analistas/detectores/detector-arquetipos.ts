@@ -63,9 +63,9 @@ if (process.env.VITEST) {
   type TestExports = Record<string, unknown> & {
     scoreArquetipo: typeof scoreArquetipo;
   };
-  const g = globalThis as unknown as { __ORACULO_TESTS__?: TestExports };
-  const prev = g.__ORACULO_TESTS__ ?? ({} as TestExports);
-  g.__ORACULO_TESTS__ = { ...prev, scoreArquetipo };
+  const g = globalThis as unknown as { __DOUTOR_TESTS__?: TestExports };
+  const prev = g.__DOUTOR_TESTS__ ?? ({} as TestExports);
+  g.__DOUTOR_TESTS__ = { ...prev, scoreArquetipo };
 }
 
 export async function detectarArquetipos(
@@ -332,7 +332,7 @@ export async function detectarArquetipos(
   }
   const baselinePath = path.join(
     baseDir,
-    '.oraculo',
+    '.doutor',
     'baseline-estrutura.json',
   );
   let baseline: SnapshotEstruturaBaseline | undefined;
@@ -380,7 +380,7 @@ export async function detectarArquetipos(
         anomalias: [],
         sugestaoPadronizacao: '',
         explicacaoSimilaridade:
-          'Detectado via baseline existente (.oraculo/baseline-estrutura.json).',
+          'Detectado via baseline existente (.doutor/baseline-estrutura.json).',
         descricao: 'Arquétipo determinado pelo baseline',
       };
       candidatos = [
@@ -413,10 +413,10 @@ export async function detectarArquetipos(
   // Sugestão de plano para o candidato top
   if (candidatos[0]) {
     try {
-      // Usa plano de arquétipos se preset for diferente de 'oraculo' ou em ambiente de teste
-      const preset = (contexto as { preset?: string }).preset ?? 'oraculo';
+      // Usa plano de arquétipos se preset for diferente de 'doutor' ou em ambiente de teste
+      const preset = (contexto as { preset?: string }).preset ?? 'doutor';
       const emTeste = !!process.env.VITEST;
-      const preferEstrategista = preset === 'oraculo' && !emTeste;
+      const preferEstrategista = preset === 'doutor' && !emTeste;
       const { plano } = await OperarioEstrutura.planejar(
         baseDir,
         contexto.arquivos,

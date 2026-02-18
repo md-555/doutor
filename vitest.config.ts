@@ -75,7 +75,7 @@ function mapTsConfigAliases(rootAbs: string): VitestAlias[] {
 
 function createResolvePlugin(rootAbs: string) {
   return {
-    name: 'oraculo-resolve-src-ts-from-js',
+    name: 'doutor-resolve-src-ts-from-js',
     enforce: 'pre' as const,
     resolveId(source: string, importer?: string | undefined) {
       try {
@@ -150,7 +150,7 @@ function resolveSrcPattern(rootAbs: string, source: string) {
 function createTransformPlugin(rootAbs: string) {
   // Deprecated: kept for backward compat but split into two focused plugins below
   return {
-    name: 'oraculo-transform-tests-js-to-ts',
+    name: 'doutor-transform-tests-js-to-ts',
     enforce: 'pre' as const,
     transform: () => null,
   };
@@ -158,7 +158,7 @@ function createTransformPlugin(rootAbs: string) {
 
 function createTransformImportsPlugin(rootAbs: string) {
   return {
-    name: 'oraculo-transform-imports-js-to-ts',
+    name: 'doutor-transform-imports-js-to-ts',
     enforce: 'pre' as const,
     transform(code: string, id: string) {
       try {
@@ -201,7 +201,7 @@ function createTransformImportsPlugin(rootAbs: string) {
 
 function createTransformMocksPlugin(rootAbs: string) {
   return {
-    name: 'oraculo-transform-mocks-js-to-ts',
+    name: 'doutor-transform-mocks-js-to-ts',
     enforce: 'pre' as const,
     transform(code: string, id: string) {
       try {

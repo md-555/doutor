@@ -164,7 +164,7 @@ export function detectarTipoProjeto(
 export function getDefaultExcludes(
   tipoProjeto?: TipoLinguagemProjeto,
 ): string[] {
-  // Tenta obter do oraculo.config.json
+  // Tenta obter do doutor.config.json
   const configIncludeExclude = config.INCLUDE_EXCLUDE_RULES;
 
   if (configIncludeExclude?.globalExcludeGlob) {
@@ -188,7 +188,7 @@ export function getDefaultExcludes(
  *
  * Precedência:
  * 1. CLI --exclude (máxima)
- * 2. oraculo.config.json
+ * 2. doutor.config.json
  * 3. Padrões do sistema (fallback)
  */
 export function processarFiltros(

@@ -149,9 +149,9 @@ export function comandoPerf(): Command {
               : config.PERF_SNAPSHOT_DIR;
             const metricas = (
               globalThis as unknown as {
-                __ULTIMAS_METRICAS_ORACULO__?: Partial<MetricaExecucaoLike> | null;
+                __ULTIMAS_METRICAS_DOUTOR__?: Partial<MetricaExecucaoLike> | null;
               }
-            ).__ULTIMAS_METRICAS_ORACULO__;
+            ).__ULTIMAS_METRICAS_DOUTOR__;
             const snap = await gerarBaseline(dir, metricas || undefined);
             if (parent.json) {
               console.log(

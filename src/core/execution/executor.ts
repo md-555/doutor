@@ -589,7 +589,7 @@ export async function executarInquisicao(
   if (config.ANALISE_METRICAS_ENABLED) {
     const metricasGlobais: MetricasGlobais = ((
       globalThis as unknown as Record<string, unknown>
-    ).__ORACULO_METRICAS__ as MetricasGlobais) || {
+    ).__DOUTOR_METRICAS__ as MetricasGlobais) || {
       parsingTimeMs: 0,
       cacheHits: 0,
       cacheMiss: 0,
@@ -668,9 +668,9 @@ export function registrarUltimasMetricas(
   try {
     (
       globalThis as unknown as {
-        __ULTIMAS_METRICAS_ORACULO__?: MetricaExecucao | null;
+        __ULTIMAS_METRICAS_DOUTOR__?: MetricaExecucao | null;
       }
-    ).__ULTIMAS_METRICAS_ORACULO__ = metricas || null;
+    ).__ULTIMAS_METRICAS_DOUTOR__ = metricas || null;
   } catch {
     /* ignore */
   }

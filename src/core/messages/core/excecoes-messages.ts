@@ -8,7 +8,7 @@ export const ExcecoesMessages = {
 
   // Plugins / import seguro
   pluginsDesabilitadosSafeMode:
-    'Carregamento de plugins desabilitado em SAFE_MODE. Defina ORACULO_ALLOW_PLUGINS=1 para permitir.',
+    'Carregamento de plugins desabilitado em SAFE_MODE. Defina DOUTOR_ALLOW_PLUGINS=1 para permitir.',
   pluginBloqueado: (erro: string) => `Plugin bloqueado: ${erro}`,
   caminhoPluginNaoResolvido: 'Caminho de plugin não resolvido',
 

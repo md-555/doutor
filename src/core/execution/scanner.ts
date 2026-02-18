@@ -224,7 +224,7 @@ export async function scanRepository(
       // Normaliza para separador POSIX para que micromatch funcione de forma consistente no Windows
       const relPath = toPosix(relPathRaw);
 
-      // Regra fixa do Oráculo: não analisar testes (deixa para o runner, ex.: Vitest)
+      // Regra fixa do Doutor: não analisar testes (deixa para o runner, ex.: Vitest)
       const isTestLike = (p: string): boolean => {
         const rp = toPosix(p);
         if (/(^|\/)__(tests|mocks)__(\/|$)/.test(rp)) return true;

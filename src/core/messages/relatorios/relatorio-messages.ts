@@ -15,7 +15,7 @@ import {
 export const RelatorioMessages = {
   /* -------------------------- RELATÓRIO PRINCIPAL (gerador-relatorio.ts) -------------------------- */
   principal: {
-    titulo: `${ICONES_RELATORIO.resumo} Relatório Oráculo`,
+    titulo: `${ICONES_RELATORIO.resumo} Relatório Doutor`,
     secoes: {
       metadados: {
         data: 'Data',
@@ -114,7 +114,7 @@ export const RelatorioMessages = {
     },
     instrucoes: {
       diagnosticoDetalhado:
-        'Para diagnóstico detalhado, execute: oraculo diagnosticar --export',
+        'Para diagnóstico detalhado, execute: doutor diagnosticar --export',
       tabelasVerbosas:
         'Para ver tabelas com moldura no terminal (muito verboso), use: --debug',
     },

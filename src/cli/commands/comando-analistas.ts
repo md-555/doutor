@@ -20,7 +20,7 @@ export function comandoAnalistas(): Command {
     .option('-d, --doc <arquivo>', 'Gera documentação Markdown dos analistas')
     .action(async (opts: { json?: boolean; output?: string; doc?: string }) => {
       try {
-        if (process.env.ORACULO_TEST_FAST === '1') {
+        if (process.env.DOUTOR_TEST_FAST === '1') {
           if (opts.json) {
             log.info(
               JSON.stringify(

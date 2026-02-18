@@ -74,11 +74,11 @@ export async function prepararComAst(
   // Guarda: { mtimeMs, size, ast } - tipo importado de @types
   const globalStore = globalThis as unknown as Record<string, unknown>;
   const cache: Map<string, CacheValor> =
-    (globalStore.__ORACULO_AST_CACHE__ as Map<string, CacheValor>) || new Map();
-  if (!globalStore.__ORACULO_AST_CACHE__)
-    globalStore.__ORACULO_AST_CACHE__ = cache;
+    (globalStore.__DOUTOR_AST_CACHE__ as Map<string, CacheValor>) || new Map();
+  if (!globalStore.__DOUTOR_AST_CACHE__)
+    globalStore.__DOUTOR_AST_CACHE__ = cache;
   const metricas: MetricasGlobais =
-    (globalStore.__ORACULO_METRICAS__ as MetricasGlobais) || {
+    (globalStore.__DOUTOR_METRICAS__ as MetricasGlobais) || {
       parsingTimeMs: 0,
       cacheHits: 0,
       cacheMiss: 0,
@@ -87,7 +87,7 @@ export async function prepararComAst(
   metricas.parsingTimeMs = 0;
   metricas.cacheHits = 0;
   metricas.cacheMiss = 0;
-  globalStore.__ORACULO_METRICAS__ = metricas;
+  globalStore.__DOUTOR_METRICAS__ = metricas;
 
   return Promise.all(
     entries.map(async (entry): Promise<FileEntryWithAst> => {
@@ -166,7 +166,7 @@ export async function prepararComAst(
                   unknown
                 >;
                 const lista =
-                  (globalStore2.__ORACULO_PARSE_ERROS__ as
+                  (globalStore2.__DOUTOR_PARSE_ERROS__ as
                     | OcorrenciaParseErro[]
                     | undefined) || [];
                 try {
@@ -234,7 +234,7 @@ export async function prepararComAst(
                     }),
                   );
                 }
-                globalStore2.__ORACULO_PARSE_ERROS__ = lista;
+                globalStore2.__DOUTOR_PARSE_ERROS__ = lista;
               }
             }
             metricas.parsingTimeMs += performance.now() - inicioParse;
@@ -254,7 +254,7 @@ export async function prepararComAst(
           );
           // Registra ocorrência de parse erro
           const lista =
-            (globalStore.__ORACULO_PARSE_ERROS__ as
+            (globalStore.__DOUTOR_PARSE_ERROS__ as
               | OcorrenciaParseErro[]
               | undefined) || [];
           lista.push(
@@ -264,7 +264,7 @@ export async function prepararComAst(
               origem: 'parser',
             }),
           );
-          globalStore.__ORACULO_PARSE_ERROS__ = lista;
+          globalStore.__DOUTOR_PARSE_ERROS__ = lista;
         }
       }
 
@@ -290,7 +290,7 @@ export async function iniciarInquisicao(
     incluirMetadados = true,
     skipExec = false,
   } = options;
-  log.info(`${S.scan} Iniciando a Inquisição do Oráculo em: ${baseDir}`);
+  log.info(`${S.scan} Iniciando a Inquisição do Doutor em: ${baseDir}`);
 
   const fileMap = await scanRepository(baseDir, {
     includeContent,
@@ -303,17 +303,17 @@ export async function iniciarInquisicao(
           // A política semântica correta: não mostrar progresso parcial durante a varredura;
           // em vez disso, exibimos apenas um resumo final após a conclusão da varredura.
           const g = globalThis as unknown as {
-            __ORACULO_DIR_COUNT__?: number;
-            __ORACULO_DIR_SAMPLES__?: string[];
+            __DOUTOR_DIR_COUNT__?: number;
+            __DOUTOR_DIR_SAMPLES__?: string[];
           };
-          g.__ORACULO_DIR_COUNT__ = (g.__ORACULO_DIR_COUNT__ || 0) + 1;
+          g.__DOUTOR_DIR_COUNT__ = (g.__DOUTOR_DIR_COUNT__ || 0) + 1;
           // Armazena primeiros N diretórios como amostra para diagnóstico posterior
           const SAMPLE_MAX = 5;
-          if (!g.__ORACULO_DIR_SAMPLES__) g.__ORACULO_DIR_SAMPLES__ = [];
-          if (g.__ORACULO_DIR_SAMPLES__.length < SAMPLE_MAX) {
-            g.__ORACULO_DIR_SAMPLES__.push(progressData.caminho);
+          if (!g.__DOUTOR_DIR_SAMPLES__) g.__DOUTOR_DIR_SAMPLES__ = [];
+          if (g.__DOUTOR_DIR_SAMPLES__.length < SAMPLE_MAX) {
+            g.__DOUTOR_DIR_SAMPLES__.push(progressData.caminho);
           }
-          // contador atualizado em g.__ORACULO_DIR_COUNT__ (não usado diretamente aqui)
+          // contador atualizado em g.__DOUTOR_DIR_COUNT__ (não usado diretamente aqui)
           // Em modo verbose original poderíamos mostrar mais detalhes, mas por padrão
           // evitamos ruído progressivo. Erros continuam sendo reportados abaixo.
         } else if (progressData.tipo === 'erro') {
@@ -438,13 +438,13 @@ export async function iniciarInquisicao(
   // Exibe um resumo único da varredura preliminar, imediatamente antes da análise principal.
   try {
     const g = globalThis as unknown as {
-      __ORACULO_DIR_COUNT__?: number;
-      __ORACULO_DIR_SAMPLES__?: string[];
+      __DOUTOR_DIR_COUNT__?: number;
+      __DOUTOR_DIR_SAMPLES__?: string[];
     };
-    const totalDirs = g.__ORACULO_DIR_COUNT__ || 0;
+    const totalDirs = g.__DOUTOR_DIR_COUNT__ || 0;
     // Não exibir caminhos nem moldura — apenas resumo simples em texto.
-    const amostra = Array.isArray(g.__ORACULO_DIR_SAMPLES__)
-      ? g.__ORACULO_DIR_SAMPLES__
+    const amostra = Array.isArray(g.__DOUTOR_DIR_SAMPLES__)
+      ? g.__DOUTOR_DIR_SAMPLES__
       : [];
     if (config.LOG_ESTRUTURADO) {
       log.info(
@@ -479,12 +479,12 @@ export async function iniciarInquisicao(
   // Anexa ocorrências de parse se existirem
   const parseErros: OcorrenciaParseErro[] =
     ((globalThis as unknown as Record<string, unknown>)
-      .__ORACULO_PARSE_ERROS__ as OcorrenciaParseErro[]) || [];
+      .__DOUTOR_PARSE_ERROS__ as OcorrenciaParseErro[]) || [];
   if (parseErros.length) {
     // Armazena contagem original para métricas (usado em saída JSON)
     (
-      globalThis as unknown as { __ORACULO_PARSE_ERROS_ORIGINAIS__?: number }
-    ).__ORACULO_PARSE_ERROS_ORIGINAIS__ = parseErros.length;
+      globalThis as unknown as { __DOUTOR_PARSE_ERROS_ORIGINAIS__?: number }
+    ).__DOUTOR_PARSE_ERROS_ORIGINAIS__ = parseErros.length;
     if (config.PARSE_ERRO_AGRUPAR) {
       const porArquivo: Record<string, OcorrenciaParseErro[]> = {};
       for (const pe of parseErros) {

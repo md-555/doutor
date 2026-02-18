@@ -252,7 +252,7 @@ export function gerarFooterRelatorio(timestampISO?: string): string[] {
 
   lines.push(RelatorioMessages.comum.separadores.secao);
   lines.push('');
-  lines.push('_Gerado por Oráculo CLI_');
+  lines.push('_Gerado por Doutor CLI_');
   if (timestampISO) {
     lines.push(`_${timestampISO}_`);
   }

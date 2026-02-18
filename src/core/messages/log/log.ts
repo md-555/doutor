@@ -26,16 +26,16 @@ export const LOG_SIMBOLOS = {
 function shouldSilence(): boolean {
   // Modo JSON sempre silencia logs visuais
   if (isJsonMode()) return true;
-  if (process.env.ORACULO_FORCE_SILENT_JSON === '1') return true;
+  if (process.env.DOUTOR_FORCE_SILENT_JSON === '1') return true;
   return config.REPORT_SILENCE_LOGS;
 }
 
 function shouldSuppressParcial(msg?: string): boolean {
   try {
-    // Permite override rápido via variável de ambiente curta ORACULO_SUPPRESS_PARCIAL=1
+    // Permite override rápido via variável de ambiente curta DOUTOR_SUPPRESS_PARCIAL=1
     if (
       !config.SUPPRESS_PARCIAL_LOGS &&
-      process.env.ORACULO_SUPPRESS_PARCIAL !== '1'
+      process.env.DOUTOR_SUPPRESS_PARCIAL !== '1'
     )
       return false;
     if (!msg || typeof msg !== 'string') return false;
@@ -48,7 +48,7 @@ function shouldSuppressParcial(msg?: string): boolean {
 }
 
 function isDebugMode(): boolean {
-  return config.DEV_MODE || process.env.ORACULO_DEBUG === 'true';
+  return config.DEV_MODE || process.env.DOUTOR_DEBUG === 'true';
 }
 
 function shouldLogLevel(nivel: Nivel): boolean {
@@ -149,8 +149,8 @@ export function formatarLinha({
   const grayFn: StyleFn =
     typeof chalk.gray === 'function' ? chalk.gray : (s: string) => String(s);
   const linha = `${grayFn(ts)} ${colNivel} ${corpoFmt}`;
-  // Centraliza linhas soltas somente com opt-in explícito (ORACULO_CENTER=1)
-  if (!process.env.VITEST && process.env.ORACULO_CENTER === '1') {
+  // Centraliza linhas soltas somente com opt-in explícito (DOUTOR_CENTER=1)
+  if (!process.env.VITEST && process.env.DOUTOR_CENTER === '1') {
     try {
       const cols = obterColunasTerm();
       const out: tty.WriteStream | undefined =
@@ -190,7 +190,7 @@ function obterColunasTerm(): number | undefined {
     if (typeof cols === 'number' && cols > 0) return cols;
   } catch {}
   // Permite override explícito via env e fallback de variáveis comuns
-  const envOverride = Number(process.env.ORACULO_FRAME_MAX_COLS || '0');
+  const envOverride = Number(process.env.DOUTOR_FRAME_MAX_COLS || '0');
   if (Number.isFinite(envOverride) && envOverride > 0) return envOverride;
   const envCols = Number(
     process.env.COLUMNS || process.env.TERM_COLUMNS || '0',
@@ -295,7 +295,7 @@ export function formatarBloco(
 // Fallback opcional de moldura ASCII (evita mojibake em redirecionamentos no Windows)
 
 function deveUsarAsciiFrames(): boolean {
-  return process.env.ORACULO_ASCII_FRAMES === '1';
+  return process.env.DOUTOR_ASCII_FRAMES === '1';
 }
 
 function converterMolduraParaAscii(bloco: string): string {
@@ -426,8 +426,8 @@ export const log = {
     const out = deveUsarAsciiFrames()
       ? converterMolduraParaAscii(bloco)
       : bloco;
-    // Centraliza o bloco somente com opt-in explícito (ORACULO_CENTER=1)
-    if (!process.env.VITEST && process.env.ORACULO_CENTER === '1') {
+    // Centraliza o bloco somente com opt-in explícito (DOUTOR_CENTER=1)
+    if (!process.env.VITEST && process.env.DOUTOR_CENTER === '1') {
       try {
         const lines = out.split('\n');
         if (!lines.length) {

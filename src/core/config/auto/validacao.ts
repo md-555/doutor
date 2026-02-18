@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 /**
  * Sistema de validação para correções automáticas
- * Integra com o sistema existente de detectores do Oráculo
+ * Integra com o sistema existente de detectores do Doutor
  */
 
 import { log } from '@core/messages/index.js';

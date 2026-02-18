@@ -5,7 +5,7 @@ import type { File } from '@babel/types';
 // Re-export do tipo comum para compatibilidade
 
 export interface ParserBabelFileExtra extends File {
-  oraculoExtra?: {
+  doutorExtra?: {
     lang: string;
     rawAst: unknown;
     metadata?: unknown;

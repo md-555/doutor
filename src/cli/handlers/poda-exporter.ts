@@ -53,7 +53,7 @@ export async function exportarRelatoriosPoda(
 
     // Gerar timestamp único para os arquivos
     const ts = new Date().toISOString().replace(/[:.]/g, '-');
-    const nomeBase = `oraculo-poda-${ts}`;
+    const nomeBase = `doutor-poda-${ts}`;
 
     // Gerar relatório Markdown
     const caminhoMd = path.join(dir, `${nomeBase}.md`);

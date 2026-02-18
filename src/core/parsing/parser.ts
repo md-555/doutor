@@ -41,7 +41,7 @@ const localRequire = createRequire(import.meta.url);
 
 // Mantemos a assinatura retornando BabelFile | null para não quebrar tipos externos, mas
 // para linguagens não-Babel geramos um objeto "compat" mínimo com File/Program vazio
-// e ast original em oraculoExtra.
+// e ast original em doutorExtra.
 
 function parseComBabel(codigo: string, plugins?: string[]): BabelFile | null {
   // Plugins padrão ampliados para cobrir padrões amplamente usados em node_modules
@@ -86,7 +86,7 @@ function wrapMinimal(lang: string, rawAst: ParserRawAst): BabelFileExtra {
     },
     comments: [],
     tokens: [],
-    oraculoExtra: { lang, rawAst },
+    doutorExtra: { lang, rawAst },
   };
 }
 
@@ -289,7 +289,7 @@ export async function decifrarSintaxe(
 
   // Curto-circuito para TS/TSX: se o chamador forneceu plugins e eles não incluem 'typescript'
   // (ou incluem 'flow'), evitamos Babel para não aceitar sintaxe TS como Flow e forçamos o
-  // compilador do TypeScript. Isso garante ast.oraculoExtra.lang = 'ts-tsc'|'tsx-tsc'.
+  // compilador do TypeScript. Isso garante ast.doutorExtra.lang = 'ts-tsc'|'tsx-tsc'.
   if (ext === '.ts' || ext === '.tsx') {
     const p = opts.plugins;
     if (Array.isArray(p)) {

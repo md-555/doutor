@@ -21,17 +21,17 @@ export function diffSnapshots(
     : '';
   const cacheKey = `${key}:${hashBefore}>${hashAfter}`;
   const globalAny = global as unknown as {
-    __ORACULO_DIFF_CACHE__?: Map<string, ComparacaoSnapshot>;
+    __DOUTOR_DIFF_CACHE__?: Map<string, ComparacaoSnapshot>;
   };
-  if (!globalAny.__ORACULO_DIFF_CACHE__)
-    globalAny.__ORACULO_DIFF_CACHE__ = new Map();
-  const cache = globalAny.__ORACULO_DIFF_CACHE__;
+  if (!globalAny.__DOUTOR_DIFF_CACHE__)
+    globalAny.__DOUTOR_DIFF_CACHE__ = new Map();
+  const cache = globalAny.__DOUTOR_DIFF_CACHE__;
   if (cache.has(cacheKey)) {
     const globAny = globalAny as unknown as {
-      __ORACULO_DIFF_CACHE_HITS__?: number;
+      __DOUTOR_DIFF_CACHE_HITS__?: number;
     };
-    globAny.__ORACULO_DIFF_CACHE_HITS__ =
-      (globAny.__ORACULO_DIFF_CACHE_HITS__ || 0) + 1;
+    globAny.__DOUTOR_DIFF_CACHE_HITS__ =
+      (globAny.__DOUTOR_DIFF_CACHE_HITS__ || 0) + 1;
     const hit = cache.get(cacheKey);
     if (hit) return hit;
   }

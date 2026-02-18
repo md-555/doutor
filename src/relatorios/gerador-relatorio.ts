@@ -147,7 +147,7 @@ export async function gerarRelatorioJson(
   const relatorioVersionado = criarRelatorioComVersao(
     resultado,
     undefined,
-    'Relatório completo de diagnóstico do Oráculo',
+    'Relatório completo de diagnóstico do Doutor',
   );
 
   const { salvarEstado } = await import('@shared/persistence/persistencia.js');

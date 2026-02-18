@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// @oraculo-disable tipo-inseguro-unknown
+// @doutor-disable tipo-inseguro-unknown
 // Justificativa: unknown é usado para serialização genérica que aceita qualquer entrada
 import { promises as fs } from 'node:fs';
 import * as fsCb from 'node:fs';
@@ -34,7 +34,7 @@ function assertInsideRoot(caminho: string): void {
   // Qualquer valor truthy em VITEST deve liberar a restrição (Vitest define VITEST="true")
   if (
     (process.env.VITEST ?? '') !== '' ||
-    process.env.ORACULO_ALLOW_OUTSIDE_FS === '1'
+    process.env.DOUTOR_ALLOW_OUTSIDE_FS === '1'
   )
     return;
   const resolved = path.resolve(caminho);
@@ -104,7 +104,7 @@ async function salvarEstadoImpl<T = unknown>(
   const payload = isString ? (dados as string) : stableStringify(dados);
   const tempFilePath = path.join(
     dir,
-    `.tmp-bin-${Date.now()}-${Math.random().toString(16).slice(2)}.oraculo`,
+    `.tmp-bin-${Date.now()}-${Math.random().toString(16).slice(2)}.doutor`,
   );
   // Escreve diretamente com fs.promises para manter compat em ambientes mockados
   await writeFileSafe(tempFilePath, payload, {

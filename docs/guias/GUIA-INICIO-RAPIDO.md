@@ -1,13 +1,13 @@
-# 🚀 Guia de Início Rápido do Oráculo
+# 🚀 Guia de Início Rápido do Doutor
 
-> Proveniência e Autoria: Este documento integra o projeto Oráculo (licença MIT).
+> Proveniência e Autoria: Este documento integra o projeto Doutor (licença MIT).
 > Última atualização: 15 de janeiro de 2026
 
 ---
 
-## O que é o Oráculo?
+## O que é o Doutor?
 
-O **Oráculo** é uma ferramenta de linha de comando (CLI) para analisar, diagnosticar e manter projetos JavaScript/TypeScript (e com suporte heurístico para outras linguagens). Ele identifica problemas de código, verifica integridade de arquivos e sugere melhorias estruturais.
+O **Doutor** é uma ferramenta de linha de comando (CLI) para analisar, diagnosticar e manter projetos JavaScript/TypeScript (e com suporte heurístico para outras linguagens). Ele identifica problemas de código, verifica integridade de arquivos e sugere melhorias estruturais.
 
 **Requisitos:** Node.js >=25.0.0
 
@@ -30,14 +30,14 @@ O projeto também inclui um arquivo `.nvmrc` com o valor `25`. Ao clonar, execut
 
 ```bash
 # Clone o repositório
-git clone https://github.com/ossmoralus/oraculo.git
-cd oraculo
+git clone https://github.com/ossmoralus/doutor.git
+cd doutor
 
 # Instale as dependências e compile
 npm install
 npm run build
 
-# Link global (permite usar 'oraculo' de qualquer diretório)
+# Link global (permite usar 'doutor' de qualquer diretório)
 npm link
 ```
 
@@ -45,17 +45,17 @@ npm link
 
 ```bash
 # No diretório do seu projeto
-npm install --save-dev /caminho/para/oraculo
+npm install --save-dev /caminho/para/doutor
 
 # Use via npx
-npx oraculo diagnosticar
+npx doutor diagnosticar
 ```
 
 ### Opção 3: Teste Rápido (sem instalar)
 
 ```bash
 # Requer Node.js 24+
-npx github:ossmoralus/oraculo diagnosticar --help
+npx github:ossmoralus/doutor diagnosticar --help
 ```
 
 ---
@@ -65,10 +65,10 @@ npx github:ossmoralus/oraculo diagnosticar --help
 Execute o comando básico no diretório do seu projeto:
 
 ```bash
-oraculo diagnosticar
+doutor diagnosticar
 ```
 
-O Oráculo irá:
+O Doutor irá:
 
 1. 📁 **Varrer** todos os arquivos do projeto
 2. 🔍 **Analisar** código em busca de problemas
@@ -102,59 +102,59 @@ O Oráculo irá:
 
 ```bash
 # Diagnóstico básico (modo compacto)
-oraculo diagnosticar
+doutor diagnosticar
 
 # Diagnóstico detalhado
-oraculo diagnosticar --full
+doutor diagnosticar --full
 
 # Apenas visualizar arquivos (sem análise)
-oraculo diagnosticar --scan-only
+doutor diagnosticar --scan-only
 ```
 
 ### 2. Exportar Resultados
 
 ```bash
 # Saída JSON para CI/CD
-oraculo diagnosticar --json
+doutor diagnosticar --json
 
 # Exportar relatório para arquivo
-oraculo diagnosticar --export
+doutor diagnosticar --export
 ```
 
 ### 3. Filtrar Análise
 
 ```bash
 # Analisar apenas pasta src/
-oraculo diagnosticar --include "src/**"
+doutor diagnosticar --include "src/**"
 
 # Excluir testes
-oraculo diagnosticar --exclude "**/*.test.ts"
+doutor diagnosticar --exclude "**/*.test.ts"
 
 # Combinação
-oraculo diagnosticar --include "src/**" --exclude "**/*.test.ts"
+doutor diagnosticar --include "src/**" --exclude "**/*.test.ts"
 ```
 
 ### 4. Correção Automática
 
 ```bash
 # Correção conservadora (segura)
-oraculo diagnosticar --auto-fix --auto-fix-mode conservative
+doutor diagnosticar --auto-fix --auto-fix-mode conservative
 
 # Preview das correções (sem aplicar)
-oraculo diagnosticar --auto-fix --dry-run
+doutor diagnosticar --auto-fix --dry-run
 ```
 
 ### 5. Verificação de Integridade (Guardian)
 
 ```bash
 # Criar baseline de hashes
-oraculo guardian
+doutor guardian
 
 # Verificar alterações
-oraculo guardian --diff
+doutor guardian --diff
 
 # Aceitar alterações atuais
-oraculo guardian --accept
+doutor guardian --accept
 ```
 
 ---
@@ -164,8 +164,8 @@ oraculo guardian --accept
 ### Criar arquivo de configuração
 
 ```bash
-# Criar oraculo.config.json na raiz do projeto
-cat > oraculo.config.json << 'EOF'
+# Criar doutor.config.json na raiz do projeto
+cat > doutor.config.json << 'EOF'
 {
   "INCLUDE_EXCLUDE_RULES": {
     "globalExcludeGlob": [
@@ -189,10 +189,10 @@ EOF
 Use comentários inline para suprimir ocorrências específicas:
 
 ```typescript
-// @oraculo-disable-next-line tipo-inseguro-any
+// @doutor-disable-next-line tipo-inseguro-any
 const dados: any = respostaExterna;
 
-// @oraculo-disable hardcoded-secrets
+// @doutor-disable hardcoded-secrets
 const configKey = "chave_configuracao_publica";
 ```
 
@@ -242,8 +242,8 @@ const configKey = "chave_configuracao_publica";
 ### Integração com CI/CD
 
 ```yaml
-# .github/workflows/oraculo.yml
-name: Oráculo CI
+# .github/workflows/doutor.yml
+name: Doutor CI
 
 on: [push, pull_request]
 
@@ -256,23 +256,23 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Instalar Oráculo
+      - name: Instalar Doutor
         run: |
           npm install
           npm run build
 
       - name: Executar Diagnóstico
-        run: npx oraculo diagnosticar --json --export
+        run: npx doutor diagnosticar --json --export
 ```
 
 ### Monorepo
 
 ```bash
 # Analisar um pacote específico
-oraculo diagnosticar --include "packages/my-package/**"
+doutor diagnosticar --include "packages/my-package/**"
 
 # Analisar múltiplos pacotes
-oraculo diagnosticar \
+doutor diagnosticar \
   --include "packages/core/**" \
   --include "packages/utils/**"
 ```
@@ -280,7 +280,7 @@ oraculo diagnosticar \
 ### Código Legado
 
 ```json
-// oraculo.config.json
+// doutor.config.json
 {
   "rules": {
     "tipo-inseguro": {
@@ -305,13 +305,13 @@ oraculo diagnosticar \
 
 ```bash
 # Ver todos os comandos disponíveis
-oraculo --help
+doutor --help
 
 # Ajuda de um comando específico
-oraculo diagnosticar --help
+doutor diagnosticar --help
 
 # Listar analistas disponíveis
-oraculo analistas --listar
+doutor analistas --listar
 ```
 
 ---
@@ -325,26 +325,26 @@ oraculo analistas --listar
 npm link
 
 # Ou use npx
-npx oraculo diagnosticar
+npx doutor diagnosticar
 ```
 
 ### "Muitos falsos positivos"
 
 1. Use `--exclude` para filtrar arquivos de teste
 2. Configure `testPatterns.allowAnyType: true` para testes
-3. Use `// @oraculo-disable-next-line` para casos específicos
+3. Use `// @doutor-disable-next-line` para casos específicos
 
 ### "Análise muito lenta"
 
 ```bash
 # Use modo rápido
-oraculo diagnosticar --fast
+doutor diagnosticar --fast
 
 # Limite o escopo
-oraculo diagnosticar --include "src/**"
+doutor diagnosticar --include "src/**"
 
 # Aumente workers (paralelização)
-WORKER_POOL_MAX_WORKERS=4 oraculo diagnosticar
+WORKER_POOL_MAX_WORKERS=4 doutor diagnosticar
 ```
 
 ---

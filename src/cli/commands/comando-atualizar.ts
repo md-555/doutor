@@ -14,7 +14,7 @@ export function comandoAtualizar(
   aplicarFlagsGlobais: (opts: Record<string, unknown>) => void,
 ): Command {
   return new Command('atualizar')
-    .description('Atualiza o Oráculo se a integridade estiver preservada')
+    .description('Atualiza o Doutor se a integridade estiver preservada')
     .option('--global', 'atualiza globalmente via npm i -g')
     .action(async function (this: Command, opts: { global?: boolean }) {
       try {
@@ -58,13 +58,13 @@ export function comandoAtualizar(
             '🌀 Guardian gerou novo baseline ou detectou alterações. Prosseguindo com cautela.',
           );
           log.info(
-            'Recomendado: `oraculo guardian --diff` e `oraculo guardian --accept-baseline` antes de atualizar.',
+            'Recomendado: `doutor guardian --diff` e `doutor guardian --accept-baseline` antes de atualizar.',
           );
         }
 
         const cmd = opts.global
-          ? 'npm install -g oraculo@latest'
-          : 'npm install oraculo@latest';
+          ? 'npm install -g doutor@latest'
+          : 'npm install doutor@latest';
 
         logSistema.atualizacaoExecutando(cmd);
         executarShellSeguro(cmd, { stdio: 'inherit' });

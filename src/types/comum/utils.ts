@@ -6,7 +6,7 @@ export interface BabelNode {
   [key: string]: unknown;
 }
 
-// @oraculo-disable tipo-inseguro-unknown
+// @doutor-disable tipo-inseguro-unknown
 // Justificativa: função é um type guard; aceita `unknown` e valida com checagem runtime.
 export function isBabelNode(obj: unknown): obj is BabelNode {
   // Implementação de runtime fica em src/@types ou em utilitários reais.
@@ -29,7 +29,7 @@ export interface Estatisticas {
   withs: Contador;
 }
 
-export type ComandoOraculo =
+export type ComandoDoutor =
   | 'diagnosticar'
   | 'guardian'
   | 'podar'

@@ -55,7 +55,7 @@ export function expandIncludes(list: string[]): string[] {
 // Função para obter padrões de exclusão padrão do config
 
 export function getDefaultExcludes(): string[] {
-  // Primeiro tenta obter do oraculo.config.json do usuário
+  // Primeiro tenta obter do doutor.config.json do usuário
   const configIncludeExclude = config.INCLUDE_EXCLUDE_RULES;
   if (configIncludeExclude) {
     // Prioriza `globalExcludeGlob` (configuração moderna). Se não existir,
@@ -134,7 +134,7 @@ export function configurarFiltros(
 
   // Configurar excludes com precedência clara:
   // 1. CLI --exclude (prioridade máxima)
-  // 2. oraculo.config.json (configuração do usuário)
+  // 2. doutor.config.json (configuração do usuário)
   // 3. Padrões do sistema (fallback)
   let finalExcludePatterns: string[];
 

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// @oraculo-disable tipo-literal-inline-complexo
+// @doutor-disable tipo-literal-inline-complexo
 // Justificativa: tipos locais para formatação de display
 import { chalk } from '@core/config/chalk-safe.js';
 import { config } from '@core/config/config.js';

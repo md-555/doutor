@@ -1,11 +1,11 @@
-# 📚 Guia Completo de Comandos do Oráculo
+# 📚 Guia Completo de Comandos do Doutor
 
-> Proveniência e Autoria: Este documento integra o projeto Oráculo (licença MIT).
+> Proveniência e Autoria: Este documento integra o projeto Doutor (licença MIT).
 > Última atualização: 15 de janeiro de 2026
 
 ## 🎯 Visão Geral
 
-O Oráculo oferece diversos comandos para análise, diagnóstico e manutenção de projetos. Este guia detalha cada comando, suas opções e casos de uso.
+O Doutor oferece diversos comandos para análise, diagnóstico e manutenção de projetos. Este guia detalha cada comando, suas opções e casos de uso.
 
 **Requisitos:** Node.js >=25.0.0
 
@@ -33,10 +33,10 @@ Comando principal para análise completa do projeto.
 ### Uso Básico
 
 ```bash
-oraculo diagnosticar
+doutor diagnosticar
 ```
 
-Durante a execução, o Oráculo exibe um indicador visual “🔎 Diagnóstico em execução...” para sinalizar processamento.
+Durante a execução, o Doutor exibe um indicador visual “🔎 Diagnóstico em execução...” para sinalizar processamento.
 
 ### Opções Principais
 
@@ -44,96 +44,96 @@ Durante a execução, o Oráculo exibe um indicador visual “🔎 Diagnóstico 
 
 ```bash
 # Modo detalhado (mais informações)
-oraculo diagnosticar --full
+doutor diagnosticar --full
 
 # Modo compacto (padrão): consolida progresso e mostra o essencial
-oraculo diagnosticar --compact
+doutor diagnosticar --compact
 
 # Modo executivo: apenas problemas críticos/alta prioridade
-oraculo diagnosticar --executive
+doutor diagnosticar --executive
 
 # Apenas varredura (não prepara AST, sem análise completa)
-oraculo diagnosticar --scan-only
+doutor diagnosticar --scan-only
 ```
 
 #### Formatos de Saída
 
 ```bash
 # Saída JSON para ferramentas/automação
-oraculo diagnosticar --json
+doutor diagnosticar --json
 
 # Exportar resumo/manifest
-oraculo diagnosticar --export
+doutor diagnosticar --export
 
 # Exportar dump completo (fragmentado em shards)
-oraculo diagnosticar --export-full
+doutor diagnosticar --export-full
 
 # JSON ASCII (compat legada)
-oraculo diagnosticar --json-ascii
+doutor diagnosticar --json-ascii
 ```
 
 #### Filtros
 
 ```bash
 # Incluir padrões
-oraculo diagnosticar --include "src/**" --include "scripts/**"
+doutor diagnosticar --include "src/**" --include "scripts/**"
 
 # Excluir padrões
-oraculo diagnosticar --exclude "**/*.test.*" --exclude "**/__tests__/**"
+doutor diagnosticar --exclude "**/*.test.*" --exclude "**/__tests__/**"
 
 # Excluir testes rapidamente
-oraculo diagnosticar --exclude-tests
+doutor diagnosticar --exclude-tests
 ```
 
 #### Auto-Fix
 
 ```bash
 # Ativar auto-fix
-oraculo diagnosticar --auto-fix
+doutor diagnosticar --auto-fix
 
 # Modo conservador / agressivo / equilibrado
-oraculo diagnosticar --auto-fix-mode conservative
-oraculo diagnosticar --auto-fix-mode aggressive
-oraculo diagnosticar --auto-fix-mode balanced
+doutor diagnosticar --auto-fix-mode conservative
+doutor diagnosticar --auto-fix-mode aggressive
+doutor diagnosticar --auto-fix-mode balanced
 
 # Atalhos
-oraculo diagnosticar --fix            # alias de --auto-fix
-oraculo diagnosticar --fix-safe       # alias de --auto-fix --auto-fix-mode conservative
+doutor diagnosticar --fix            # alias de --auto-fix
+doutor diagnosticar --fix-safe       # alias de --auto-fix --auto-fix-mode conservative
 
 # Dry-run (preview sem modificar)
-ORACULO_ALLOW_MUTATE_FS=1 oraculo diagnosticar --auto-fix --dry-run
+DOUTOR_ALLOW_MUTATE_FS=1 doutor diagnosticar --auto-fix --dry-run
 ```
 
 #### Timeout e Performance
 
 ```bash
 # Modo rápido (menos checks)
-oraculo diagnosticar --fast
+doutor diagnosticar --fast
 
 # Confiar no compilador (reduz falsos positivos comuns)
-oraculo diagnosticar --trust-compiler
+doutor diagnosticar --trust-compiler
 
 # Verificar ciclos com heurística extra
-oraculo diagnosticar --verify-cycles
+doutor diagnosticar --verify-cycles
 
 # Ajustes de timeout via ambiente (por analista)
-ORACULO_ANALISE_TIMEOUT_POR_ANALISTA_MS=60000 oraculo diagnosticar
+DOUTOR_ANALISE_TIMEOUT_POR_ANALISTA_MS=60000 doutor diagnosticar
 ```
 
 ### Exemplos de Uso
 
 ```bash
 # Padrão compacto com resumo útil
-oraculo diagnosticar --compact
+doutor diagnosticar --compact
 
 # Detalhado (inclui amostra maior e blocos completos)
-oraculo diagnosticar --full
+doutor diagnosticar --full
 
 # Para CI/CD estruturado
-oraculo diagnosticar --json --export
+doutor diagnosticar --json --export
 
 # Correção automática segura
-ORACULO_ALLOW_MUTATE_FS=1 oraculo diagnosticar --fix-safe --dry-run
+DOUTOR_ALLOW_MUTATE_FS=1 doutor diagnosticar --fix-safe --dry-run
 ```
 
 ---
@@ -146,26 +146,26 @@ Verificação de integridade dos arquivos via hashes.
 
 ```bash
 # Criar baseline inicial
-oraculo guardian
+doutor guardian
 
 # Verificar alterações
-oraculo guardian --diff
+doutor guardian --diff
 ```
 
 ### Opções
 
 ```bash
 # Saída JSON
-oraculo guardian --json
+doutor guardian --json
 
 # Modo verbose
-oraculo guardian --verbose
+doutor guardian --verbose
 
 # Aceitar alterações como novo baseline
-oraculo guardian --accept
+doutor guardian --accept
 
 # Forçar recriação do baseline
-oraculo guardian --force
+doutor guardian --force
 ```
 
 ### Status de Retorno
@@ -180,13 +180,13 @@ oraculo guardian --force
 
 ```bash
 # Verificação rápida no CI
-oraculo guardian --diff --json
+doutor guardian --diff --json
 
 # Criar baseline após mudanças válidas
-oraculo guardian --accept
+doutor guardian --accept
 
 # Debug detalhado
-oraculo guardian --diff --verbose
+doutor guardian --diff --verbose
 ```
 
 ---
@@ -199,36 +199,36 @@ Remoção segura de arquivos órfãos (não referenciados).
 
 ```bash
 # Dry-run (preview sem remover)
-oraculo podar --dry-run
+doutor podar --dry-run
 
 # Remoção efetiva
-oraculo podar
+doutor podar
 ```
 
 ### Opções
 
 ```bash
 # Modo interativo (confirma cada arquivo)
-oraculo podar --interactive
+doutor podar --interactive
 
 # Saída JSON
-oraculo podar --json
+doutor podar --json
 
 # Verbose (mostrar análise detalhada)
-oraculo podar --verbose
+doutor podar --verbose
 ```
 
 ### Exemplos
 
 ```bash
 # Análise de arquivos órfãos
-oraculo podar --dry-run --verbose
+doutor podar --dry-run --verbose
 
 # Limpeza automática
-oraculo podar --json
+doutor podar --json
 
 # Limpeza com confirmação
-oraculo podar --interactive
+doutor podar --interactive
 ```
 
 ---
@@ -241,36 +241,36 @@ Visualização de métricas e histórico agregado.
 
 ```bash
 # Exibir métricas atuais
-oraculo metricas
+doutor metricas
 
 # Formato JSON
-oraculo metricas --json
+doutor metricas --json
 ```
 
 ### Opções
 
 ```bash
 # Exibir histórico
-oraculo metricas --history
+doutor metricas --history
 
 # Comparar com período anterior
-oraculo metricas --compare
+doutor metricas --compare
 
 # Exportar para arquivo
-oraculo metricas --export metricas.json
+doutor metricas --export metricas.json
 ```
 
 ### Exemplos
 
 ```bash
 # Dashboard de métricas
-oraculo metricas --verbose
+doutor metricas --verbose
 
 # Análise de tendências
-oraculo metricas --history --json
+doutor metricas --history --json
 
 # Comparação temporal
-oraculo metricas --compare --full
+doutor metricas --compare --full
 ```
 
 ---
@@ -283,37 +283,37 @@ Análise de performance e comparação de snapshots.
 
 ```bash
 # Criar snapshot de performance
-oraculo perf snapshot
+doutor perf snapshot
 
 # Comparar snapshots
-oraculo perf compare
+doutor perf compare
 ```
 
 ### Opções
 
 ```bash
 # Comparar com baseline
-oraculo perf compare --baseline
+doutor perf compare --baseline
 
 # Saída JSON
-oraculo perf --json
+doutor perf --json
 
 # Limites personalizados
-oraculo perf compare --threshold 10
+doutor perf compare --threshold 10
 ```
 
 ### Exemplos
 
 ```bash
 # Benchmark antes de mudanças
-oraculo perf snapshot --name "antes-refactor"
+doutor perf snapshot --name "antes-refactor"
 
 # Benchmark depois e comparar
-oraculo perf snapshot --name "depois-refactor"
-oraculo perf compare antes-refactor depois-refactor
+doutor perf snapshot --name "depois-refactor"
+doutor perf compare antes-refactor depois-refactor
 
 # Análise de regressão no CI
-oraculo perf compare --baseline --json
+doutor perf compare --baseline --json
 ```
 
 ---
@@ -326,36 +326,36 @@ Listar e documentar analistas disponíveis.
 
 ```bash
 # Listar todos os analistas
-oraculo analistas
+doutor analistas
 
 # Formato JSON
-oraculo analistas --json
+doutor analistas --json
 ```
 
 ### Opções
 
 ```bash
 # Gerar documentação
-oraculo analistas --doc docs/ANALISTAS.md
+doutor analistas --doc docs/ANALISTAS.md
 
 # Mostrar apenas ativos
-oraculo analistas --active-only
+doutor analistas --active-only
 
 # Incluir metadados
-oraculo analistas --full
+doutor analistas --full
 ```
 
 ### Exemplos
 
 ```bash
 # Catálogo completo
-oraculo analistas --full --json
+doutor analistas --full --json
 
 # Documentação automática
-oraculo analistas --doc docs/ANALISTAS-GERADO.md
+doutor analistas --doc docs/ANALISTAS-GERADO.md
 
 # Debug de analistas
-oraculo diagnosticar --listar-analistas
+doutor diagnosticar --listar-analistas
 ```
 
 ---
@@ -368,40 +368,40 @@ Correção interativa de tipos inseguros (any/unknown).
 
 ```bash
 # Modo interativo
-oraculo fix-types --interactive
+doutor fix-types --interactive
 
 # Auto-fix conservador
-oraculo fix-types --auto-fix --auto-fix-mode conservative
+doutor fix-types --auto-fix --auto-fix-mode conservative
 ```
 
 ### Opções
 
 ```bash
 # Mostrar diff antes de aplicar
-oraculo fix-types --show-diff
+doutor fix-types --show-diff
 
 # Dry-run
-oraculo fix-types --dry-run
+doutor fix-types --dry-run
 
 # Validar sintaxe após correção
-oraculo fix-types --validate-only
+doutor fix-types --validate-only
 
 # Focar em tipo específico
-oraculo fix-types --tipo any
-oraculo fix-types --tipo unknown
+doutor fix-types --tipo any
+doutor fix-types --tipo unknown
 ```
 
 ### Exemplos
 
 ```bash
 # Correção segura e interativa
-oraculo fix-types --interactive --show-diff
+doutor fix-types --interactive --show-diff
 
 # Correção automática de 'any'
-oraculo fix-types --tipo any --auto-fix --dry-run
+doutor fix-types --tipo any --auto-fix --dry-run
 
 # Validação pós-correção
-oraculo fix-types --validate-only
+doutor fix-types --validate-only
 ```
 
 ---
@@ -414,44 +414,44 @@ Reorganização de estrutura do projeto com plano de moves.
 
 ```bash
 # Ver plano sem aplicar
-oraculo reestruturar --somente-plano
+doutor reestruturar --somente-plano
 
 # Aplicar reestruturação
-oraculo reestruturar --auto
+doutor reestruturar --auto
 ```
 
 ### Opções
 
 ```bash
 # Organização por domains
-oraculo reestruturar --domains
+doutor reestruturar --domains
 
 # Organização flat
-oraculo reestruturar --flat
+doutor reestruturar --flat
 
 # Usar preset específico
-oraculo reestruturar --preset oraculo
-oraculo reestruturar --preset node-community
-oraculo reestruturar --preset ts-lib
+doutor reestruturar --preset doutor
+doutor reestruturar --preset node-community
+doutor reestruturar --preset ts-lib
 
 # Override de categoria
-oraculo reestruturar --categoria controller=handlers
+doutor reestruturar --categoria controller=handlers
 
 # Filtros
-oraculo reestruturar --include "src/**" --exclude "**/*.test.*"
+doutor reestruturar --include "src/**" --exclude "**/*.test.*"
 ```
 
 ### Exemplos
 
 ```bash
 # Preview de reestruturação
-oraculo reestruturar --somente-plano --verbose
+doutor reestruturar --somente-plano --verbose
 
 # Aplicar com preset
-oraculo reestruturar --preset oraculo --auto
+doutor reestruturar --preset doutor --auto
 
 # Reestruturar apenas uma pasta
-oraculo reestruturar --include "src/old-module/**" --auto
+doutor reestruturar --include "src/old-module/**" --auto
 ```
 
 ---
@@ -464,23 +464,23 @@ Aplica formatação de código com Prettier ou motor interno.
 
 ```bash
 # Verificar formatação
-oraculo formatar --check
+doutor formatar --check
 
 # Aplicar formatação
-oraculo formatar --write
+doutor formatar --write
 ```
 
 ### Opções
 
 ```bash
 # Escolher motor
-oraculo formatar --engine auto      # padrão (tenta Prettier, fallback interno)
-oraculo formatar --engine prettier  # força Prettier
-oraculo formatar --engine interno   # usa motor interno
+doutor formatar --engine auto      # padrão (tenta Prettier, fallback interno)
+doutor formatar --engine prettier  # força Prettier
+doutor formatar --engine interno   # usa motor interno
 
 # Filtros de arquivos
-oraculo formatar --include "src/**/*.ts"
-oraculo formatar --exclude "**/*.generated.*"
+doutor formatar --include "src/**/*.ts"
+doutor formatar --exclude "**/*.generated.*"
 ```
 
 ### Arquivos Suportados
@@ -496,13 +496,13 @@ oraculo formatar --exclude "**/*.generated.*"
 
 ```bash
 # Verificar tudo antes de commit
-oraculo formatar --check
+doutor formatar --check
 
 # Formatar apenas arquivos TypeScript
-oraculo formatar --write --include "**/*.ts"
+doutor formatar --write --include "**/*.ts"
 
 # CI: verificar formatação
-oraculo formatar --check || exit 1
+doutor formatar --check || exit 1
 ```
 
 ---
@@ -515,69 +515,69 @@ Otimiza arquivos SVG usando otimizador interno (compatível com svgo).
 
 ```bash
 # Preview sem modificar
-oraculo otimizar-svg --dry
+doutor otimizar-svg --dry
 
 # Aplicar otimizações
-oraculo otimizar-svg --write
+doutor otimizar-svg --write
 ```
 
 ### Opções
 
 ```bash
 # Diretório específico
-oraculo otimizar-svg --dir assets/icons
+doutor otimizar-svg --dir assets/icons
 
 # Filtros
-oraculo otimizar-svg --include "**/*.svg"
-oraculo otimizar-svg --exclude "**/node_modules/**"
+doutor otimizar-svg --include "**/*.svg"
+doutor otimizar-svg --exclude "**/node_modules/**"
 ```
 
 ### Exemplos
 
 ```bash
 # Analisar potencial de otimização
-oraculo otimizar-svg --dry --verbose
+doutor otimizar-svg --dry --verbose
 
 # Otimizar pasta de ícones
-oraculo otimizar-svg --dir src/assets/icons --write
+doutor otimizar-svg --dir src/assets/icons --write
 
 # Otimizar SVGs específicos
-oraculo otimizar-svg --include "public/**/*.svg" --write
+doutor otimizar-svg --include "public/**/*.svg" --write
 ```
 
 ---
 
 ## atualizar
 
-Atualiza o Oráculo com verificação de integridade prévia via Guardian.
+Atualiza o Doutor com verificação de integridade prévia via Guardian.
 
 ### Uso Básico
 
 ```bash
 # Atualização local
-oraculo atualizar
+doutor atualizar
 
 # Atualização global
-oraculo atualizar --global
+doutor atualizar --global
 ```
 
 ### Fluxo de Execução
 
 1. Executa análise do projeto
 2. Verifica integridade via Guardian
-3. Se OK, executa `npm install oraculo@latest`
+3. Se OK, executa `npm install doutor@latest`
 4. Reporta sucesso/falha
 
 ### Exemplos
 
 ```bash
 # Atualização segura
-oraculo atualizar
+doutor atualizar
 
 # Se Guardian detectar alterações, primeiro aceite:
-oraculo guardian --diff
-oraculo guardian --accept-baseline
-oraculo atualizar
+doutor guardian --diff
+doutor guardian --accept-baseline
+doutor atualizar
 ```
 
 ---
@@ -590,49 +590,49 @@ Gerencia o mapa de reversão para operações de reestruturação.
 
 ```bash
 # Listar todos os moves registrados
-oraculo reverter listar
+doutor reverter listar
 
 # Reverter arquivo específico
-oraculo reverter arquivo <caminho>
+doutor reverter arquivo <caminho>
 
 # Reverter move por ID
-oraculo reverter move <id>
+doutor reverter move <id>
 
 # Limpar histórico de reversão
-oraculo reverter limpar
-oraculo reverter limpar --force
+doutor reverter limpar
+doutor reverter limpar --force
 ```
 
 ### Exemplos
 
 ```bash
 # Ver histórico de moves
-oraculo reverter listar
+doutor reverter listar
 
 # Reverter um arquivo movido
-oraculo reverter arquivo src/new-location/file.ts
+doutor reverter arquivo src/new-location/file.ts
 
 # Reverter move específico
-oraculo reverter move abc123def
+doutor reverter move abc123def
 
 # Limpar tudo (cuidado!)
-oraculo reverter limpar --force
+doutor reverter limpar --force
 ```
 
 ---
 
 ## histórico
 
-Utilitários globais para gerenciar o histórico de interações do Oráculo.
+Utilitários globais para gerenciar o histórico de interações do Doutor.
 
 ### Flags
 
 ```bash
-oraculo --historico         # Exibe resumo do histórico
-oraculo --limpar-historico  # Limpa o histórico persistido
+doutor --historico         # Exibe resumo do histórico
+doutor --limpar-historico  # Limpa o histórico persistido
 ```
 
-O histórico é persistido em `~/.oraculo/history.json`. Cada execução do CLI registra os argumentos usados.
+O histórico é persistido em `~/.doutor/history.json`. Cada execução do CLI registra os argumentos usados.
 
 ## 🌍 Variáveis de Ambiente Globais
 
@@ -667,20 +667,20 @@ export PONTUACAO_FATOR_ESCALA=2.0
 
 ```bash
 # 1. Análise inicial
-oraculo diagnosticar --verbose
+doutor diagnosticar --verbose
 
 # 2. Correção de tipos
-oraculo fix-types --interactive
+doutor fix-types --interactive
 
 # 3. Verificação de integridade
-oraculo guardian --diff
+doutor guardian --diff
 
 # 4. Limpeza de órfãos
-oraculo podar --dry-run
-oraculo podar
+doutor podar --dry-run
+doutor podar
 
 # 5. Análise final
-oraculo diagnosticar --full --export relatorio-final.md
+doutor diagnosticar --full --export relatorio-final.md
 ```
 
 ### Workflow de CI/CD
@@ -688,36 +688,36 @@ oraculo diagnosticar --full --export relatorio-final.md
 ```bash
 # 1. Build e análise
 npm run build
-oraculo diagnosticar --json --silence > diagnostico.json
+doutor diagnosticar --json --silence > diagnostico.json
 
 # 2. Verificação de integridade
-oraculo guardian --diff --json > guardian.json
+doutor guardian --diff --json > guardian.json
 
 # 3. Métricas
-oraculo metricas --json > metricas.json
+doutor metricas --json > metricas.json
 
 # 4. Análise de performance
-oraculo perf compare --baseline --json > perf.json
+doutor perf compare --baseline --json > perf.json
 ```
 
 ### Workflow de Refatoração
 
 ```bash
 # 1. Snapshot antes
-oraculo perf snapshot --name "antes-refactor"
-oraculo guardian
+doutor perf snapshot --name "antes-refactor"
+doutor guardian
 
 # 2. Fazer mudanças...
 
 # 3. Análise após mudanças
-oraculo diagnosticar --full
-oraculo guardian --diff
+doutor diagnosticar --full
+doutor guardian --diff
 
 # 4. Performance comparison
-oraculo perf compare antes-refactor --json
+doutor perf compare antes-refactor --json
 
 # 5. Aceitar se OK
-oraculo guardian --accept
+doutor guardian --accept
 ```
 
 ---
@@ -741,11 +741,11 @@ npm install -g .
 
 ```bash
 # Aumentar timeout
-oraculo diagnosticar --timeout 120
+doutor diagnosticar --timeout 120
 
 # Via variável
-export ORACULO_ANALISE_TIMEOUT_POR_ANALISTA_MS=120000
-oraculo diagnosticar
+export DOUTOR_ANALISE_TIMEOUT_POR_ANALISTA_MS=120000
+doutor diagnosticar
 ```
 
 ### Performance Lenta
@@ -753,10 +753,10 @@ oraculo diagnosticar
 ```bash
 # Reduzir workers
 export WORKER_POOL_MAX_WORKERS=1
-oraculo diagnosticar
+doutor diagnosticar
 
 # Restringir escopo
-oraculo diagnosticar --include "src/**" --exclude "**/*.test.*"
+doutor diagnosticar --include "src/**" --exclude "**/*.test.*"
 ```
 
 ---
@@ -765,8 +765,8 @@ oraculo diagnosticar --include "src/**" --exclude "**/*.test.*"
 
 - [README Principal](../README.md)
 - [Sistema de Type Safety](TYPE-SAFETY-SYSTEM.md)
-- [Filtros Include/Exclude](GUIA_FILTROS_ORACULO.md)
-- [Configuração Local](CONFIGURAR-ORACULO-LOCAL.md)
+- [Filtros Include/Exclude](GUIA_FILTROS_DOUTOR.md)
+- [Configuração Local](CONFIGURAR-DOUTOR-LOCAL.md)
 
 ---
 

@@ -41,9 +41,9 @@ export interface OpcoesProcessamentoFiltros {
 }
 
 /**
- * Flags globais aplicáveis em todos os comandos do Oráculo
+ * Flags globais aplicáveis em todos os comandos do Doutor
  */
-export interface OraculoGlobalFlags {
+export interface DoutorGlobalFlags {
   silence?: boolean;
   verbose?: boolean;
   export?: boolean;

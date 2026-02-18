@@ -23,12 +23,12 @@ export function getAvailablePlugins(): string[] {
 }
 
 /**
- * Configuração padrão de plugins para o Oráculo
+ * Configuração padrão de plugins para o Doutor
  */
 export const DEFAULT_PLUGIN_CONFIG = {
   enabled: ['core'],
   autoload: true,
-  registry: '@oraculo/plugins',
+  registry: '@doutor/plugins',
 };
 
 /**

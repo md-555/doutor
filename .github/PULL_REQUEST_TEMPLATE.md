@@ -1,4 +1,4 @@
-<!-- Proveniência e Autoria: Este documento integra o projeto Oráculo (licença MIT). -->
+<!-- Proveniência e Autoria: Este documento integra o projeto Doutor (licença MIT). -->
 
 ## 📋 Descrição
 

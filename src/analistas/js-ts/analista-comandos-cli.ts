@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// @oraculo-disable tipo-inseguro-unknown
+// @doutor-disable tipo-inseguro-unknown
 // Justificativa: unknown é usado para manipulação segura de nós AST com tipagem defensiva
 import type { NodePath } from '@babel/traverse';
 import type {

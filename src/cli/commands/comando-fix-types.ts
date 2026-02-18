@@ -499,7 +499,7 @@ async function executarFixTypes(options: FixTypesOptions): Promise<void> {
     const path = await import('node:path');
     const reportPath = path.join(
       PROJECT_ROOT,
-      '.oraculo',
+      '.doutor',
       'fix-types-analise.json',
     );
     await fs.mkdir(path.dirname(reportPath), { recursive: true });

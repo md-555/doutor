@@ -89,4 +89,4 @@ export type {
 } from './stylelint.js';
 
 // Memory
-export type { OraculoContextState, OraculoRunRecord } from './memory.js';
+export type { DoutorContextState, DoutorRunRecord } from './memory.js';

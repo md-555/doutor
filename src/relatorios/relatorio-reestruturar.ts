@@ -13,7 +13,7 @@ export async function gerarRelatorioReestruturarMarkdown(
   const total = movimentos.length;
   const simulado = opcoes?.simulado;
   const origem = opcoes?.origem ?? 'desconhecido';
-  const preset = opcoes?.preset ?? 'oraculo';
+  const preset = opcoes?.preset ?? 'doutor';
   const conflitos = opcoes?.conflitos ?? 0;
 
   const linhas: string[] = [];
@@ -64,7 +64,7 @@ export async function gerarRelatorioReestruturarJson(
   const json = {
     simulado: Boolean(opcoes?.simulado),
     origem: opcoes?.origem ?? 'desconhecido',
-    preset: opcoes?.preset ?? 'oraculo',
+    preset: opcoes?.preset ?? 'doutor',
     conflitos: opcoes?.conflitos ?? 0,
     totalMovimentos: movimentos.length,
     movimentos,

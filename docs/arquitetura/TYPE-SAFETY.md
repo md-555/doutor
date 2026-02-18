@@ -1,11 +1,11 @@
-# 🔒 Sistema de Type Safety do Oráculo
+# 🔒 Sistema de Type Safety do Doutor
 
-> Proveniência e Autoria: Este documento integra o projeto Oráculo (licença MIT).
+> Proveniência e Autoria: Este documento integra o projeto Doutor (licença MIT).
 > Documentação atualizada em: 29 de novembro de 2025
 
 ## 📋 Visão Geral
 
-O Oráculo possui um sistema inteligente de detecção e correção de tipos inseguros (`any`, `unknown`) que:
+O Doutor possui um sistema inteligente de detecção e correção de tipos inseguros (`any`, `unknown`) que:
 
 1. **Detecta** uso de tipos inseguros no código TypeScript
 2. **Categoriza** automaticamente se o uso é legítimo ou problemático
@@ -257,54 +257,54 @@ function processData(input: unknown) {
 
 ```bash
 # Ver todos os tipos inseguros
-oraculo diagnosticar
+doutor diagnosticar
 
 # Apenas tipos inseguros
-oraculo diagnosticar --filtro tipo-inseguro-any
-oraculo diagnosticar --filtro tipo-inseguro-unknown
-oraculo diagnosticar --filtro tipo-inseguro-any-assertion
+doutor diagnosticar --filtro tipo-inseguro-any
+doutor diagnosticar --filtro tipo-inseguro-unknown
+doutor diagnosticar --filtro tipo-inseguro-any-assertion
 ```
 
 ### 2. Análise Detalhada
 
 ```bash
 # Modo completo com contexto
-oraculo diagnosticar --full
+doutor diagnosticar --full
 
 # JSON estruturado para CI
-oraculo diagnosticar --filtro tipo-inseguro-any --json
+doutor diagnosticar --filtro tipo-inseguro-any --json
 
 # Export para arquivo
-oraculo diagnosticar --export relatorio-tipos.md
+doutor diagnosticar --export relatorio-tipos.md
 ```
 
 ### 3. Correção Automática
 
 ```bash
 # Auto-fix conservador (apenas casos óbvios)
-oraculo diagnosticar --auto-fix --auto-fix-mode conservative
+doutor diagnosticar --auto-fix --auto-fix-mode conservative
 
 # Auto-fix permissivo (mais agressivo)
-oraculo diagnosticar --auto-fix --auto-fix-mode permissive
+doutor diagnosticar --auto-fix --auto-fix-mode permissive
 
 # Dry-run (preview sem modificar)
-oraculo diagnosticar --auto-fix --dry-run
+doutor diagnosticar --auto-fix --dry-run
 
 # Comando dedicado fix-types
-oraculo fix-types --interactive
+doutor fix-types --interactive
 ```
 
 ### 4. Modo Interativo
 
 ```bash
 # Escolher quais correções aplicar
-oraculo fix-types --interactive
+doutor fix-types --interactive
 
 # Ver diff antes de aplicar
-oraculo fix-types --show-diff
+doutor fix-types --show-diff
 
 # Apenas validar sintaxe após fix
-oraculo fix-types --validate-only
+doutor fix-types --validate-only
 ```
 
 ## 📊 Métricas e Estatísticas
@@ -334,7 +334,7 @@ oraculo fix-types --validate-only
 
 ## 🔧 Configuração
 
-### oraculo.config.json
+### doutor.config.json
 
 ```json
 {
@@ -477,10 +477,10 @@ describe("categorizarUnknown", () => {
 
 ```bash
 # Ver decisões do categorizador
-DEBUG_TYPE_SAFETY=true oraculo diagnosticar --verbose
+DEBUG_TYPE_SAFETY=true doutor diagnosticar --verbose
 
 # Ver regex matches
-DEBUG_DETECTOR=true oraculo diagnosticar
+DEBUG_DETECTOR=true doutor diagnosticar
 ```
 
 ### Problemas Comuns
@@ -493,7 +493,7 @@ DEBUG_DETECTOR=true oraculo diagnosticar
 
 ```bash
 # Verificar confiança dos casos
-oraculo diagnosticar --filtro tipo-inseguro-unknown --full
+doutor diagnosticar --filtro tipo-inseguro-unknown --full
 
 # Ajustar threshold
 export TYPE_SAFETY_CONFIDENCE_THRESHOLD=90
@@ -523,7 +523,7 @@ if (isMinhaInterface(data)) {
 
 ```bash
 # Reduzir escopo
-oraculo diagnosticar --include "src/**/*.ts" --exclude "**/*.test.ts"
+doutor diagnosticar --include "src/**/*.ts" --exclude "**/*.test.ts"
 
 # Desabilitar análise profunda
 export TYPE_SAFETY_DEEP_ANALYSIS=false
@@ -576,4 +576,4 @@ Para contribuir com melhorias no sistema de type-safety:
 
 **Última atualização:** 29 de novembro de 2025
 **Versão do documento:** 1.0.0
-**Autor:** Equipe Oráculo
+**Autor:** Equipe Doutor

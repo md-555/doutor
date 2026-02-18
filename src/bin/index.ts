@@ -54,7 +54,7 @@ const entryUrl = pathToFileURL(entryPath).toString();
 
     const msg =
       typeof message === 'string' ? message : extrairMensagemErro(err);
-    console.error('Erro ao inicializar o oraculo:', msg);
+    console.error('Erro ao inicializar o doutor:', msg);
     if (err && typeof err === 'object' && 'stack' in err) {
       console.error((err as { stack?: string }).stack);
     }
@@ -81,7 +81,7 @@ const entryUrl = pathToFileURL(entryPath).toString();
     process.exit(0);
   }
   const msg = typeof message === 'string' ? message : extrairMensagemErro(err);
-  console.error('Erro ao inicializar o oraculo:', msg);
+  console.error('Erro ao inicializar o doutor:', msg);
   if (err && typeof err === 'object' && 'stack' in err) {
     console.error((err as { stack?: string }).stack);
   }

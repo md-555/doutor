@@ -1,6 +1,6 @@
-# ⚙️ Guia de Configuração do Oráculo
+# ⚙️ Guia de Configuração do Doutor
 
-> Proveniência e Autoria: Este documento integra o projeto Oráculo (licença MIT).
+> Proveniência e Autoria: Este documento integra o projeto Doutor (licença MIT).
 > Última atualização: 15 de janeiro de 2026
 
 ---
@@ -20,7 +20,7 @@
 
 ## Visão Geral
 
-O Oráculo oferece um sistema flexível de configuração que permite adaptar a análise às necessidades específicas de cada projeto. A configuração pode ser feita através de:
+O Doutor oferece um sistema flexível de configuração que permite adaptar a análise às necessidades específicas de cada projeto. A configuração pode ser feita através de:
 
 - **Arquivos JSON** - Configuração persistente e versionável
 - **Variáveis de ambiente** - Configuração dinâmica para CI/CD
@@ -31,16 +31,16 @@ O Oráculo oferece um sistema flexível de configuração que permite adaptar a 
 A ordem de precedência (maior para menor prioridade):
 
 1. **Argumentos CLI** - `--timeout 60`
-2. **Variáveis de ambiente** - `ORACULO_ANALISE_TIMEOUT_POR_ANALISTA_MS=60000`
-3. **oraculo.config.json** - Configuração local do projeto
-4. **oraculo.config.safe.json** - Configurações de segurança
+2. **Variáveis de ambiente** - `DOUTOR_ANALISE_TIMEOUT_POR_ANALISTA_MS=60000`
+3. **doutor.config.json** - Configuração local do projeto
+4. **doutor.config.safe.json** - Configurações de segurança
 5. **Valores padrão do código** - Defaults internos
 
 ---
 
 ## Arquivos de Configuração
 
-### 1. oraculo.config.json (Principal)
+### 1. doutor.config.json (Principal)
 
 Arquivo de configuração principal na raiz do projeto.
 
@@ -92,7 +92,7 @@ Arquivo de configuração principal na raiz do projeto.
 | `coverageGate`                | object  | Limiares de cobertura de testes          |
 | `TYPE_SAFETY`                 | object  | Configurações do sistema de type-safety  |
 
-### 2. oraculo.config.safe.json (Modo Seguro)
+### 2. doutor.config.safe.json (Modo Seguro)
 
 Configurações de segurança para ambientes de produção e CI/CD.
 
@@ -118,7 +118,7 @@ Configurações de segurança para ambientes de produção e CI/CD.
 | `ALLOW_EXEC`      | `false`           | Impede execução de comandos |
 | `ALLOW_MUTATE_FS` | `false`           | Bloqueia modificações no FS |
 
-### 3. oraculo.repo.arquetipo.json (Perfil do Repositório)
+### 3. doutor.repo.arquetipo.json (Perfil do Repositório)
 
 Define a estrutura esperada do projeto para análise de conformidade.
 
@@ -150,7 +150,7 @@ WORKER_POOL_BATCH_SIZE=10
 WORKER_POOL_TIMEOUT_MS=30000
 
 # === Tempo de Análise ===
-ORACULO_ANALISE_TIMEOUT_POR_ANALISTA_MS=30000
+DOUTOR_ANALISE_TIMEOUT_POR_ANALISTA_MS=30000
 
 # === Pontuação Adaptativa ===
 PONTUACAO_MODO=padrao       # padrao | conservador | permissivo
@@ -200,21 +200,21 @@ COVERAGE_GATE_STATEMENTS=90
 
 ```bash
 # Apenas TypeScript
-oraculo diagnosticar --include "**/*.ts" --include "**/*.tsx"
+doutor diagnosticar --include "**/*.ts" --include "**/*.tsx"
 
 # Apenas código fonte
-oraculo diagnosticar --include "src/**"
+doutor diagnosticar --include "src/**"
 
 # Excluir testes
-oraculo diagnosticar --exclude "**/*.test.*" --exclude "**/*.spec.*"
+doutor diagnosticar --exclude "**/*.test.*" --exclude "**/*.spec.*"
 
 # Código TypeScript sem testes
-oraculo diagnosticar \
+doutor diagnosticar \
   --include "src/**/*.ts" \
   --exclude "**/*.test.ts"
 
 # Monorepo - apenas um pacote
-oraculo diagnosticar --include "packages/my-package/**"
+doutor diagnosticar --include "packages/my-package/**"
 ```
 
 ### Configuração de Filtros via JSON
@@ -363,7 +363,7 @@ REPORT_SILENCE_LOGS=true
 
 ```bash
 # 1. Criar configuração básica
-cat > oraculo.config.json << 'EOF'
+cat > doutor.config.json << 'EOF'
 {
   "INCLUDE_EXCLUDE_RULES": {
     "globalExcludeGlob": ["node_modules/**", "dist/**", "coverage/**"]
@@ -433,43 +433,43 @@ echo ".env" >> .gitignore
 
 ```bash
 # Verificar se arquivo existe
-ls -la oraculo.config.json
+ls -la doutor.config.json
 
 # Validar JSON
-cat oraculo.config.json | jq .
+cat doutor.config.json | jq .
 
 # Debug de carregamento
-DEBUG=config oraculo diagnosticar
+DEBUG=config doutor diagnosticar
 ```
 
 ### Conflito de Variáveis
 
 ```bash
 # Listar variáveis atuais
-env | grep ORACULO
+env | grep DOUTOR
 
-# Limpar todas env vars do Oráculo
-unset $(env | grep ORACULO | cut -d= -f1)
+# Limpar todas env vars do Doutor
+unset $(env | grep DOUTOR | cut -d= -f1)
 ```
 
 ### Debug de Filtros
 
 ```bash
 # Visualizar arquivos que serão analisados
-oraculo diagnosticar --verbose --scan-only
+doutor diagnosticar --verbose --scan-only
 
 # Modo debug mostra decisões de filtro
-oraculo diagnosticar --debug --scan-only
+doutor diagnosticar --debug --scan-only
 ```
 
 ### Armadilhas Comuns
 
 ```bash
 # ❌ Errado - apenas nível raiz de src/
-oraculo diagnosticar --include "src/*.ts"
+doutor diagnosticar --include "src/*.ts"
 
 # ✅ Correto - recursivo em src/
-oraculo diagnosticar --include "src/**/*.ts"
+doutor diagnosticar --include "src/**/*.ts"
 ```
 
 ---

@@ -2,10 +2,10 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 
-import type { MemoryMessage, OraculoContextState, OraculoRunRecord } from '@';
+import type { MemoryMessage, DoutorContextState, DoutorRunRecord } from '@';
 
 // Re-exporta para compatibilidade com código existente
-export type { MemoryMessage, OraculoContextState, OraculoRunRecord };
+export type { MemoryMessage, DoutorContextState, DoutorRunRecord };
 
 export class ConversationMemory {
   private history: MemoryMessage[] = [];
@@ -38,7 +38,7 @@ export class ConversationMemory {
   }
 
   getSummary(): {
-    // @oraculo-disable: tipo-literal-inline-complexo
+    // @doutor-disable: tipo-literal-inline-complexo
     totalMessages: number;
     userMessages: number;
     assistantMessages: number;
@@ -75,8 +75,8 @@ export class ConversationMemory {
   }
 }
 
-export class OraculoContextMemory {
-  private state: OraculoContextState = {
+export class DoutorContextMemory {
+  private state: DoutorContextState = {
     schemaVersion: 1,
     lastRuns: [],
     preferences: {},
@@ -91,13 +91,13 @@ export class OraculoContextMemory {
     if (!this.persistPath) return;
     try {
       const raw = await readFile(this.persistPath, 'utf-8');
-      const parsed = JSON.parse(raw) as Partial<OraculoContextState>;
+      const parsed = JSON.parse(raw) as Partial<DoutorContextState>;
       if (parsed && parsed.schemaVersion === 1) {
         this.state = {
-          // @oraculo-disable: tipo-literal-inline-complexo
+          // @doutor-disable: tipo-literal-inline-complexo
           schemaVersion: 1,
           lastRuns: Array.isArray(parsed.lastRuns)
-            ? (parsed.lastRuns as OraculoRunRecord[])
+            ? (parsed.lastRuns as DoutorRunRecord[])
             : [],
           preferences:
             parsed.preferences && typeof parsed.preferences === 'object'
@@ -110,16 +110,16 @@ export class OraculoContextMemory {
     }
   }
 
-  getState(): OraculoContextState {
+  getState(): DoutorContextState {
     return {
-      // @oraculo-disable: tipo-literal-inline-complexo
+      // @doutor-disable: tipo-literal-inline-complexo
       schemaVersion: 1,
       lastRuns: [...this.state.lastRuns],
       preferences: { ...this.state.preferences },
     };
   }
 
-  getLastRun(): OraculoRunRecord | undefined {
+  getLastRun(): DoutorRunRecord | undefined {
     return this.state.lastRuns[this.state.lastRuns.length - 1];
   }
 
@@ -133,7 +133,7 @@ export class OraculoContextMemory {
   }
 
   async recordRunStart(
-    // @oraculo-disable: tipo-literal-inline-complexo
+    // @doutor-disable: tipo-literal-inline-complexo
     input: {
       cwd: string;
       argv: string[];
@@ -142,7 +142,7 @@ export class OraculoContextMemory {
     },
   ): Promise<string> {
     const id = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
-    const record: OraculoRunRecord = {
+    const record: DoutorRunRecord = {
       id,
       timestamp: input.timestamp ?? new Date().toISOString(),
       cwd: input.cwd,
@@ -161,7 +161,7 @@ export class OraculoContextMemory {
 
   async recordRunEnd(
     id: string,
-    // @oraculo-disable: tipo-literal-inline-complexo
+    // @doutor-disable: tipo-literal-inline-complexo
     update: {
       ok: boolean;
       exitCode?: number;
@@ -205,15 +205,15 @@ export class OraculoContextMemory {
 
 export async function getDefaultMemory(): Promise<ConversationMemory> {
   // Preferimos memória por projeto (cwd) para evitar misturar repositórios.
-  const persistPath = join(process.cwd(), '.oraculo', 'history.json');
+  const persistPath = join(process.cwd(), '.doutor', 'history.json');
   const mem = new ConversationMemory(10, persistPath);
   await mem.init();
   return mem;
 }
 
-export async function getDefaultContextMemory(): Promise<OraculoContextMemory> {
-  const persistPath = join(process.cwd(), '.oraculo', 'context.json');
-  const mem = new OraculoContextMemory(20, persistPath);
+export async function getDefaultContextMemory(): Promise<DoutorContextMemory> {
+  const persistPath = join(process.cwd(), '.doutor', 'context.json');
+  const mem = new DoutorContextMemory(20, persistPath);
   await mem.init();
   return mem;
 }

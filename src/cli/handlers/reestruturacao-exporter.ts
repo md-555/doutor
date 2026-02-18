@@ -78,7 +78,7 @@ export async function exportarRelatoriosReestruturacao(
 
     // Gerar timestamp único para os arquivos
     const ts = new Date().toISOString().replace(/[:.]/g, '-');
-    const nomeBase = `oraculo-reestruturacao-${ts}`;
+    const nomeBase = `doutor-reestruturacao-${ts}`;
 
     // Normalizar movimentos para formato padrão
     const movimentosNormalizados = normalizarMovimentos(movimentos);

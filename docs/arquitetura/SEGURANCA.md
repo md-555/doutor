@@ -1,11 +1,11 @@
-# 🛡️ Robustez e Segurança do Oráculo
+# 🛡️ Robustez e Segurança do Doutor
 
-> Proveniência e Autoria: Este documento integra o projeto Oráculo (licença MIT).
+> Proveniência e Autoria: Este documento integra o projeto Doutor (licença MIT).
 > Última atualização: 29 de novembro de 2025
 
 ## 📋 Visão Geral
 
-O Oráculo implementa múltiplas camadas de segurança e robustez para garantir análises seguras e confiáveis em qualquer ambiente.
+O Doutor implementa múltiplas camadas de segurança e robustez para garantir análises seguras e confiáveis em qualquer ambiente.
 
 ## 🔒 Modelo de Segurança
 
@@ -23,14 +23,14 @@ O Oráculo implementa múltiplas camadas de segurança e robustez para garantir 
 
 ```bash
 # Via flag
-oraculo diagnosticar --safe-mode
+doutor diagnosticar --safe-mode
 
 # Via variável de ambiente
 export SAFE_MODE=true
-oraculo diagnosticar
+doutor diagnosticar
 
 # Via configuração
-# oraculo.config.safe.json
+# doutor.config.safe.json
 {
   "SAFE_MODE": true
 }
@@ -246,7 +246,7 @@ const TIMEOUT_PADRAO = 30000; // 30s
 
 async function executarAnalistaComTimeout(analista: Analista, arquivo: string) {
   const timeout =
-    process.env.ORACULO_ANALISE_TIMEOUT_POR_ANALISTA_MS || TIMEOUT_PADRAO;
+    process.env.DOUTOR_ANALISE_TIMEOUT_POR_ANALISTA_MS || TIMEOUT_PADRAO;
 
   return Promise.race([
     analista.aplicar(arquivo),
@@ -313,7 +313,7 @@ function monitorarMemoria() {
 
 ```yaml
 # .github/workflows/ci.yml
-- name: Análise Oráculo
+- name: Análise Doutor
   run: |
     npm run build
     node dist/bin/index.js diagnosticar \
@@ -500,7 +500,7 @@ describe("timeout de analistas", () => {
 
 - [README Principal](../README.md)
 - [Guia de Comandos](GUIA_COMANDOS.md)
-- [Configuração Local](CONFIGURAR-ORACULO-LOCAL.md)
+- [Configuração Local](CONFIGURAR-DOUTOR-LOCAL.md)
 
 ### Segurança Externa
 

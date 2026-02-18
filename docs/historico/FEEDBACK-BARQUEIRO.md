@@ -1,19 +1,19 @@
-# Feedback e Sugestões para Oráculo CLI
+# Feedback e Sugestões para Doutor CLI
 
-> Proveniência e Autoria: Este documento integra o projeto Oráculo (licença MIT).
+> Proveniência e Autoria: Este documento integra o projeto Doutor (licença MIT).
 > Nada aqui implica cessão de direitos morais/autorais.
 > Conteúdos de terceiros não licenciados de forma compatível não devem ser incluídos.
 > Referências a materiais externos devem ser linkadas e reescritas com palavras próprias.
 
 **Data:** 01/12/2025
 **Projeto:** Barqueiro (Discord Bot)
-**Versão do Oráculo:** 0.2.0
+**Versão do Doutor:** 0.2.0
 
 ---
 
 ## 📊 Resumo Geral
 
-O Oráculo foi uma ferramenta **muito útil** para identificar problemas de qualidade no código. Conseguimos reduzir de **301 para 93 ocorrências** (69% de redução) em algumas iterações. A ferramenta tem grande potencial, mas precisa de ajustes para reduzir falsos positivos.
+O Doutor foi uma ferramenta **muito útil** para identificar problemas de qualidade no código. Conseguimos reduzir de **301 para 93 ocorrências** (69% de redução) em algumas iterações. A ferramenta tem grande potencial, mas precisa de ajustes para reduzir falsos positivos.
 
 **Pontos Fortes:**
 
@@ -47,7 +47,7 @@ const configKey = `squad_role_${squadType.toLowerCase()}`;
 
 - Adicionar heurística: se a string está em template literal com interpolação, reduzir severidade
 - Ignorar padrões como `${variavel}` que claramente são dinâmicos
-- Comentário `@oraculo-disable-next-line` deveria funcionar (não funcionou no teste)
+- Comentário `@doutor-disable-next-line` deveria funcionar (não funcionou no teste)
 
 ---
 
@@ -102,7 +102,7 @@ collector.on("collect", async (i) => {
 
 - Adicionar whitelist de limites conhecidos de APIs populares (Discord.js, Stripe, AWS SDK)
 - Detectar quando número está em `.slice()`, `.take()`, `.limit()` com contexto de API
-- Permitir configurar limites ignorados via `.oraculorc.json`
+- Permitir configurar limites ignorados via `.doutorrc.json`
 
 ---
 
@@ -110,7 +110,7 @@ collector.on("collect", async (i) => {
 
 ### Problema: Mover Tests para dentro de `src/`
 
-**Sugestão do Oráculo:**
+**Sugestão do Doutor:**
 
 ```
 src/storage/channel-config.ts → src/config/channel-config.ts
@@ -134,7 +134,7 @@ test/storage/channel-config.test.ts → src/config/channel-config.test.ts
 
 ## ✨ Sugestões de Novas Features
 
-### 1. **Suporte a `.oraculorc.json` para Configuração**
+### 1. **Suporte a `.doutorrc.json` para Configuração**
 
 ```json
 {
@@ -160,7 +160,7 @@ npm run diagnosticar -- --interactive
 
 - Mostrar uma ocorrência por vez
 - Perguntar: "É falso positivo? [y/N]"
-- Gerar arquivo `.oraculoignore` automaticamente
+- Gerar arquivo `.doutorignore` automaticamente
 - Similar ao `git add -p`
 
 ### 3. **Integração com TSConfig/ESLint**
@@ -183,7 +183,7 @@ Sugestão melhorada:
 💡 Magic constant: 25
    → Extrair para: const DISCORD_SELECT_MAX_OPTIONS = 25
    → Ou adicionar comentário: .slice(0, 25) // Discord API limit
-   → Ou ignorar: // @oraculo-ignore magic-constants
+   → Ou ignorar: // @doutor-ignore magic-constants
 ```
 
 ### 5. **Detecção de Contexto de Framework**
@@ -232,7 +232,7 @@ Sugestão:
 
 ```
 ❌ hardcoded-secrets encontrado
-   📖 Saiba mais: https://oraculo.dev/docs/hardcoded-secrets
+   📖 Saiba mais: https://doutor.dev/docs/hardcoded-secrets
    💡 Como corrigir: Use variáveis de ambiente
 ```
 
@@ -250,7 +250,7 @@ Sugestão:
 O modo `--export` atual gera MD muito básico. Sugestão:
 
 ```markdown
-# Relatório Oráculo - 01/12/2025
+# Relatório Doutor - 01/12/2025
 
 ## 🎯 Métricas
 
@@ -286,12 +286,12 @@ const key = "squad*role*"
 
 ## 🔧 Bugs e Inconsistências
 
-### 1. **Comentário `@oraculo-disable-next-line` não funciona**
+### 1. **Comentário `@doutor-disable-next-line` não funciona**
 
 Testamos:
 
 ```typescript
-// @oraculo-disable-next-line hardcoded-secrets
+// @doutor-disable-next-line hardcoded-secrets
 const configKey = `squad_role_${squadType.toLowerCase()}`;
 ```
 
@@ -331,8 +331,8 @@ Output tem linhas `INFO` antes do JSON válido, quebrando parse:
 
 ### Alta Prioridade:
 
-1. ⭐⭐⭐ Configuração via `.oraculorc.json`
-2. ⭐⭐⭐ Corrigir `@oraculo-disable-next-line`
+1. ⭐⭐⭐ Configuração via `.doutorrc.json`
+2. ⭐⭐⭐ Corrigir `@doutor-disable-next-line`
 3. ⭐⭐⭐ Modo `--json` puro (sem logs)
 4. ⭐⭐ Reduzir falsos positivos de `unhandled-async` em event handlers
 
@@ -352,7 +352,7 @@ Output tem linhas `INFO` antes do JSON válido, quebrando parse:
 
 ## 💚 Agradecimentos
 
-Apesar dos pontos de melhoria, o Oráculo **já é uma ferramenta valiosa**. Conseguimos:
+Apesar dos pontos de melhoria, o Doutor **já é uma ferramenta valiosa**. Conseguimos:
 
 - Limpar 69% dos problemas de qualidade
 - Identificar interfaces que deveriam estar em arquivos de tipos
@@ -367,4 +367,4 @@ Apesar dos pontos de melhoria, o Oráculo **já é uma ferramenta valiosa**. Con
 
 - **Projeto:** [github.com/ascentusoss/barqueiro](https://github.com/ascentusoss/barqueiro)
 - **Feedback gerado em:** 01/12/2025
-- **Versão analisada:** Oráculo CLI v0.2.0
+- **Versão analisada:** Doutor CLI v0.2.0

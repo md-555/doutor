@@ -5,34 +5,34 @@ import { lerArquivoTexto } from '@shared/persistence/persistencia.js';
 
 import type { IncludeExcludeConfig } from '@';
 
-import { ORACULO_DIRS, ORACULO_FILES } from '../registry/paths.js';
+import { DOUTOR_DIRS, DOUTOR_FILES } from '../registry/paths.js';
 
-// Diretórios internos do Oráculo (agora usando paths centralizados)
-const ORACULO_STATE = ORACULO_DIRS.STATE;
-const ZELADOR_ABANDONED = path.join(ORACULO_STATE, 'abandonados');
+// Diretórios internos do Doutor (agora usando paths centralizados)
+const DOUTOR_STATE = DOUTOR_DIRS.STATE;
+const ZELADOR_ABANDONED = path.join(DOUTOR_STATE, 'abandonados');
 
-// Configuração global do sistema Oráculo
+// Configuração global do sistema Doutor
 export const configDefault = {
   VERBOSE: false,
   LOG_LEVEL: 'info' as 'erro' | 'aviso' | 'info' | 'debug',
   // 🌱 Flags gerais
   DEV_MODE:
     process.env.NODE_ENV === 'development' ||
-    process.env.ORACULO_DEV === 'true',
+    process.env.DOUTOR_DEV === 'true',
   AUTOANALISE_CONCURRENCY: 5,
   // Segurança: modo seguro impede ações destrutivas por padrão.
   // Em ambiente de testes (VITEST) mantemos SAFE_MODE desabilitado para preservar o comportamento das suites.
-  // Para desativar por processo/ambiente fora de testes: ORACULO_SAFE_MODE=0
-  SAFE_MODE: process.env.VITEST ? false : process.env.ORACULO_SAFE_MODE !== '0',
+  // Para desativar por processo/ambiente fora de testes: DOUTOR_SAFE_MODE=0
+  SAFE_MODE: process.env.VITEST ? false : process.env.DOUTOR_SAFE_MODE !== '0',
   // Permissões explícitas para permitir plugins/exec/fs mutações quando SAFE_MODE ativo
-  ALLOW_PLUGINS: process.env.ORACULO_ALLOW_PLUGINS === '1' || false,
-  ALLOW_EXEC: process.env.ORACULO_ALLOW_EXEC === '1' || false,
+  ALLOW_PLUGINS: process.env.DOUTOR_ALLOW_PLUGINS === '1' || false,
+  ALLOW_EXEC: process.env.DOUTOR_ALLOW_EXEC === '1' || false,
   ALLOW_MUTATE_FS: true,
 
   // 🛡️ Guardian
   GUARDIAN_ENABLED: true,
   GUARDIAN_ENFORCE_PROTECTION: true,
-  GUARDIAN_BASELINE: ORACULO_FILES.GUARDIAN_BASELINE,
+  GUARDIAN_BASELINE: DOUTOR_FILES.GUARDIAN_BASELINE,
   GUARDIAN_ALLOW_ADDS: false,
   GUARDIAN_ALLOW_CHG: false,
   GUARDIAN_ALLOW_DELS: false,
@@ -44,7 +44,7 @@ export const configDefault = {
   // ao executar em modo silencioso. Valor default: false.
   SUPPRESS_PARCIAL_LOGS: false,
   REPORT_EXPORT_ENABLED: false,
-  REPORT_OUTPUT_DIR: ORACULO_DIRS.REPORTS,
+  REPORT_OUTPUT_DIR: DOUTOR_DIRS.REPORTS,
   // Quando true, além do relatório summary, gera também o relatório completo (pesado) em JSON
   REPORT_EXPORT_FULL: false,
   // Fragmentation defaults: controlam o tamanho máximo de cada shard ao fragmentar relatórios
@@ -59,12 +59,12 @@ export const configDefault = {
   RELATORIO_SAUDE_DETALHADO_VERBOSE: true,
 
   // 📂 Zelador
-  ORACULO_STATE_DIR: ORACULO_STATE,
+  DOUTOR_STATE_DIR: DOUTOR_STATE,
   ZELADOR_ABANDONED_DIR: ZELADOR_ABANDONED,
-  ZELADOR_PENDING_PATH: path.join(ORACULO_STATE, 'pendentes.json'),
-  ZELADOR_REACTIVATE_PATH: path.join(ORACULO_STATE, 'reativar.json'),
-  ZELADOR_HISTORY_PATH: path.join(ORACULO_STATE, 'historico.json'),
-  ZELADOR_REPORT_PATH: path.join(ORACULO_STATE, 'poda-oraculo.md'),
+  ZELADOR_PENDING_PATH: path.join(DOUTOR_STATE, 'pendentes.json'),
+  ZELADOR_REACTIVATE_PATH: path.join(DOUTOR_STATE, 'reativar.json'),
+  ZELADOR_HISTORY_PATH: path.join(DOUTOR_STATE, 'historico.json'),
+  ZELADOR_REPORT_PATH: path.join(DOUTOR_STATE, 'poda-doutor.md'),
   ZELADOR_GHOST_INACTIVITY_DAYS: 30,
 
   // Padrões adicionais controlados via CLI para filtragem dinâmica pontual
@@ -96,8 +96,8 @@ export const configDefault = {
       '.pensando/**',
       '**/pensando/**',
       // Estado interno / cache / builds
-      '**/.oraculo/**',
-      'oraculo/**',
+      '**/.doutor/**',
+      'doutor/**',
       'dist/**',
       '**/dist/**',
       'coverage/**',
@@ -157,7 +157,7 @@ export const configDefault = {
   WORKER_POOL_BATCH_SIZE: 10,
   // Caminho de histórico de métricas (migrado para subdir dedicado; arquivo antigo na raiz ainda lido como fallback em runtime onde aplicável)
   ANALISE_METRICAS_HISTORICO_PATH: path.join(
-    ORACULO_STATE,
+    DOUTOR_STATE,
     'historico-metricas',
     'metricas-historico.json',
   ),
@@ -173,7 +173,7 @@ export const configDefault = {
   // Incremental desabilitado por padrão para evitar efeitos colaterais em testes; habilite explicitamente onde necessário
   ANALISE_INCREMENTAL_ENABLED: false,
   ANALISE_INCREMENTAL_STATE_PATH: path.join(
-    ORACULO_STATE,
+    DOUTOR_STATE,
     'incremental-analise.json',
   ),
   ANALISE_INCREMENTAL_VERSION: 1,
@@ -190,13 +190,13 @@ export const configDefault = {
     DOCS_FRAGMENTS_DIR: path.posix.join('docs', 'fragments'),
   },
 
-  // Convenções do projeto analisado (customizável via oraculo.config.json)
+  // Convenções do projeto analisado (customizável via doutor.config.json)
   conventions: {
     // Diretório onde tipos dedicados devem viver (ex.: 'src/tipos', 'app/types')
     typesDirectory: path.posix.join('src', 'tipos'),
   },
 
-  // Configuração do detector-markdown (customizável via oraculo.config.json)
+  // Configuração do detector-markdown (customizável via doutor.config.json)
   detectorMarkdown: {
     checkProveniencia: true,
     checkLicenses: true,
@@ -217,15 +217,15 @@ export const configDefault = {
   STRUCTURE_AUTO_FIX: false,
   STRUCTURE_CONCURRENCY: 5,
   STRUCTURE_LAYERS: {},
-  STRUCTURE_REVERSE_MAP_PATH: path.join(ORACULO_STATE, 'mapa-reversao.json'),
+  STRUCTURE_REVERSE_MAP_PATH: path.join(DOUTOR_STATE, 'mapa-reversao.json'),
   // Limite de tamanho (bytes) para considerar mover arquivo em plano de reorganização
   ESTRUTURA_PLANO_MAX_FILE_SIZE: 256 * 1024, // ~250KB
   // Limite de arquivos considerados "muitos arquivos na raiz" (ajustável por repo)
   ESTRUTURA_ARQUIVOS_RAIZ_MAX: 10,
 
   // Compatibilidade/legado
-  STATE_DIR: ORACULO_STATE,
-  ZELADOR_STATE_DIR: ORACULO_STATE,
+  STATE_DIR: DOUTOR_STATE,
+  ZELADOR_STATE_DIR: DOUTOR_STATE,
   COMPACT_MODE: false,
   // Modo somente varredura (sem AST, sem técnicas) quando ativado por flag
   SCAN_ONLY: false,
@@ -312,7 +312,7 @@ async function carregarArquivoConfig(): Promise<Record<
   unknown
 > | null> {
   // Ordem de busca simples
-  const candidatos = ['oraculo.config.json', 'src/config.json'];
+  const candidatos = ['doutor.config.json', 'src/config.json'];
   for (const nome of candidatos) {
     try {
       const caminho = path.join(process.cwd(), nome);
@@ -379,7 +379,7 @@ function converterConfigSimplificada(
     resultado.plugins = {
       enabled: enabledPlugins,
       autoload: true,
-      registry: '@oraculo/plugins',
+      registry: '@doutor/plugins',
     };
 
     delete resultado.languages;
@@ -424,7 +424,7 @@ function sincronizarIgnorados() {
 
 function carregarEnvConfig(): Record<string, unknown> {
   const resultado: Record<string, unknown> = {};
-  // Mapeia cada chave do default para uma env ORACULO_<KEY>
+  // Mapeia cada chave do default para uma env DOUTOR_<KEY>
   const stack: Array<{ obj: Record<string, unknown>; prefix: string }> = [
     { obj: configDefault as unknown as Record<string, unknown>, prefix: '' },
   ];
@@ -434,7 +434,7 @@ function carregarEnvConfig(): Record<string, unknown> {
     const { obj, prefix } = popped;
     for (const k of Object.keys(obj)) {
       const keyPath = prefix ? `${prefix}.${k}` : k;
-      const envName = `ORACULO_${keyPath.replace(/\./g, '_').toUpperCase()}`;
+      const envName = `DOUTOR_${keyPath.replace(/\./g, '_').toUpperCase()}`;
       const currentVal = (obj as Record<string, unknown>)[k];
       if (ehObjetoPlano(currentVal)) {
         stack.push({ obj: currentVal, prefix: keyPath });

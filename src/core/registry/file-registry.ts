@@ -22,9 +22,9 @@ import type { MigrationResult } from '@';
 import { log } from '../messages/log/log.js';
 import {
   MIGRATION_MAP,
-  ORACULO_DIRS,
-  ORACULO_FILES,
-  type OraculoFilePath,
+  DOUTOR_DIRS,
+  DOUTOR_FILES,
+  type DoutorFilePath,
 } from './paths.js';
 
 /**
@@ -120,19 +120,19 @@ async function tryMigrate(targetPath: string): Promise<MigrationResult> {
 /**
  * Lê arquivo JSON do registry
  *
- * @param filePath Caminho do arquivo (use ORACULO_FILES.*)
+ * @param filePath Caminho do arquivo (use DOUTOR_FILES.*)
  * @param options Opções de leitura
  * @returns Conteúdo parseado do JSON
  *
  * @example
  * ```ts
- * const config = await readJSON(ORACULO_FILES.CONFIG, {
+ * const config = await readJSON(DOUTOR_FILES.CONFIG, {
  *   default: {}
  * });
  * ```
  */
 export async function readJSON<T = unknown>(
-  filePath: OraculoFilePath | string,
+  filePath: DoutorFilePath | string,
   options: ReadOptions<T> = {},
 ): Promise<T> {
   const { default: defaultValue, migrate = true, validate } = options;
@@ -179,20 +179,20 @@ export async function readJSON<T = unknown>(
 /**
  * Escreve arquivo JSON no registry
  *
- * @param filePath Caminho do arquivo (use ORACULO_FILES.*)
+ * @param filePath Caminho do arquivo (use DOUTOR_FILES.*)
  * @param data Dados a serem salvos
  * @param options Opções de escrita
  *
  * @example
  * ```ts
- * await writeJSON(ORACULO_FILES.GUARDIAN_BASELINE, snapshot, {
+ * await writeJSON(DOUTOR_FILES.GUARDIAN_BASELINE, snapshot, {
  *   createDirs: true,
  *   backup: true
  * });
  * ```
  */
 export async function writeJSON<T = unknown>(
-  filePath: OraculoFilePath | string,
+  filePath: DoutorFilePath | string,
   data: T,
   options: WriteOptions = {},
 ): Promise<void> {
@@ -230,11 +230,11 @@ export async function writeJSON<T = unknown>(
 /**
  * Deleta arquivo do registry
  *
- * @param filePath Caminho do arquivo (use ORACULO_FILES.*)
+ * @param filePath Caminho do arquivo (use DOUTOR_FILES.*)
  * @param options Opções de deleção
  */
 export async function deleteJSON(
-  filePath: OraculoFilePath | string,
+  filePath: DoutorFilePath | string,
   options: { backup?: boolean } = {},
 ): Promise<void> {
   const { backup = true } = options;
@@ -261,7 +261,7 @@ export async function deleteJSON(
 /**
  * Lista todos os arquivos JSON em um diretório do registry
  *
- * @param dirPath Caminho do diretório (use ORACULO_DIRS.*)
+ * @param dirPath Caminho do diretório (use DOUTOR_DIRS.*)
  * @returns Lista de caminhos completos
  */
 export async function listJSONFiles(dirPath: string): Promise<string[]> {
@@ -293,6 +293,6 @@ export const FileRegistry = {
   write: writeJSON,
   delete: deleteJSON,
   list: listJSONFiles,
-  paths: ORACULO_FILES,
-  dirs: ORACULO_DIRS,
+  paths: DOUTOR_FILES,
+  dirs: DOUTOR_DIRS,
 } as const;

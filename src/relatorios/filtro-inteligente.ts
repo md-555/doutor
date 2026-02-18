@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// @oraculo-disable tipo-literal-inline-complexo
+// @doutor-disable tipo-literal-inline-complexo
 // Justificativa: tipos locais para filtragem de relatórios
 // Sistema inteligente de filtragem e priorização de relatórios
 // Agrupa problemas similares e prioriza por impacto para evitar sobrecarga de informação

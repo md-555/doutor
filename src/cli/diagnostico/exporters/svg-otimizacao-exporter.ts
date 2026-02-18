@@ -98,7 +98,7 @@ export async function exportarRelatorioSvgOtimizacao(params: {
 
   const outputPath = path.join(
     relatoriosDir,
-    `oraculo-svg-otimizacao-${ts}.md`,
+    `doutor-svg-otimizacao-${ts}.md`,
   );
 
   let md = '';

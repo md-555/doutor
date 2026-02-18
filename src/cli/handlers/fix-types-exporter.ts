@@ -123,7 +123,7 @@ async function gerarRelatorioMarkdown(
   lines.push('# Relatório de Análise de Tipos Inseguros');
   lines.push('');
   lines.push(`**Gerado em:** ${new Date().toISOString()}`);
-  lines.push(`**Comando:** \`oraculo fix-types\``);
+  lines.push(`**Comando:** \`doutor fix-types\``);
   lines.push(`**Confiança Mínima:** ${minConfidence}%`);
   lines.push('');
 
@@ -303,7 +303,7 @@ export async function exportarRelatoriosFixTypes(
 
     // Gerar timestamp único para os arquivos
     const ts = new Date().toISOString().replace(/[:.]/g, '-');
-    const nomeBase = `oraculo-fix-types-${ts}`;
+    const nomeBase = `doutor-fix-types-${ts}`;
 
     // Gerar relatório Markdown
     const caminhoMd = path.join(dir, `${nomeBase}.md`);

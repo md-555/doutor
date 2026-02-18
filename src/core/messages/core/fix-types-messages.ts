@@ -178,7 +178,7 @@ export const MENSAGENS_CLI_FIX_TYPES = {
   verboseVarianteItem: (idxBase1: number, variante: string) =>
     `        ${idxBase1}. ${variante}`,
 
-  analiseDetalhadaSalva: `${ICONES_ARQUIVO.arquivo} Análise detalhada salva em: .oraculo/fix-types-analise.json`,
+  analiseDetalhadaSalva: `${ICONES_ARQUIVO.arquivo} Análise detalhada salva em: .doutor/fix-types-analise.json`,
 
   altaConfiancaTitulo: (qtd: number) =>
     `${ICONES_DIAGNOSTICO.stats} ${qtd} correções de alta confiança (≥85%):`,
@@ -200,7 +200,7 @@ export const MENSAGENS_CLI_FIX_TYPES = {
     confianca: number,
   ) => `  ${ICONES_TIPOS.melhoravel} ${relPath}:${linha} (${confianca}%)`,
   incertosMais: (qtd: number) =>
-    `  ... e mais ${qtd} casos incertos (veja .oraculo/fix-types-analise.json)`,
+    `  ... e mais ${qtd} casos incertos (veja .doutor/fix-types-analise.json)`,
 
   correcoesResumoSucesso: (qtd: number) =>
     `${ICONES_STATUS.ok} ${qtd} arquivo(s) corrigido(s)`,

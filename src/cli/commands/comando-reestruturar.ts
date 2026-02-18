@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// @oraculo-disable tipo-literal-inline-complexo
+// @doutor-disable tipo-literal-inline-complexo
 // Justificativa: tipos inline para opções de comando CLI são locais e não precisam de extração
 import { OperarioEstrutura } from '@analistas/estrategistas/operario-estrutura.js';
 import { exportarRelatoriosReestruturacao } from '@cli/handlers/reestruturacao-exporter.js';
@@ -51,7 +51,7 @@ export function comandoReestruturar(
     )
     .option(
       '--domains',
-      'Organiza por domains/<entidade>/<categoria>s (opcional; preset oraculo usa flat)',
+      'Organiza por domains/<entidade>/<categoria>s (opcional; preset doutor usa flat)',
       false,
     )
     .option('--flat', 'Organiza por src/<categoria>s (sem domains)', false)
@@ -62,7 +62,7 @@ export function comandoReestruturar(
     )
     .option(
       '--preset <nome>',
-      'Preset de estrutura (oraculo|node-community|ts-lib). Se omitido, não sugere estrutura automaticamente.',
+      'Preset de estrutura (doutor|node-community|ts-lib). Se omitido, não sugere estrutura automaticamente.',
     )
     .option(
       '--categoria <pair>',
@@ -129,10 +129,10 @@ export function comandoReestruturar(
       const baseDir = process.cwd();
 
       try {
-        // Caminho r�pido de teste: quando ORACULO_TEST_FAST=1 pulamos varredura e inquisicao pesadas.
+        // Caminho r�pido de teste: quando DOUTOR_TEST_FAST=1 pulamos varredura e inquisicao pesadas.
         // Mant�m apenas valida��o e gera��o de plano via Operario (mockado nos testes),
         // reduzindo drasticamente o tempo e riscos de timeouts RPC do Vitest.
-        if (process.env.ORACULO_TEST_FAST === '1') {
+        if (process.env.DOUTOR_TEST_FAST === '1') {
           const fileEntriesComAst: FileEntryWithAst[] = [];
           const map = parsearCategorias(opts.categoria);
           if (opts.domains && opts.flat) {
@@ -206,7 +206,7 @@ export function comandoReestruturar(
           return;
         }
         // Aplica flags globais (inclui/exclude) no config
-        // O scanner centralizado j� respeita oraculo.config.json e as flags
+        // O scanner centralizado j� respeita doutor.config.json e as flags
         // O resultado j� vem filtrado
         let fileEntriesComAst: FileEntryWithAst[] = [];
         let analiseParaCorrecao:
@@ -399,7 +399,7 @@ export function comandoReestruturar(
           let answer = '';
           if (process.env.VITEST) {
             // Permite simular resposta customizada via variável de ambiente
-            answer = process.env.ORACULO_REESTRUTURAR_ANSWER ?? 's';
+            answer = process.env.DOUTOR_REESTRUTURAR_ANSWER ?? 's';
           } else {
             try {
               const readline = await import('node:readline/promises');

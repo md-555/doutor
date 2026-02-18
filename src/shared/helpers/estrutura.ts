@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// @oraculo-disable tipo-literal-inline-complexo
+// @doutor-disable tipo-literal-inline-complexo
 // Justificativa: tipos locais para helpers de estrutura
 import path from 'node:path';
 
@@ -51,7 +51,7 @@ export const DEFAULT_OPCOES: Required<
     'dist',
     'build',
     'coverage',
-    '.oraculo',
+    '.doutor',
   ],
 };
 
@@ -60,9 +60,9 @@ export const PRESETS: Record<
   string,
   Partial<typeof DEFAULT_OPCOES> & { nome: string }
 > = {
-  oraculo: {
-    nome: 'oraculo',
-    // No preset "oraculo" não organizamos por entidade/domains
+  doutor: {
+    nome: 'doutor',
+    // No preset "doutor" não organizamos por entidade/domains
     criarSubpastasPorEntidade: false,
     apenasCategoriasConfiguradas: false,
     categoriasMapa: { ...CATEGORIAS_DEFAULT },
@@ -220,7 +220,7 @@ export async function carregarConfigEstrategia(
   baseDir: string,
   overrides?: OpcoesEstrategista,
 ): Promise<Required<typeof DEFAULT_OPCOES>> {
-  const caminho = path.join(baseDir, '.oraculo', 'estrutura.json');
+  const caminho = path.join(baseDir, '.doutor', 'estrutura.json');
   const lido = await lerEstado<Record<string, unknown> | []>(caminho);
   const cfgArquivo = (
     lido && !Array.isArray(lido) && typeof lido === 'object' ? lido : {}

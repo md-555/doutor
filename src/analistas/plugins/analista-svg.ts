@@ -13,7 +13,7 @@ import {
 import type { Ocorrencia } from '@';
 import { criarAnalista, criarOcorrencia } from '@';
 
-const disableEnv = process.env.ORACULO_DISABLE_PLUGIN_SVG === '1';
+const disableEnv = process.env.DOUTOR_DISABLE_PLUGIN_SVG === '1';
 
 type Msg = ReturnType<typeof criarOcorrencia>;
 
@@ -51,7 +51,7 @@ function msg(
 export const analistaSvg = criarAnalista({
   nome: 'analista-svg',
   categoria: 'assets',
-  descricao: 'Heurísticas para SVG + sugestão de otimização (modo Oráculo).',
+  descricao: 'Heurísticas para SVG + sugestão de otimização (modo Doutor).',
   global: false,
   test: (relPath: string): boolean => /\.svg$/i.test(relPath),
   aplicar: async (src, relPath): Promise<Ocorrencia[] | null> => {

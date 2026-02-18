@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// @oraculo-disable tipo-literal-inline-complexo
+// @doutor-disable tipo-literal-inline-complexo
 // Justificativa: tipos inline para opções de comando CLI são locais e não precisam de extração
 // Importar handler modular do Guardian (Sprint 2)
 import {
@@ -22,7 +22,7 @@ export function comandoGuardian(
 ): Command {
   return (
     new Command('guardian')
-      .description('Gerencia e verifica a integridade do ambiente do Oráculo.')
+      .description('Gerencia e verifica a integridade do ambiente do Doutor.')
       // Alinhar com comportamento tolerante usado em outros comandos/testes
       .allowUnknownOption(true)
       .allowExcessArguments(true)
@@ -169,9 +169,9 @@ export function comandoGuardian(
                         cacheDiffHits:
                           (
                             globalThis as unknown as {
-                              __ORACULO_DIFF_CACHE_HITS__?: number;
+                              __DOUTOR_DIFF_CACHE_HITS__?: number;
                             }
-                          ).__ORACULO_DIFF_CACHE_HITS__ || 0,
+                          ).__DOUTOR_DIFF_CACHE_HITS__ || 0,
                       }),
                     );
                   else logGuardian.integridadeOk();
@@ -184,9 +184,9 @@ export function comandoGuardian(
                         cacheDiffHits:
                           (
                             globalThis as unknown as {
-                              __ORACULO_DIFF_CACHE_HITS__?: number;
+                              __DOUTOR_DIFF_CACHE_HITS__?: number;
                             }
-                          ).__ORACULO_DIFF_CACHE_HITS__ || 0,
+                          ).__DOUTOR_DIFF_CACHE_HITS__ || 0,
                       }),
                     );
                   else logGuardian.baselineCriadoConsole();
@@ -202,9 +202,9 @@ export function comandoGuardian(
                         cacheDiffHits:
                           (
                             globalThis as unknown as {
-                              __ORACULO_DIFF_CACHE_HITS__?: number;
+                              __DOUTOR_DIFF_CACHE_HITS__?: number;
                             }
-                          ).__ORACULO_DIFF_CACHE_HITS__ || 0,
+                          ).__DOUTOR_DIFF_CACHE_HITS__ || 0,
                       }),
                     );
                   else logGuardian.baselineAtualizado();
