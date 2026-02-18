@@ -1,0 +1,13 @@
+# SQLite-specific lint config (json format)
+# This is a small, documented example combining typical sqlite lint rules.
+{
+  "rules": {
+    "valid-table-name": "error",
+    "valid-column-name": "error",
+    "no-invalid-column-name": "error",
+    "spaces-around-operators": "warn",
+    "lowercase-keywords": "off",
+    "uppercase-keywords": "off",
+    "consistent-case": "warn"
+  }
+}

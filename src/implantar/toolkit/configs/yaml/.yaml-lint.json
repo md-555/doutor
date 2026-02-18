@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json.schemastore.org/yamllint.json",
+  "extends": "default",
+  "rules": {
+    "indentation": { "level": "warning", "spaces": 2 },
+    "key-duplicates": "error",
+    "trailing-spaces": "warning",
+    "line-length": { "level": "warning", "limit": 120 },
+    "new-line-at-end-of-file": "warning"
+  }
+}

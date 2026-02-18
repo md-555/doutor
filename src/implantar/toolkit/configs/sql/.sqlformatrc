@@ -1,0 +1,10 @@
+# SQL Formatter configuration (default: sqlite-friendly)
+language: sqlite
+tabWidth: 2
+keywordCase: upper
+indentStyle: standard
+logicalOperatorNewline: before
+expressionWidth: 50
+linesBetweenQueries: 2
+denseOperators: false
+newlineBeforeSemicolon: false

@@ -1,0 +1,203 @@
+{
+  "name": "@ascentusoss/shared-config",
+  "version": "2.0.0",
+  "description": "Configurações compartilhadas de lint e formatadores para projetos Morallus Software",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "exports": {
+    "./eslint/base": "./configs/eslint/base.js",
+    "./eslint/typescript": "./configs/eslint/typescript.js",
+    "./eslint/react": "./configs/eslint/react.js",
+    "./eslint/node": "./configs/eslint/node.js",
+    "./eslint/browser": "./configs/eslint/browser.js",
+    "./prettier": "./configs/prettier/.prettierrc",
+    "./prettier/tailwind": "./configs/prettier/.prettierrc.tailwind",
+    "./stylelint": "./configs/stylelint/.stylelintrc.json",
+    "./postcss": "./configs/postcss/postcss.config.js",
+    "./svgo": "./configs/svgo/svgo.config.js",
+    "./editorconfig": "./configs/.editorconfig",
+    "./sql/postgres": "./configs/sql/.sqlfluff.postgres",
+    "./sql/sqlite": "./configs/sql/.sqlfluff.sqlite",
+    "./sql/sqlformat": "./configs/sql/.sqlformatrc",
+    "./sql/sqliterc": "./configs/sql/.sqliterc",
+    "./yaml/yamllint": "./configs/yaml/.yamllint.yml",
+    "./yaml/yaml-lint-json": "./configs/yaml/.yaml-lint.json",
+    "./markdown/remark": "./configs/markdown/.remarkrc.cjs",
+    "./markdown/markdownlint": "./configs/markdown/.markdownlint.json"
+  },
+  "files": ["configs/**/*", "README.md", "LICENSE"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moralus/shared-config.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "@moralus:registry": "https://npm.pkg.github.com"
+  },
+  "keywords": [
+    "eslint",
+    "prettier",
+    "stylelint",
+    "config",
+    "lint",
+    "formatter",
+    "code-quality",
+    "typescript",
+    "react"
+  ],
+  "author": "Italo C Lopes",
+  "license": "MIT-0",
+  "peerDependencies": {
+    "@eslint/js": "^9.39.2",
+    "autoprefixer": "^10.4.24",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-n": "^17.23.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-security": "^3.0.1",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-sonarjs": "^3.0.7",
+    "eslint-plugin-unicorn": "^63.0.0",
+    "eslint-plugin-unused-imports": "^4.4.1",
+    "postcss": "^8.5.0",
+    "prettier": "^3.8.1",
+    "remark-lint": "^10.0.1",
+    "remark-lint-maximum-line-length": "^4.1.1",
+    "remark-preset-lint-consistent": "^6.0.1",
+    "remark-preset-lint-markdown-style-guide": "^6.0.1",
+    "remark-preset-lint-recommended": "^7.0.1",
+    "stylelint": "^17.2.0",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-order": "^7.0.1",
+    "svgo": "^4.0.0",
+    "tailwindcss": "^4.0.0",
+    "typescript-eslint": "^8.55.0"
+  },
+  "peerDependenciesMeta": {
+    "autoprefixer": {
+      "optional": true
+    },
+    "eslint-import-resolver-typescript": {
+      "optional": true
+    },
+    "eslint-plugin-import": {
+      "optional": true
+    },
+    "eslint-plugin-jsx-a11y": {
+      "optional": true
+    },
+    "eslint-plugin-n": {
+      "optional": true
+    },
+    "eslint-plugin-react": {
+      "optional": true
+    },
+    "eslint-plugin-react-hooks": {
+      "optional": true
+    },
+    "eslint-plugin-security": {
+      "optional": true
+    },
+    "eslint-plugin-simple-import-sort": {
+      "optional": true
+    },
+    "eslint-plugin-sonarjs": {
+      "optional": true
+    },
+    "eslint-plugin-unused-imports": {
+      "optional": true
+    },
+    "postcss": {
+      "optional": true
+    },
+    "remark-lint": {
+      "optional": true
+    },
+    "remark-lint-maximum-line-length": {
+      "optional": true
+    },
+    "remark-preset-lint-consistent": {
+      "optional": true
+    },
+    "remark-preset-lint-markdown-style-guide": {
+      "optional": true
+    },
+    "remark-preset-lint-recommended": {
+      "optional": true
+    },
+    "stylelint": {
+      "optional": true
+    },
+    "stylelint-config-standard": {
+      "optional": true
+    },
+    "stylelint-order": {
+      "optional": true
+    },
+    "svgo": {
+      "optional": true
+    },
+    "tailwindcss": {
+      "optional": true
+    },
+    "typescript-eslint": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-n": "^17.23.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-security": "^3.0.1",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-sonarjs": "^3.0.7",
+    "eslint-plugin-unicorn": "^63.0.0",
+    "eslint-plugin-unused-imports": "^4.4.1",
+    "markdownlint-cli2": "^0.20.0",
+    "prettier": "^3.8.1",
+    "remark-cli": "^12.0.1",
+    "remark-lint": "^10.0.1",
+    "remark-lint-maximum-line-length": "^4.1.1",
+    "remark-preset-lint-consistent": "^6.0.1",
+    "remark-preset-lint-markdown-style-guide": "^6.0.1",
+    "remark-preset-lint-recommended": "^7.0.1",
+    "stylelint": "^17.2.0",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-order": "^7.0.1",
+    "typescript-eslint": "^8.55.0"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "lint:md": "remark . -q",
+    "lint:md:alt": "markdownlint-cli2 -c configs/markdown/.markdownlint.json '**/*.md'",
+    "lint:style": "stylelint '**/*.{css,scss}'",
+    "format": "prettier --write .",
+    "format:md": "prettier --write '**/*.md'",
+    "format:check": "prettier --check .",
+    "formatar": "oraculo formatar --write",
+    "diagnosticar": "oraculo diagnosticar",
+    "release": "npm publish --registry=https://npm.pkg.github.com"
+  },
+  "overrides": {
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21"
+  },
+  "dependencies": {
+    "auditor": "file:auditor-0.1.0.tgz",
+    "minimatch": "^10.2.0",
+    "oraculo": "file:oraculo-0.3.8.tgz"
+  }
+}

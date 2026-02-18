@@ -1,0 +1,20 @@
+# Unified yamllint configuration
+# Combines and refines project settings found across the repo
+extends: default
+
+rules:
+  line-length:
+    max: 120
+    level: warning
+  indentation:
+    spaces: 2
+    indent-sequences: true
+  comments:
+    min-spaces-from-content: 1
+  comments-indentation: {}
+  document-start: disable
+  truthy:
+    allowed-values: ["true", "false", "on", "off"]
+  trailing-spaces: warning
+  new-line-at-end-of-file: warning
+  key-duplicates: error

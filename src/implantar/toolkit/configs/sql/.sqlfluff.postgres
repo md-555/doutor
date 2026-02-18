@@ -1,0 +1,32 @@
+# SQLFluff config for PostgreSQL
+# Dialect: postgres
+
+[sqlfluff]
+dialect = postgres
+templater = jinja
+sql_file_exts = .sql,.psql
+max_line_length = 120
+indent_unit = space
+indented_joins = False
+indented_using_on = True
+
+[sqlfluff:rules]
+# rules common defaults
+tab_space_size = 2
+max_line_length = 120
+indent_unit = space
+comma_style = trailing
+capitalisation_policy = upper
+
+# rule overrides
+[sqlfluff:rules:L003]
+hanging_indents = True
+
+[sqlfluff:rules:L010]
+capitalisation_policy = upper
+
+[sqlfluff:rules:L014]
+extended_capitalisation_policy = lower
+
+[sqlfluff:rules:L030]
+capitalisation_policy = upper

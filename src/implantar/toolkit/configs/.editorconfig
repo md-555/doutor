@@ -1,0 +1,44 @@
+# EditorConfig: https://EditorConfig.org
+# Configuração universal para editores de código
+# @module @morallus-software/shared-config/editorconfig
+
+root = true
+
+# Padrão para todos os arquivos
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+max_line_length = 100
+
+# Markdown
+[*.md]
+max_line_length = off
+trim_trailing_whitespace = false
+
+# Python
+[*.py]
+indent_size = 4
+
+# Go
+[*.go]
+indent_style = tab
+
+# Makefile
+[Makefile]
+indent_style = tab
+
+# YAML
+[*.{yml,yaml}]
+indent_size = 2
+
+# JSON
+[*.json]
+indent_size = 2
+
+# Package files
+[{package.json,package-lock.json,yarn.lock,pnpm-lock.yaml}]
+indent_size = 2
