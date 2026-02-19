@@ -374,7 +374,10 @@ function collectHtmlIssuesRegex(src: string, relPath: string): Msg[] {
       }
     }
     const isExternal = /\ssrc=/.test(m[0]);
-    const isEmpty = /<script\b[^>]*>\s*<\/\s*script\b[^>]*\s*>?/i.test(m[0]);
+    const innerScriptContent = m[0]
+      .replace(/^[\s\S]*?<script\b[^>]*>/i, '')
+      .replace(/<\/\s*script\b[^>]*\s*>[\s\S]*$/i, '');
+    const isEmpty = innerScriptContent.trim().length === 0;
     if (!isExternal && !isEmpty) {
       ocorrencias.push(warn(HtmlMensagens.inlineScript, relPath, lineOfScan(m.index)));
     }
