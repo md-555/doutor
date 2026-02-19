@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Nota: manter ARQUETIPOS importado visível como lembrete para integração futura
 import path from 'node:path';
+
 import { extrairSinaisAvancados } from '@analistas/arquitetos/sinais-projeto-avancados.js';
 import { ARQUETIPOS } from '@analistas/estrategistas/arquetipos-defs.js';
 import { OperarioEstrutura } from '@analistas/estrategistas/operario-estrutura.js';
@@ -8,7 +9,9 @@ import { carregarArquetipoPersonalizado, integrarArquetipos, obterArquetipoOfici
 import { scoreArquetipoAvancado } from '@analistas/pontuadores/pontuador.js';
 import { config } from '@core/config/config.js';
 import { lerEstado, salvarEstado } from '@shared/persistence/persistencia.js';
+
 import type { ArquetipoDrift, ArquetipoEstruturaDef, ArquetipoPersonalizado, ContextoExecucao, PackageJson, ResultadoContexto, ResultadoDeteccaoArquetipo, SinaisProjetoAvancados, SnapshotEstruturaBaseline } from '@';
+
 function scoreArquetipo(def: ArquetipoEstruturaDef, arquivos: string[], _sinaisAvancados: SinaisProjetoAvancados): ResultadoDeteccaoArquetipo {
   // Implementação simplificada temporária.
   // Mantemos a assinatura e a forma do retorno para compatibilidade.
@@ -39,10 +42,10 @@ if (process.env.VITEST) {
     scoreArquetipo: typeof scoreArquetipo;
   };
   const g = globalThis as unknown as {
-    __DOUTOR_TESTS__?: TestExports;
+    __SENSEI_TESTS__?: TestExports;
   };
-  const prev = g.__DOUTOR_TESTS__ ?? {} as TestExports;
-  g.__DOUTOR_TESTS__ = {
+  const prev = g.__SENSEI_TESTS__ ?? {} as TestExports;
+  g.__SENSEI_TESTS__ = {
     ...prev,
     scoreArquetipo
   };
@@ -230,7 +233,7 @@ export async function detectarArquetipos(contexto: Pick<ContextoExecucao, 'arqui
       candidatos = [top];
     }
   }
-  const baselineCaminho = path.join(baseDir, '.doutor', 'baseline-estrutura.json');
+  const baselineCaminho = path.join(baseDir, '.sensei', 'baseline-estrutura.json');
   let baseline: SnapshotEstruturaBaseline | undefined;
   const existente = await lerEstado<SnapshotEstruturaBaseline | []>(baselineCaminho);
   if (existente && !Array.isArray(existente) && typeof existente === 'object' && 'arquetipo' in existente) {
@@ -266,7 +269,7 @@ export async function detectarArquetipos(contexto: Pick<ContextoExecucao, 'arqui
         forbiddenPresent: [],
         anomalias: [],
         sugestaoPadronizacao: '',
-        explicacaoSimilaridade: 'Detectado via baseline existente (.doutor/baseline-estrutura.json).',
+        explicacaoSimilaridade: 'Detectado via baseline existente (.sensei/baseline-estrutura.json).',
         descricao: 'Arquétipo determinado pelo baseline'
       };
       candidatos = [melhorLinhaBase, ...candidatos.filter((c: ResultadoDeteccaoArquetipo) => c.nome !== baseline.arquetipo)];
@@ -294,12 +297,12 @@ export async function detectarArquetipos(contexto: Pick<ContextoExecucao, 'arqui
   // Sugestão de plano para o candidato top
   if (candidatos[0]) {
     try {
-      // Usa plano de arquétipos se preset for diferente de 'doutor' ou em ambiente de teste
+      // Usa plano de arquétipos se preset for diferente de 'sensei' ou em ambiente de teste
       const preset = (contexto as {
         preset?: string;
-      }).preset ?? 'doutor';
+      }).preset ?? 'sensei';
       const emTeste = !!process.env.VITEST;
-      const preferEstrategista = preset === 'doutor' && !emTeste;
+      const preferEstrategista = preset === 'sensei' && !emTeste;
       const {
         plano
       } = await OperarioEstrutura.planejar(baseDir, contexto.arquivos, {

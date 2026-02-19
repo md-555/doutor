@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 import { ICONES_ACAO } from '../ui/icons.js';
+
 export const CliComandoMetricasMensagens = {
   linhaEmBranco: '',
   historicoExportado: (destino: string) => `${ICONES_ACAO.export} Histórico de métricas exportado para ${destino}`,

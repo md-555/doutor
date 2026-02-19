@@ -44,7 +44,7 @@ jobs:
         if: always()
         with:
           name: license-report
-          path: .doutor/licenses.json
+          path: .sensei/licenses.json
           retention-days: 30
 
   security:

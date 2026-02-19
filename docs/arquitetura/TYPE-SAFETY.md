@@ -1,11 +1,11 @@
-# 🔒 Sistema de Type Safety do Doutor
+# 🔒 Sistema de Type Safety do Sensei
 
-> Proveniência e Autoria: Este documento integra o projeto Doutor (licença MIT).
+> Proveniência e Autoria: Este documento integra o projeto Sensei (licença MIT).
 > Documentação atualizada em: 29 de novembro de 2025
 
 ## 📋 Visão Geral
 
-O Doutor possui um sistema inteligente de detecção e correção de tipos inseguros (`any`, `unknown`) que:
+O Sensei possui um sistema inteligente de detecção e correção de tipos inseguros (`any`, `unknown`) que:
 
 1. **Detecta** uso de tipos inseguros no código TypeScript
 2. **Categoriza** automaticamente se o uso é legítimo ou problemático
@@ -257,54 +257,54 @@ function processData(input: unknown) {
 
 ```bash
 # Ver todos os tipos inseguros
-doutor diagnosticar
+sensei diagnosticar
 
 # Apenas tipos inseguros
-doutor diagnosticar --filtro tipo-inseguro-any
-doutor diagnosticar --filtro tipo-inseguro-unknown
-doutor diagnosticar --filtro tipo-inseguro-any-assertion
+sensei diagnosticar --filtro tipo-inseguro-any
+sensei diagnosticar --filtro tipo-inseguro-unknown
+sensei diagnosticar --filtro tipo-inseguro-any-assertion
 ```
 
 ### 2. Análise Detalhada
 
 ```bash
 # Modo completo com contexto
-doutor diagnosticar --full
+sensei diagnosticar --full
 
 # JSON estruturado para CI
-doutor diagnosticar --filtro tipo-inseguro-any --json
+sensei diagnosticar --filtro tipo-inseguro-any --json
 
 # Export para arquivo
-doutor diagnosticar --export relatorio-tipos.md
+sensei diagnosticar --export relatorio-tipos.md
 ```
 
 ### 3. Correção Automática
 
 ```bash
 # Auto-fix conservador (apenas casos óbvios)
-doutor diagnosticar --auto-fix --auto-fix-mode conservative
+sensei diagnosticar --auto-fix --auto-fix-mode conservative
 
 # Auto-fix permissivo (mais agressivo)
-doutor diagnosticar --auto-fix --auto-fix-mode permissive
+sensei diagnosticar --auto-fix --auto-fix-mode permissive
 
 # Dry-run (preview sem modificar)
-doutor diagnosticar --auto-fix --dry-run
+sensei diagnosticar --auto-fix --dry-run
 
 # Comando dedicado fix-types
-doutor fix-types --interactive
+sensei fix-types --interactive
 ```
 
 ### 4. Modo Interativo
 
 ```bash
 # Escolher quais correções aplicar
-doutor fix-types --interactive
+sensei fix-types --interactive
 
 # Ver diff antes de aplicar
-doutor fix-types --show-diff
+sensei fix-types --show-diff
 
 # Apenas validar sintaxe após fix
-doutor fix-types --validate-only
+sensei fix-types --validate-only
 ```
 
 ## 📊 Métricas e Estatísticas
@@ -334,7 +334,7 @@ doutor fix-types --validate-only
 
 ## 🔧 Configuração
 
-### doutor.config.json
+### sensei.config.json
 
 ```json
 {
@@ -477,10 +477,10 @@ describe("categorizarUnknown", () => {
 
 ```bash
 # Ver decisões do categorizador
-DEBUG_TYPE_SAFETY=true doutor diagnosticar --verbose
+DEBUG_TYPE_SAFETY=true sensei diagnosticar --verbose
 
 # Ver regex matches
-DEBUG_DETECTOR=true doutor diagnosticar
+DEBUG_DETECTOR=true sensei diagnosticar
 ```
 
 ### Problemas Comuns
@@ -493,7 +493,7 @@ DEBUG_DETECTOR=true doutor diagnosticar
 
 ```bash
 # Verificar confiança dos casos
-doutor diagnosticar --filtro tipo-inseguro-unknown --full
+sensei diagnosticar --filtro tipo-inseguro-unknown --full
 
 # Ajustar threshold
 export TYPE_SAFETY_CONFIDENCE_THRESHOLD=90
@@ -523,7 +523,7 @@ if (isMinhaInterface(data)) {
 
 ```bash
 # Reduzir escopo
-doutor diagnosticar --include "src/**/*.ts" --exclude "**/*.test.ts"
+sensei diagnosticar --include "src/**/*.ts" --exclude "**/*.test.ts"
 
 # Desabilitar análise profunda
 export TYPE_SAFETY_DEEP_ANALYSIS=false
@@ -576,4 +576,4 @@ Para contribuir com melhorias no sistema de type-safety:
 
 **Última atualização:** 29 de novembro de 2025
 **Versão do documento:** 1.0.0
-**Autor:** Equipe Doutor
+**Autor:** Equipe Sensei

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 import { ExcecoesMensagens } from '@core/messages/core/excecoes-messages.js';
 import { log, logCore } from '@core/messages/index.js';
+
 import type { GlobalComImport, ImportDinamico, LanguageSupport, ParserPlugin, PluginConfig } from '@';
 
 /**
@@ -18,7 +19,7 @@ export class PluginRegistry {
     this.config = {
       enabled: ['core'],
       autoload: true,
-      registry: '@doutor/plugins',
+      registry: '@sensei/plugins',
       ...config
     };
     this.userConfiguredEnabled = !!config?.enabled;

@@ -5,6 +5,7 @@
  */
 
 import type { Node } from '@babel/types';
+
 import type { ASTNode, PropertyUsage, TypeGuard, UsagePattern, VariableUsage } from '@';
 
 /**

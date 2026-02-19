@@ -2,8 +2,10 @@
 import type { NodePath } from '@babel/traverse';
 import type { Node } from '@babel/types';
 import { findQuickFixes, type PatternBasedQuickFix } from '@core/config/auto/fix-config.js';
+
 import type { Analista, Ocorrencia } from '@';
 import { criarOcorrencia } from '@';
+
 export const analistaQuickFixes: Analista = {
   nome: 'quick-fixes',
   categoria: 'melhorias',

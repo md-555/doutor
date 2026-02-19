@@ -14,7 +14,9 @@ import type { NodePath } from '@babel/traverse';
 import type { Node } from '@babel/types';
 import { getTypesDirectoryDisplay, isInsideTypesDirectory } from '@core/config/conventions.js';
 import { DetectorInterfacesInlineMensagens } from '@core/messages/analistas/detector-interfaces-inline-messages.js';
+
 import type { Analista, InterfaceInlineDetection, Ocorrencia } from '@';
+
 const ANALISTA: Analista = {
   nome: 'detector-interfaces-inline',
   categoria: 'code-organization',

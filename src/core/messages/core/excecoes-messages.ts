@@ -6,7 +6,7 @@ export const ExcecoesMensagens = {
   requireMutateFsAutoFix: 'Auto-fix indisponível',
   autoFixTimeout: (timeoutMs: number) => `Auto-fix timeout após ${timeoutMs}ms`,
   // Plugins / import seguro
-  pluginsDesabilitadosSafeMode: 'Carregamento de plugins desabilitado em SAFE_MODE. Defina DOUTOR_ALLOW_PLUGINS=1 para permitir.',
+  pluginsDesabilitadosSafeMode: 'Carregamento de plugins desabilitado em SAFE_MODE. Defina SENSEI_ALLOW_PLUGINS=1 para permitir.',
   pluginBloqueado: (erro: string) => `Plugin bloqueado: ${erro}`,
   caminhoPluginNaoResolvido: 'Caminho de plugin não resolvido',
   // Registry de plugins

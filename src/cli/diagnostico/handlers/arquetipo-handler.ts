@@ -14,6 +14,7 @@ import { config } from '@core/config/config.js';
 import { CliArquetipoHandlerMensagens } from '@core/messages/cli/cli-arquetipo-handler-messages.js';
 import { MENSAGENS_ARQUETIPOS } from '@core/messages/core/diagnostico-messages.js';
 import { log } from '@core/messages/index.js';
+
 import type { ArquetipoOptions, ArquetipoResult, FileEntryWithAst } from '@';
 
 // Re-export para compatibilidade
@@ -141,7 +142,7 @@ async function salvarArquetipo(resultado: Awaited<ReturnType<typeof detectarArqu
     };
 
     // Salvar em arquivo
-    const outputCaminho = path.join(baseDir, 'doutor.repo.arquetipo.json');
+    const outputCaminho = path.join(baseDir, 'sensei.repo.arquetipo.json');
     await fs.writeFile(outputCaminho, JSON.stringify(arquetipo, null, 2), 'utf-8');
     if (!silent) {
       log.sucesso(MENSAGENS_ARQUETIPOS.salvo(outputCaminho));

@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 import { grafoDependencias } from '@analistas/detectores/detector-dependencias.js';
 import { ARQUETIPOS, normalizarCaminho } from '@analistas/estrategistas/arquetipos-defs.js';
+
 import type { ArquetipoDeteccaoAnomalia, ArquetipoEstruturaDef, ResultadoDeteccaoArquetipo, SinaisProjetoAvancados } from '@';
+
 const PENALIDADE_MISSING_REQUIRED = 20;
 const PESO_OPTIONAL = 5;
 const PESO_REQUIRED = 10;

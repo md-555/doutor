@@ -11,8 +11,10 @@ import { config } from '@core/config/config.js';
 import { DICAS, formatarTipoInseguro, gerarResumoCategoria, ICONES_FIX_TYPES as ICONES, log, MENSAGENS_AUTOFIX, MENSAGENS_CLI_CORRECAO_TIPOS, MENSAGENS_ERRO_FIX_TYPES as MENSAGENS_ERRO, MENSAGENS_INICIO_FIX_TYPES as MENSAGENS_INICIO, MENSAGENS_PROGRESSO_FIX_TYPES as MENSAGENS_PROGRESSO, MENSAGENS_RESUMO, MENSAGENS_SUCESSO_FIX_TYPES as MENSAGENS_SUCESSO, TEMPLATE_RESUMO_FINAL, TEXTOS_CATEGORIZACAO_CORRECAO_TIPOS } from '@core/messages/index.js';
 import { PROJETO_RAIZ } from '@core/registry/paths.js';
 import { Command } from 'commander';
+
 import type { FixTypesOptions, Ocorrencia } from '@';
 import { extrairMensagemErro } from '@';
+
 export function criarComandoFixTypes(): Command {
   const cmd = new Command('fix-types');
   cmd.description('Detecta e corrige tipos inseguros (any/unknown) no código').option('--dry-run', 'Mostra o que seria corrigido sem aplicar mudanças', false).option('--target <path>', 'Diretório ou arquivo específico para analisar', 'src').option('--confidence <number>', 'Nível mínimo de confiança para aplicar correções (0-100)', '85').option('--verbose', 'Mostra detalhes de cada correção', false).option('--interactive', 'Modo interativo: confirma cada correção', false).option('--export', 'Exporta relatórios JSON e Markdown para pasta relatorios/', false).option('--include <padrao>', 'Glob pattern a INCLUIR (pode repetir a flag ou usar vírgulas / espaços para múltiplos)', (val: string, prev: string[]) => {
@@ -337,7 +339,7 @@ async function executarFixTypes(options: FixTypesOptions): Promise<void> {
   if (verbose) {
     const fs = await import('node:fs/promises');
     const path = await import('node:path');
-    const reportCaminho = path.join(PROJETO_RAIZ, '.doutor', 'fix-types-analise.json');
+    const reportCaminho = path.join(PROJETO_RAIZ, '.sensei', 'fix-types-analise.json');
     await fs.mkdir(path.dirname(reportCaminho), {
       recursive: true
     });

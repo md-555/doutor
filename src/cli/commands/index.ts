@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 /**
- * Ponto de entrada único para todos os comandos da CLI do Doutor.
+ * Ponto de entrada único para todos os comandos da CLI do Sensei.
  *
  * Este arquivo centraliza as exportações de todos os comandos disponíveis,
  * facilitando a manutenção e evitando múltiplas importações espalhadas.

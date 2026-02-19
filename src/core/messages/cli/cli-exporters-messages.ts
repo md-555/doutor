@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 import { ICONES_ACAO, ICONES_RELATORIO } from '../ui/icons.js';
+
 export const CliExportersMensagens = {
   poda: {
     relatoriosExportados: (dir: string) => `Relatórios de poda exportados para: ${dir}`,

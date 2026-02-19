@@ -2,6 +2,7 @@
 
 import type { NodePath } from '@babel/traverse';
 import type { Node } from '@babel/types';
+
 export type OrigemArquivo = 'local' | 'remoto' | 'gerado';
 
 // Versão base - compatível com núcleo

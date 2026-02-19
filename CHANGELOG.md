@@ -1,4 +1,4 @@
-> **Proveniência e Autoria**: Este documento integra o projeto Doutor (licença MIT).
+> **Proveniência e Autoria**: Este documento integra o projeto Sensei (licença MIT).
 > Nada aqui implica cessão de direitos morais/autorais.
 > Conteúdos de terceiros não licenciados de forma compatível não devem ser incluídos.
 > Referências a materiais externos devem ser linkadas e reescritas com palavras próprias.
@@ -128,9 +128,9 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 ### Adicionado
 
 - **Novos Comandos CLI**:
-  - `formatar` — Aplica formatação estilo Doutor (whitespace, seções, finais de linha) com suporte a Prettier
+  - `formatar` — Aplica formatação estilo Sensei (whitespace, seções, finais de linha) com suporte a Prettier
   - `otimizar-svg` — Otimiza SVGs do projeto usando otimizador interno (svgo-like)
-  - `atualizar` — Atualiza o Doutor verificando integridade via Guardian antes
+  - `atualizar` — Atualiza o Sensei verificando integridade via Guardian antes
   - `reverter` — Gerencia mapa de reversão para moves aplicados (listar, arquivo, move, limpar)
 
 - **Novos Analistas e Detectores**:
@@ -153,7 +153,7 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
   - `detector-markdown` — Validação de arquivos Markdown
   - `detector-documentacao` — Análise de qualidade de documentação
 
-- **Sistema de Supressão Inline**: `@doutor-disable-next-line <regra>` funciona para todos os analistas
+- **Sistema de Supressão Inline**: `@sensei-disable-next-line <regra>` funciona para todos os analistas
 
 - **Modos de Execução Expandidos**:
   - `--executive` — Modo executivo (apenas problemas críticos/alta prioridade)
@@ -177,7 +177,7 @@ e este projeto adere ao [Versionamento Semântico](https://semver.org/lang/pt-BR
 
 ### Removido
 
-- Dependência circular interna em `doutor: file:doutor-0.3.0.tgz` (problema de empacotamento)
+- Dependência circular interna em `sensei: file:sensei-0.3.0.tgz` (problema de empacotamento)
 
 ---
 

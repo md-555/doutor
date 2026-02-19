@@ -15,7 +15,9 @@ import type { NodePath } from '@babel/traverse';
 import type { Node } from '@babel/types';
 import { config } from '@core/config/config.js';
 import { shouldSuppressOccurrence } from '@shared/helpers/rule-config.js';
+
 import type { Analista, Ocorrencia } from '@';
+
 const ANALISTA: Analista = {
   nome: 'detector-tipos-inseguros',
   categoria: 'code-quality',

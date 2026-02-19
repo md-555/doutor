@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: MIT
 /**
  * Sistema de validação para correções automáticas
- * Integra com o sistema existente de detectores do Doutor
+ * Integra com o sistema existente de detectores do Sensei
  */
 
 import { log } from '@core/messages/index.js';
+
 import type { ValidationResult } from '@';
 
 // Re-exporta o tipo para compatibilidade

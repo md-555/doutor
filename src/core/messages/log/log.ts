@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: MIT
 import type tty from 'node:tty';
+
 import chalk from '@core/config/chalk-safe.js';
 import { config } from '@core/config/config.js';
 import { isJsonMode } from '@shared/helpers/json-mode.js';
+
 import type { FormatOptions, Nivel, StyleFn } from '@';
 // Reexport para testes configurarem flags sem importar cosmos diretamente
 export { config } from '@core/config/config.js';
@@ -22,13 +24,13 @@ export const LOG_SIMBOLOS = {
 function shouldSilence(): boolean {
   // Modo JSON sempre silencia logs visuais
   if (isJsonMode()) return true;
-  if (process.env.DOUTOR_FORCE_SILENT_JSON === '1') return true;
+  if (process.env.SENSEI_FORCE_SILENT_JSON === '1') return true;
   return config.REPORT_SILENCE_LOGS;
 }
 function shouldSuppressParcial(msg?: string): boolean {
   try {
-    // Permite override rápido via variável de ambiente curta DOUTOR_SUPPRESS_PARCIAL=1
-    if (!config.SUPPRESS_PARCIAL_LOGS && process.env.DOUTOR_SUPPRESS_PARCIAL !== '1') return false;
+    // Permite override rápido via variável de ambiente curta SENSEI_SUPPRESS_PARCIAL=1
+    if (!config.SUPPRESS_PARCIAL_LOGS && process.env.SENSEI_SUPPRESS_PARCIAL !== '1') return false;
     if (!msg || typeof msg !== 'string') return false;
     // Suprime quando substring 'parcial' (case-insensitive) aparece em qualquer lugar.
     // Isso cobre 'parcial' e variações como 'parcialmente'.
@@ -38,7 +40,7 @@ function shouldSuppressParcial(msg?: string): boolean {
   }
 }
 function isDebugMode(): boolean {
-  return config.DEV_MODE || process.env.DOUTOR_DEBUG === 'true';
+  return config.DEV_MODE || process.env.SENSEI_DEBUG === 'true';
 }
 function shouldLogLevel(nivel: Nivel): boolean {
   const niveis = ['erro', 'aviso', 'info', 'debug'];
@@ -134,8 +136,8 @@ export function formatarLinha({
   const corpoFmt = nivel === 'info' || nivel === 'debug' ? corpo : cor(corpo);
   const grayFn: StyleFn = typeof chalk.gray === 'function' ? chalk.gray : (s: string) => String(s);
   const linha = `${grayFn(ts)} ${colNivel} ${corpoFmt}`;
-  // Centraliza linhas soltas somente com opt-in explícito (DOUTOR_CENTER=1)
-  if (!process.env.VITEST && process.env.DOUTOR_CENTER === '1') {
+  // Centraliza linhas soltas somente com opt-in explícito (SENSEI_CENTER=1)
+  if (!process.env.VITEST && process.env.SENSEI_CENTER === '1') {
     try {
       const cols = obterColunasTerm();
       const out: tty.WriteStream | undefined = process.stdout && typeof (process.stdout as tty.WriteStream).isTTY !== 'undefined' ? process.stdout as tty.WriteStream : undefined;
@@ -166,7 +168,7 @@ function obterColunasTerm(): number | undefined {
     if (typeof cols === 'number' && cols > 0) return cols;
   } catch {}
   // Permite override explícito via env e fallback de variáveis comuns
-  const envOverride = Number(process.env.DOUTOR_FRAME_MAX_COLS || '0');
+  const envOverride = Number(process.env.SENSEI_FRAME_MAX_COLS || '0');
   if (Number.isFinite(envOverride) && envOverride > 0) return envOverride;
   const envCols = Number(process.env.COLUMNS || process.env.TERM_COLUMNS || '0');
   return Number.isFinite(envCols) && envCols > 0 ? envCols : undefined;
@@ -245,7 +247,7 @@ export function formatarBloco(titulo: string, linhas: string[], corTitulo: Style
 // Fallback opcional de moldura ASCII (evita mojibake em redirecionamentos no Windows)
 
 function deveUsarAsciiFrames(): boolean {
-  return process.env.DOUTOR_ASCII_FRAMES === '1';
+  return process.env.SENSEI_ASCII_FRAMES === '1';
 }
 function converterMolduraParaAscii(bloco: string): string {
   return bloco.replaceAll('┌', '+').replaceAll('┐', '+').replaceAll('└', '+').replaceAll('┘', '+').replaceAll('─', '-').replaceAll('│', '|');
@@ -354,8 +356,8 @@ export const log = {
     }
     const bloco = formatarBloco(titulo, linhas, corTitulo, larguraMax);
     const out = deveUsarAsciiFrames() ? converterMolduraParaAscii(bloco) : bloco;
-    // Centraliza o bloco somente com opt-in explícito (DOUTOR_CENTER=1)
-    if (!process.env.VITEST && process.env.DOUTOR_CENTER === '1') {
+    // Centraliza o bloco somente com opt-in explícito (SENSEI_CENTER=1)
+    if (!process.env.VITEST && process.env.SENSEI_CENTER === '1') {
       try {
         const lines = out.split('\n');
         if (!lines.length) {

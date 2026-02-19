@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 /**
- * Sistema de supressão inline para o Doutor
+ * Sistema de supressão inline para o Sensei
  * Permite desabilitar regras específicas usando comentários no código
  *
  * Formatos suportados (qualquer sintaxe de comentário inline, ex.: //, #, --, ;, <!-- -->, blocos /* ... * /):
- * - @doutor-disable-next-line nome-da-regra
- * - @doutor-disable nome-da-regra
- * - @doutor-enable nome-da-regra
+ * - @sensei-disable-next-line nome-da-regra
+ * - @sensei-disable nome-da-regra
+ * - @sensei-enable nome-da-regra
  */
 
 import type { RegrasSuprimidas, SupressaoInfo } from '@';
@@ -48,8 +48,8 @@ export function extrairSupressoes(src: string): RegrasSuprimidas {
     const linhaNorm = normalizarLinha(linha);
     const numeroLinha = i + 1;
 
-    // @doutor-disable-next-line regra1 regra2
-    const matchNextLine = linhaNorm.match(/@doutor-disable-next-line\s+(.+)/);
+    // @sensei-disable-next-line regra1 regra2
+    const matchNextLine = linhaNorm.match(/@sensei-disable-next-line\s+(.+)/);
     if (matchNextLine) {
       const regras = matchNextLine[1].trim().split(/\s+/);
       const linhaAfetada = numeroLinha + 1;
@@ -65,8 +65,8 @@ export function extrairSupressoes(src: string): RegrasSuprimidas {
       continue;
     }
 
-    // @doutor-disable regra1 regra2
-    const matchDisable = linhaNorm.match(/@doutor-disable\s+(.+)/);
+    // @sensei-disable regra1 regra2
+    const matchDisable = linhaNorm.match(/@sensei-disable\s+(.+)/);
     if (matchDisable) {
       const regras = matchDisable[1].trim().split(/\s+/);
       regras.forEach((regra) => {
@@ -75,8 +75,8 @@ export function extrairSupressoes(src: string): RegrasSuprimidas {
       continue;
     }
 
-    // @doutor-enable regra1 regra2
-    const matchEnable = linhaNorm.match(/@doutor-enable\s+(.+)/);
+    // @sensei-enable regra1 regra2
+    const matchEnable = linhaNorm.match(/@sensei-enable\s+(.+)/);
     if (matchEnable) {
       const regras = matchEnable[1].trim().split(/\s+/);
       regras.forEach((regra) => {
@@ -85,14 +85,14 @@ export function extrairSupressoes(src: string): RegrasSuprimidas {
       continue;
     }
 
-    // @doutor-disable (desabilita todas as regras)
-    if (linhaNorm.includes('@doutor-disable-all')) {
+    // @sensei-disable (desabilita todas as regras)
+    if (linhaNorm.includes('@sensei-disable-all')) {
       blocosAtivos.add('*');
       continue;
     }
 
-    // @doutor-enable (reabilita todas as regras)
-    if (linhaNorm.includes('@doutor-enable-all')) {
+    // @sensei-enable (reabilita todas as regras)
+    if (linhaNorm.includes('@sensei-enable-all')) {
       blocosAtivos.clear();
       continue;
     }

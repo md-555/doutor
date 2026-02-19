@@ -1,11 +1,11 @@
 # Guia de Centralização de Mensagens e Logs
 
-> Proveniência e Autoria: Este documento integra o projeto Doutor (licença MIT).
+> Proveniência e Autoria: Este documento integra o projeto Sensei (licença MIT).
 > Nada aqui implica cessão de direitos morais/autorais.
 > Conteúdos de terceiros não licenciados de forma compatível não devem ser incluídos.
 > Referências a materiais externos devem ser linkadas e reescritas com palavras próprias.
 
-Este guia documenta como produzir saídas consistentes no Doutor usando os módulos centralizados de mensagens e a API de logs.
+Este guia documenta como produzir saídas consistentes no Sensei usando os módulos centralizados de mensagens e a API de logs.
 
 ## Onde estão as mensagens
 

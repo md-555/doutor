@@ -1,12 +1,12 @@
 ---
-Proveniência e Autoria: Este documento integra o projeto Doutor (licença MIT).
+Proveniência e Autoria: Este documento integra o projeto Sensei (licença MIT).
 Nada aqui implica cessão de direitos morais/autorais.
 Conteúdos de terceiros não licenciados de forma compatível não devem ser incluídos.
 Referências a materiais externos devem ser linkadas e reescritas com palavras próprias.
 ---
 
 
-# Plano de Desacoplamento - Projeto Doutor
+# Plano de Desacoplamento - Projeto Sensei
 
 Este documento descreve o diagnóstico atual de acoplamento do projeto e as estratégias propostas para tornar a arquitetura mais modular, testável e extensível.
 

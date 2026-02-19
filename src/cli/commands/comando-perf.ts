@@ -2,6 +2,7 @@
 import crypto from 'node:crypto';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+
 import { ExitCode, sair } from '@cli/helpers/exit-codes.js';
 import { config } from '@core/config/config.js';
 import { formatPct } from '@core/config/format.js';
@@ -9,7 +10,9 @@ import { CliComandoDesempMensagens } from '@core/messages/cli/cli-comando-perf-m
 import { ICONES_DIAGNOSTICO, log, logSistema } from '@core/messages/index.js';
 import { lerEstado, salvarEstado } from '@shared/persistence/persistencia.js';
 import { Command } from 'commander';
+
 import type { MetricaExecucaoLike, SnapshotPerf } from '@';
+
 async function obterCommit(): Promise<string | undefined> {
   try {
     // usar helper seguro
@@ -104,8 +107,8 @@ export function comandoPerf(): Command {
       const parent = cmd.parent?.opts?.() || {};
       const dir = parent.dir ? String(parent.dir) : config.PERF_SNAPSHOT_DIR;
       const metricas = (globalThis as unknown as {
-        __ULTIMAS_METRICAS_DOUTOR__?: Partial<MetricaExecucaoLike> | null;
-      }).__ULTIMAS_METRICAS_DOUTOR__;
+        __ULTIMAS_METRICAS_SENSEI__?: Partial<MetricaExecucaoLike> | null;
+      }).__ULTIMAS_METRICAS_SENSEI__;
       const snap = await gerarBaseline(dir, metricas || undefined);
       if (parent.json) {
         console.log(JSON.stringify({

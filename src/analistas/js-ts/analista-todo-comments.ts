@@ -3,6 +3,7 @@ import type { NodePath } from '@babel/traverse';
 import type { Comment } from '@babel/types';
 import { TodoComentariosMensagens } from '@core/messages/analistas/analista-todo-comments-messages.js';
 import { detectarContextoProjeto } from '@shared/contexto-projeto.js';
+
 import type { Analista, TecnicaAplicarResultado } from '@';
 import { criarOcorrencia } from '@';
 

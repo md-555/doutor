@@ -11,6 +11,7 @@ import { XMLParser } from 'fast-xml-parser';
 // Parsers externos leves para outras linguagens
 import { parseDocument } from 'htmlparser2';
 import { createRequire } from 'module';
+
 import type { DecifrarSintaxeOpts, ParserBabelFileExtra as BabelFileExtra, ParserFunc, ParserOptions as PluginParserOptions, ParserRawAst } from '@';
 
 // Contexto global para o arquivo atual durante parsing
@@ -33,7 +34,7 @@ const localRequire = createRequire(import.meta.url);
 
 // Mantemos a assinatura retornando BabelFile | null para não quebrar tipos externos, mas
 // para linguagens não-Babel geramos um objeto "compat" mínimo com File/Program vazio
-// e ast original em doutorExtra.
+// e ast original em senseiExtra.
 
 function parseComBabel(codigo: string, plugins?: string[]): BabelFile | null {
   // Plugins padrão ampliados para cobrir padrões amplamente usados em node_modules
@@ -65,7 +66,7 @@ function wrapMinimal(lang: string, rawAst: ParserRawAst): BabelFileExtra {
     },
     comments: [],
     tokens: [],
-    doutorExtra: {
+    senseiExtra: {
       lang,
       rawAst
     }
@@ -227,7 +228,7 @@ export async function decifrarSintaxe(codigo: string, ext: string, opts: Decifra
 
   // Curto-circuito para TS/TSX: se o chamador forneceu plugins e eles não incluem 'typescript'
   // (ou incluem 'flow'), evitamos Babel para não aceitar sintaxe TS como Flow e forçamos o
-  // compilador do TypeScript. Isso garante ast.doutorExtra.lang = 'ts-tsc'|'tsx-tsc'.
+  // compilador do TypeScript. Isso garante ast.senseiExtra.lang = 'ts-tsc'|'tsx-tsc'.
   if (ext === '.ts' || ext === '.tsx') {
     const p = opts.plugins;
     if (Array.isArray(p)) {

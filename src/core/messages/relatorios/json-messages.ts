@@ -5,6 +5,7 @@
  */
 
 import type { JsonComMetadados } from '@';
+
 export const JsonMensagens = {
   /* -------------------------- CAMPOS COMUNS -------------------------- */
   comum: {
@@ -14,7 +15,7 @@ export const JsonMensagens = {
     },
     versao: {
       label: 'versao',
-      descricao: 'Versão do Doutor que gerou este relatório'
+      descricao: 'Versão do Sensei que gerou este relatório'
     },
     schemaVersion: {
       label: 'schemaVersion',

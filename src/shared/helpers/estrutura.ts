@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: MIT
-// @doutor-disable tipo-literal-inline-complexo
+// @sensei-disable tipo-literal-inline-complexo
 // Justificativa: tipos locais para helpers de estrutura
 import path from 'node:path';
+
 import { lerEstado } from '@shared/persistence/persistencia.js';
+
 import type { NomeacaoEstilo, OpcoesEstrategista, ParseNomeResultado } from '@';
 
 // Re-exporta os tipos para compatibilidade
@@ -29,16 +31,16 @@ export const PADRAO_OPCOES: Required<Pick<OpcoesEstrategista, 'raizCodigo' | 'cr
   apenasCategoriasConfiguradas: true,
   estiloPreferido: 'kebab',
   categoriasMapa: {},
-  ignorarPastas: ['node_modules', '.git', 'dist', 'build', 'coverage', '.doutor']
+  ignorarPastas: ['node_modules', '.git', 'dist', 'build', 'coverage', '.sensei']
 };
 
 // Presets de estrutura: baseiam-se nos defaults, aplicando ajustes de organização
 export const PRESETS: Record<string, Partial<typeof PADRAO_OPCOES> & {
   nome: string;
 }> = {
-  doutor: {
-    nome: 'doutor',
-    // No preset "doutor" não organizamos por entidade/domains
+  sensei: {
+    nome: 'sensei',
+    // No preset "sensei" não organizamos por entidade/domains
     criarSubpastasPorEntidade: false,
     apenasCategoriasConfiguradas: false,
     categoriasMapa: {
@@ -169,7 +171,7 @@ export function destinoPara(relPath: string, raizCodigo: string, criarSubpastasP
   };
 }
 export async function carregarConfigEstrategia(baseDir: string, overrides?: OpcoesEstrategista): Promise<Required<typeof PADRAO_OPCOES>> {
-  const caminho = path.join(baseDir, '.doutor', 'estrutura.json');
+  const caminho = path.join(baseDir, '.sensei', 'estrutura.json');
   const lido = await lerEstado<Record<string, unknown> | []>(caminho);
   const cfgArquivo = (lido && !Array.isArray(lido) && typeof lido === 'object' ? lido : {}) as (Partial<typeof PADRAO_OPCOES> & {
     preset?: string;

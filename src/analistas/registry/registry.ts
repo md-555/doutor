@@ -23,7 +23,11 @@ import { analistaTodoComentarios } from '@analistas/js-ts/analista-todo-comments
 import { analistaDocumentacao } from '@analistas/plugins/detector-documentacao.js';
 import { detectorMarkdown } from '@analistas/plugins/detector-markdown.js';
 import { comSupressaoInline } from '@shared/helpers/analista-wrapper.js';
+
 import type { Analista, EntradaRegistry, InfoAnalista, ModuloAnalista, Tecnica } from '@';
+
+import { discoverAnalistasPlugins } from './autodiscovery.js';
+
 let analistaCorrecaoAutomatica: EntradaRegistry = undefined;
 try {
   const mod = await import('@analistas/corrections/analista-pontuacao.js');
@@ -33,76 +37,7 @@ try {
 } catch {
   // leave undefined - registry will tolerate undefined entries
 }
-let analistaReact: EntradaRegistry | undefined = undefined;
-try {
-  const mod = (await import('@analistas/plugins/analista-react.js')) as ModuloAnalista;
-  analistaReact = (mod.analistaReact ?? mod.default ?? mod.analistas?.[0]) as EntradaRegistry | undefined;
-} catch {
-  // opcional: plugin ausente, continuar sem React
-}
-let analistaReactHooks: EntradaRegistry | undefined = undefined;
-try {
-  const mod = (await import('@analistas/plugins/analista-react-hooks.js')) as ModuloAnalista;
-  analistaReactHooks = (mod.analistaReactHooks ?? mod.default ?? mod.analistas?.[0]) as EntradaRegistry | undefined;
-} catch {
-  // opcional: plugin ausente, continuar sem Hooks
-}
-let analistaTailwind: EntradaRegistry | undefined = undefined;
-try {
-  const mod = (await import('@analistas/plugins/analista-tailwind.js')) as ModuloAnalista;
-  analistaTailwind = (mod.analistaTailwind ?? mod.default ?? mod.analistas?.[0]) as EntradaRegistry | undefined;
-} catch {
-  // opcional: plugin ausente, continuar sem Tailwind
-}
-let analistaCss: EntradaRegistry | undefined = undefined;
-try {
-  const mod = (await import('@analistas/plugins/analista-css.js')) as ModuloAnalista;
-  analistaCss = (mod.analistaCss ?? mod.default ?? mod.analistas?.[0]) as EntradaRegistry | undefined;
-} catch {
-  // opcional: plugin ausente, continuar sem CSS
-}
-let analistaCssInJs: EntradaRegistry | undefined = undefined;
-try {
-  const mod = (await import('@analistas/plugins/analista-css-in-js.js')) as ModuloAnalista;
-  analistaCssInJs = (mod.analistaCssInJs ?? mod.default ?? mod.analistas?.[0]) as EntradaRegistry | undefined;
-} catch {
-  // opcional: plugin ausente, continuar sem CSS-in-JS
-}
-let analistaHtml: EntradaRegistry | undefined = undefined;
-try {
-  const mod = (await import('@analistas/plugins/analista-html.js')) as ModuloAnalista;
-  analistaHtml = (mod.analistaHtml ?? mod.default ?? mod.analistas?.[0]) as EntradaRegistry | undefined;
-} catch {
-  // opcional: plugin ausente, continuar sem HTML
-}
-let analistaXml: EntradaRegistry | undefined = undefined;
-try {
-  const mod = (await import('@analistas/plugins/analista-xml.js')) as ModuloAnalista;
-  analistaXml = (mod.analistaXml ?? mod.default ?? mod.analistas?.[0]) as EntradaRegistry | undefined;
-} catch {
-  // opcional: plugin ausente, continuar sem XML
-}
-let analistaFormatador: EntradaRegistry | undefined = undefined;
-try {
-  const mod = (await import('@analistas/plugins/analista-formater.js')) as ModuloAnalista;
-  analistaFormatador = (mod.analistaFormatador ?? mod.default ?? mod.analistas?.[0]) as EntradaRegistry | undefined;
-} catch {
-  // opcional: plugin ausente, continuar sem analista de formatação
-}
-let analistaSvg: EntradaRegistry | undefined = undefined;
-try {
-  const mod = (await import('@analistas/plugins/analista-svg.js')) as ModuloAnalista;
-  analistaSvg = (mod.analistaSvg ?? mod.default ?? mod.analistas?.[0]) as EntradaRegistry | undefined;
-} catch {
-  // opcional: plugin ausente, continuar sem SVG
-}
-let analistaPython: EntradaRegistry | undefined = undefined;
-try {
-  const mod = (await import('@analistas/plugins/analista-python.js')) as ModuloAnalista;
-  analistaPython = (mod.analistaPython ?? mod.default ?? mod.analistas?.[0]) as EntradaRegistry | undefined;
-} catch {
-  // opcional: plugin ausente, continuar sem Python
-}
+const pluginsAutodiscovered = await discoverAnalistasPlugins();
 
 // Registro central de analistas. Futuro: lazy loading, filtros por categoria.
 const detectorDependencias = (detectorDependenciasMod as ModuloAnalista).detectorDependencias ?? (detectorDependenciasMod as ModuloAnalista).default ?? detectorDependenciasMod;
@@ -115,10 +50,10 @@ comSupressaoInline(analistaConstrucoesSintaticas), comSupressaoInline(analistaCo
 // Analistas especializados complementares
 // Analistas especializados complementares
 comSupressaoInline(analistaSeguranca), comSupressaoInline(analistaDocumentacao), comSupressaoInline(detectorMarkdown as unknown as Analista), comSupressaoInline(detectorTiposInseguros as unknown as Analista), comSupressaoInline(detectorInterfacesInline as unknown as Analista),
-// Plugins opcionais (React, Hooks, Tailwind) - carregados só se disponíveis
-...(analistaReact ? [comSupressaoInline(analistaReact as unknown as Analista) as Tecnica] : []), ...(analistaReactHooks ? [comSupressaoInline(analistaReactHooks as unknown as Analista) as Tecnica] : []), ...(analistaTailwind ? [comSupressaoInline(analistaTailwind as unknown as Analista) as Tecnica] : []), ...(analistaCss ? [comSupressaoInline(analistaCss as unknown as Analista) as Tecnica] : []), ...(analistaCssInJs ? [comSupressaoInline(analistaCssInJs as unknown as Analista) as Tecnica] : []), ...(analistaHtml ? [comSupressaoInline(analistaHtml as unknown as Analista) as Tecnica] : []), ...(analistaXml ? [comSupressaoInline(analistaXml as unknown as Analista) as Tecnica] : []), ...(analistaFormatador ? [comSupressaoInline(analistaFormatador as unknown as Analista) as Tecnica] : []), ...(analistaSvg ? [comSupressaoInline(analistaSvg as unknown as Analista) as Tecnica] : []),
+// Plugins autodiscovered em src/analistas/plugins/
+...pluginsAutodiscovered.map(p => comSupressaoInline(p as unknown as Analista) as Tecnica),
 // Analistas contextuais inteligentes
-analistaSugestoesContextuais, ...(analistaPython ? [comSupressaoInline(analistaPython as unknown as Analista) as Tecnica] : []),
+analistaSugestoesContextuais,
 // Analistas de melhorias e correções automáticas
 // If analistaCorrecaoAutomatica couldn't be resolved, skip the entry
 ...(analistaCorrecaoAutomatica ? [analistaCorrecaoAutomatica] : [])];

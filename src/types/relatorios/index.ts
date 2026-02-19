@@ -13,9 +13,9 @@ export type PrioridadeNivel = 'critica' | 'alta' | 'media' | 'baixa';
 
 export type { AsyncAnalysisOptions, AsyncAnalysisReport, AsyncArquivoRanqueado, AsyncCategoria, AsyncCategoriaStats, AsyncCriticidade, AsyncIssuesArquivo } from './async-analysis.js';
 
-  /* -------------------------- CONSELHEIRO DOUTORAL -------------------------- */
+  /* -------------------------- CONSELHEIRO SENSEIAL -------------------------- */
 
-export type { ConselhoContextoDoutoral } from './conselheiro.js';
+export type { ConselhoContextoSenseial } from './conselheiro.js';
 
   /* -------------------------- ESTRUTURA -------------------------- */
 
@@ -155,7 +155,7 @@ export interface AlinhamentoItem {
   razao?: string;
 }
 
-  /* -------------------------- CONSELHEIRO DOUTORAL -------------------------- */
+  /* -------------------------- CONSELHEIRO SENSEIAL -------------------------- */
 
 /**
  * Contexto para geração de conselhos
@@ -169,7 +169,7 @@ export interface ConselhoContexto {
 }
 
 /**
- * Conselho do sistema doutoral
+ * Conselho do sistema senseial
  */
 export interface Conselho {
   categoria: 'seguranca' | 'qualidade' | 'performance' | 'manutencao' | 'arquitetura';

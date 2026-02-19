@@ -9,6 +9,7 @@
  */
 
 import type { MagicConstantRule } from '@';
+
 export type { MagicConstantRule };
 
 /**

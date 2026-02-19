@@ -7,7 +7,9 @@ import { isInsideSrc } from '@core/config/paths.js';
 import { DetectorEstruturaMensagens } from '@core/messages/analistas/detector-estrutura-messages.js';
 import { detectarContextoProjeto } from '@shared/contexto-projeto.js';
 import micromatch from 'micromatch';
+
 import type { ContextoExecucao, Ocorrencia, SinaisProjeto, TecnicaAplicarResultado } from '@';
+
 export const sinaisDetectados: SinaisProjeto = {};
 
 /**

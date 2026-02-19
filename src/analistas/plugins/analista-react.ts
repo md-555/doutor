@@ -7,8 +7,10 @@ import * as t from '@babel/types';
 import { AnalystOrigens, AnalystTipos, ReactMensagens, SeverityNiveis } from '@core/messages/core/plugin-messages.js';
 import { createLineLookup } from '@shared/helpers/line-lookup.js';
 import { maskJsComments } from '@shared/helpers/masking.js';
+
 import { criarAnalista, criarOcorrencia } from '@';
-const disableEnv = process.env.DOUTOR_DISABLE_PLUGIN_REACT === '1';
+
+const disableEnv = process.env.SENSEI_DISABLE_PLUGIN_REACT === '1';
 type Msg = ReturnType<typeof criarOcorrencia>;
 function hasJSX(src: string): boolean {
   // Evita falsos positivos com genéricos TypeScript (ex.: foo<Bar>(...)).

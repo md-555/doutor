@@ -1,8 +1,8 @@
-> Proveniência e Autoria: Este documento integra o projeto Doutor (licença MIT).
+> Proveniência e Autoria: Este documento integra o projeto Sensei (licença MIT).
 
-# Sistema de Mensagens Centralizado do Doutor
+# Sistema de Mensagens Centralizado do Sensei
 
-Este diretório centraliza **TODAS** as mensagens, logs, ícones e sugestões do Doutor.
+Este diretório centraliza **TODAS** as mensagens, logs, ícones e sugestões do Sensei.
 
 ## Arquitetura
 

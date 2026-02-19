@@ -3,8 +3,10 @@ import type { NodePath } from '@babel/traverse';
 import type { Node } from '@babel/types';
 import { DetectorAgregadosMensagens } from '@core/messages/analistas/detector-agregados-messages.js';
 import { detectarContextoProjeto } from '@shared/contexto-projeto.js';
+
 import type { Analista, Ocorrencia, ProblemaTeste } from '@';
 import { criarOcorrencia } from '@';
+
 export const analistaQualidadeTestes: Analista = {
   nome: 'qualidade-testes',
   categoria: 'testes',

@@ -4,6 +4,7 @@
  */
 
 import type { Ocorrencia } from '@';
+
 import type { ArquetipoResult } from '../../cli/diagnostico/handlers/arquetipo-handler.js';
 import type { AutoFixResult } from '../../cli/diagnostico/handlers/auto-fix-handler.js';
 import type { GuardianResult } from '../../cli/diagnostico/handlers/guardian-handler.js';
@@ -32,8 +33,8 @@ export interface RelatorioJson {
       exclude?: string[];
       globalExclude?: string[];
     };
-    /** Versão do Doutor */
-    doutorVersion?: string;
+    /** Versão do Sensei */
+    senseiVersion?: string;
     /** Nome do projeto */
     projectNome?: string;
   };

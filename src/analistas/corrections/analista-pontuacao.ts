@@ -2,6 +2,7 @@
 import type { NodePath } from '@babel/traverse';
 import type { Node } from '@babel/types';
 import { findQuickFixes, type PatternBasedQuickFix } from '@core/config/auto/fix-config.js';
+
 import type { Analista, ConfiguracaoPontuacaoZelador, IntlComDisplayNames, Ocorrencia, ProblemaPontuacao } from '@';
 import { criarOcorrencia } from '@';
 

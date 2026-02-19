@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 
-import * as fs from 'fs';
-import * as path from 'path';
 import { parse } from '@babel/parser';
 import traverseModule from '@babel/traverse';
-import { Command } from 'commander';
+import { ExitCode, sair } from '@cli/helpers/exit-codes.js';
 import chalk from '@core/config/chalk-safe.js';
 import { log } from '@core/messages/index.js';
-import { ExitCode, sair } from '@cli/helpers/exit-codes.js';
+import { Command } from 'commander';
+import * as fs from 'fs';
+import * as path from 'path';
 
 // @ts-ignore
 const traverse = traverseModule.default || traverseModule;
@@ -43,7 +43,7 @@ aplicarFlagsGlobais: (opts: Record<string, unknown>) => void)
       const items = fs.readdirSync(dir, { withFileTypes: true });
       for (const item of items) {
         if (item.isDirectory()) {
-          if (['node_modules', 'dist', 'names', '.git', '.doutor'].includes(item.name)) continue;
+          if (['node_modules', 'dist', 'names', '.git', '.sensei'].includes(item.name)) continue;
           files.push(...getFiles(path.join(dir, item.name)));
         } else if (item.name.endsWith('.ts') || item.name.endsWith('.js')) {
           files.push(path.join(dir, item.name));

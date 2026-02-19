@@ -2,11 +2,12 @@
 /**
  * Sistema de Versionamento de Schema para Relatórios JSON
  *
- * Este módulo gerencia versões de schema para relatórios JSON do Doutor,
+ * Este módulo gerencia versões de schema para relatórios JSON do Sensei,
  * garantindo compatibilidade futura e evolução controlada dos formatos.
  */
 
 import { ExcecoesMensagens } from '@core/messages/core/excecoes-messages.js';
+
 import type { RelatorioComVersao, SchemaMetadata } from '@';
 
 // Re-exporta os tipos para compatibilidade

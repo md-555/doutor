@@ -10,7 +10,9 @@
 
 import { config } from '@core/config/config.js';
 import { minimatch } from 'minimatch';
+
 import type { RuleConfig, RuleOverride } from '@';
+
 export type { RuleConfig, RuleOverride };
 
 /**

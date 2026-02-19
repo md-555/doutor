@@ -5,7 +5,6 @@
 
 // Options e Filtros
 export type {
-  DoutorGlobalFlags,
   FiltrosProcessados,
   FixTypesOptions,
   FlagsBrutas,
@@ -17,6 +16,7 @@ export type {
   OpcoesProcessamentoFiltros,
   OtimizarSvgOptions,
   ResultadoValidacao,
+  SenseiGlobalFlags,
 } from './options.js';
 
 // Handlers

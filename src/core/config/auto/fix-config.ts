@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 
 import { otimizarSvgLikeSvgo, shouldSugerirOtimizacaoSvg } from '@shared/impar/svgs.js';
+
 import type { AutoFixConfig, PatternBasedQuickFix } from '@';
+
 import { hasMinimumConfidence, isCategoryAllowed, shouldExcludeFile } from './auto-fix-config.js';
 
 // Re-exporta os tipos para compatibilidade
@@ -53,7 +55,7 @@ export const quickCorrecaoRegistro: PatternBasedQuickFix[] = [
 // Começamos por SVGs, pois a transformação é determinística e segura.
 {
   id: 'svg-optimize-svgo-like',
-  title: 'Otimizar SVG (Doutor)',
+  title: 'Otimizar SVG (Sensei)',
   description: 'Remove prolog/doctype/comentários/metadata e colapsa whitespace entre tags para reduzir tamanho do SVG.',
   // Match único do arquivo inteiro
   pattern: /^[\s\S]+$/,

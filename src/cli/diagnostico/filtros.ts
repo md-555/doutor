@@ -11,8 +11,10 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+
 import { config } from '@core/config/config.js';
 import { mesclarConfigExcludes } from '@core/config/excludes-padrao.js';
+
 import type { FiltrosProcessados, OpcoesProcessamentoFiltros, TipoLinguagemProjeto } from '@';
 
   /* -------------------------- PROCESSAMENTO DE PADRÕES -------------------------- */
@@ -119,7 +121,7 @@ export function detectarTipoProjeto(baseDir: string = process.cwd()): TipoLingua
  * Obtém padrões de exclusão padrão baseados em configuração e tipo de projeto
  */
 export function getDefaultExcludes(tipoProjeto?: TipoLinguagemProjeto): string[] {
-  // Tenta obter do doutor.config.json
+  // Tenta obter do sensei.config.json
   const configIncluirExcluir = config.INCLUDE_EXCLUDE_RULES;
   if (configIncluirExcluir?.globalExcludeGlob) {
     if (Array.isArray(configIncluirExcluir.globalExcludeGlob) && configIncluirExcluir.globalExcludeGlob.length > 0) {
@@ -139,7 +141,7 @@ export function getDefaultExcludes(tipoProjeto?: TipoLinguagemProjeto): string[]
  *
  * Precedência:
  * 1. CLI --exclude (máxima)
- * 2. doutor.config.json
+ * 2. sensei.config.json
  * 3. Padrões do sistema (fallback)
  */
 export function processarFiltros(opcoes: OpcoesProcessamentoFiltros): FiltrosProcessados {

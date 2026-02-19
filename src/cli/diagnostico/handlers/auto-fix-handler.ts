@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: 2025 Doutor Contributors
+// SPDX-FileCopyrightText: 2025 Sensei Contributors
 
 /**
  * @module cli/diagnostico/handlers/auto-fix-handler
@@ -9,6 +9,7 @@
 
 import { ExcecoesMensagens } from '@core/messages/core/excecoes-messages.js';
 import { log, MENSAGENS_AUTOFIX } from '@core/messages/index.js';
+
 import type { AutoFixOptions, AutoFixResult, FileEntryWithAst } from '@';
 
 // Re-export para compatibilidade

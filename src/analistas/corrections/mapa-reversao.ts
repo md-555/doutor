@@ -1,11 +1,14 @@
 // SPDX-License-Identifier: MIT
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+
 import { ExcecoesMensagens } from '@core/messages/core/excecoes-messages.js';
 import { log, logAuto } from '@core/messages/index.js';
-import { DOUTOR_ARQUIVOS } from '@core/registry/paths.js';
+import { SENSEI_ARQUIVOS } from '@core/registry/paths.js';
 import { lerEstado, salvarEstado } from '@shared/persistence/persistencia.js';
+
 import type { MapaReversao, MoveReversao } from '@';
+
 const CONSTANTES_MAPA = {
   VERSAO: '1.0.0',
   ID_LENGTH: 9,
@@ -18,7 +21,7 @@ export class GerenciadorMapaReversao {
   constructor(opts?: {
     mapaPath?: string;
   }) {
-    this.mapaPath = opts?.mapaPath ?? DOUTOR_ARQUIVOS.MAPA_REVERSAO;
+    this.mapaPath = opts?.mapaPath ?? SENSEI_ARQUIVOS.MAPA_REVERSAO;
     this.mapa = {
       versao: CONSTANTES_MAPA.VERSAO,
       moves: [],

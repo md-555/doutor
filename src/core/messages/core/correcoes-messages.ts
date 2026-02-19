@@ -97,7 +97,7 @@ export const MENSAGENS_RELATORIOS_ANALISE = {
     salvo: (caminho: string) => `${ICONES.nivel.sucesso} Relatório async salvo em: ${caminho}`
   },
   fixTypes: {
-    analiseSalva: `${ICONES.arquivo.json} Análise detalhada salva em: .doutor/fix-types-analise.json`,
+    analiseSalva: `${ICONES.arquivo.json} Análise detalhada salva em: .sensei/fix-types-analise.json`,
     possibilidades: `└─ ${ICONES.acao.analise} Possibilidades alternativas:`,
     sugestao: (texto: string) => `└─ ${ICONES.feedback.dica} ${texto}`,
     exportado: `${ICONES.arquivo.doc} Relatórios de fix-types exportados:`

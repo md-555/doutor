@@ -4,8 +4,10 @@ import type { Node } from '@babel/types';
 import { DetectorAgregadosMensagens } from '@core/messages/analistas/detector-agregados-messages.js';
 import { detectarContextoProjeto } from '@shared/contexto-projeto.js';
 import { filtrarOcorrenciasSuprimidas } from '@shared/helpers/suppressao.js';
+
 import type { Analista, Ocorrencia, ProblemaDocumentacao } from '@';
 import { criarOcorrencia } from '@';
+
 export const analistaDocumentacao: Analista = {
   nome: 'documentacao',
   categoria: 'manutenibilidade',

@@ -89,4 +89,4 @@ export type {
 } from './stylelint.js';
 
 // Memory
-export type { DoutorContextState, DoutorRunRecord } from './memory.js';
+export type { SenseiContextState, SenseiRunRecord } from './memory.js';

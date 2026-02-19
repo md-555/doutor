@@ -7,7 +7,9 @@
 import type { Node } from '@babel/types';
 import { getTypesDirectoryDisplay } from '@core/config/conventions.js';
 import { MENSAGENS_CORRECAO_TIPOS } from '@core/messages/index.js';
+
 import type { TypeAnalysis, TypeInferenceContext } from '@';
+
 import { extractVariableName, getDomainFromFilePath, isDefinitionFile, isLegacyOrVendorFile, isTypeScriptFile } from './context-analyzer.js';
 import { inferTypeFromUsage } from './type-inference.js';
 import { analyzeUsagePatterns, findVariableUsages } from './usage-analyzer.js';

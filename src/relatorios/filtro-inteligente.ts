@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: MIT
-// @doutor-disable tipo-literal-inline-complexo
+// @sensei-disable tipo-literal-inline-complexo
 // Justificativa: tipos locais para filtragem de relatórios
 // Sistema inteligente de filtragem e priorização de relatórios
 // Agrupa problemas similares e prioriza por impacto para evitar sobrecarga de informação
 
 import { AGRUPAMENTOS_MENSAGEM, PRIORIDADES, RelatorioMensagens } from '@core/messages/index.js';
+
 import type { Ocorrencia, OcorrenciaNivel, ProblemaAgrupado, RelatorioResumo } from '@';
 
 /**

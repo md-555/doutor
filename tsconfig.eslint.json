@@ -35,5 +35,5 @@
     "exemplos-testes-implementacoes/tests/**/*.ts",
     "temp-fantasma/src/**/*.ts",
   ],
-  "exclude": ["dist", ".doutor"],
+  "exclude": ["dist", ".sensei"],
 }

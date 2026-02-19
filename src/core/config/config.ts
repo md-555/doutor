@@ -1,32 +1,35 @@
 // SPDX-License-Identifier: MIT
 import path from 'node:path';
+
 import { lerArquivoTexto } from '@shared/persistence/persistencia.js';
+
 import type { IncludeExcludeConfig } from '@';
-import { DOUTOR_DIRS, DOUTOR_ARQUIVOS } from '../registry/paths.js';
 
-// Diretórios internos do Doutor (agora usando paths centralizados)
-const DOUTOR_ESTADO = DOUTOR_DIRS.STATE;
-const ZELADOR_ABANDONED = path.join(DOUTOR_ESTADO, 'abandonados');
+import { SENSEI_ARQUIVOS,SENSEI_DIRS } from '../registry/paths.js';
 
-// Configuração global do sistema Doutor
+// Diretórios internos do Sensei (agora usando paths centralizados)
+const SENSEI_ESTADO = SENSEI_DIRS.STATE;
+const ZELADOR_ABANDONED = path.join(SENSEI_ESTADO, 'abandonados');
+
+// Configuração global do sistema Sensei
 export const configPadrao = {
   VERBOSE: false,
   LOG_LEVEL: 'info' as 'erro' | 'aviso' | 'info' | 'debug',
   // 🌱 Flags gerais
-  DEV_MODE: process.env.NODE_ENV === 'development' || process.env.DOUTOR_DEV === 'true',
+  DEV_MODE: process.env.NODE_ENV === 'development' || process.env.SENSEI_DEV === 'true',
   AUTOANALISE_CONCURRENCY: 5,
   // Segurança: modo seguro impede ações destrutivas por padrão.
   // Em ambiente de testes (VITEST) mantemos SAFE_MODE desabilitado para preservar o comportamento das suites.
-  // Para desativar por processo/ambiente fora de testes: DOUTOR_SAFE_MODE=0
-  SAFE_MODE: process.env.VITEST ? false : process.env.DOUTOR_SAFE_MODE !== '0',
+  // Para desativar por processo/ambiente fora de testes: SENSEI_SAFE_MODE=0
+  SAFE_MODE: process.env.VITEST ? false : process.env.SENSEI_SAFE_MODE !== '0',
   // Permissões explícitas para permitir plugins/exec/fs mutações quando SAFE_MODE ativo
-  ALLOW_PLUGINS: process.env.DOUTOR_ALLOW_PLUGINS === '1' || false,
-  ALLOW_EXEC: process.env.DOUTOR_ALLOW_EXEC === '1' || false,
+  ALLOW_PLUGINS: process.env.SENSEI_ALLOW_PLUGINS === '1' || false,
+  ALLOW_EXEC: process.env.SENSEI_ALLOW_EXEC === '1' || false,
   ALLOW_MUTATE_FS: true,
   // 🛡️ Guardian
   GUARDIAN_ENABLED: true,
   GUARDIAN_ENFORCE_PROTECTION: true,
-  GUARDIAN_BASELINE: DOUTOR_ARQUIVOS.GUARDIAN_BASELINE,
+  GUARDIAN_BASELINE: SENSEI_ARQUIVOS.GUARDIAN_BASELINE,
   GUARDIAN_ALLOW_ADDS: false,
   GUARDIAN_ALLOW_CHG: false,
   GUARDIAN_ALLOW_DELS: false,
@@ -37,7 +40,7 @@ export const configPadrao = {
   // ao executar em modo silencioso. Valor default: false.
   SUPPRESS_PARCIAL_LOGS: false,
   REPORT_EXPORT_ENABLED: false,
-  REPORT_OUTPUT_DIR: DOUTOR_DIRS.REPORTS,
+  REPORT_OUTPUT_DIR: SENSEI_DIRS.REPORTS,
   // Quando true, além do relatório summary, gera também o relatório completo (pesado) em JSON
   REPORT_EXPORT_FULL: false,
   // Fragmentation defaults: controlam o tamanho máximo de cada shard ao fragmentar relatórios
@@ -51,12 +54,12 @@ export const configPadrao = {
   // Quando true, em modo VERBOSE a tabela é desativada e exibimos lista detalhada
   RELATORIO_SAUDE_DETALHADO_VERBOSE: true,
   // 📂 Zelador
-  DOUTOR_STATE_DIR: DOUTOR_ESTADO,
+  SENSEI_STATE_DIR: SENSEI_ESTADO,
   ZELADOR_ABANDONED_DIR: ZELADOR_ABANDONED,
-  ZELADOR_PENDING_PATH: path.join(DOUTOR_ESTADO, 'pendentes.json'),
-  ZELADOR_REACTIVATE_PATH: path.join(DOUTOR_ESTADO, 'reativar.json'),
-  ZELADOR_HISTORY_PATH: path.join(DOUTOR_ESTADO, 'historico.json'),
-  ZELADOR_REPORT_PATH: path.join(DOUTOR_ESTADO, 'poda-doutor.md'),
+  ZELADOR_PENDING_PATH: path.join(SENSEI_ESTADO, 'pendentes.json'),
+  ZELADOR_REACTIVATE_PATH: path.join(SENSEI_ESTADO, 'reativar.json'),
+  ZELADOR_HISTORY_PATH: path.join(SENSEI_ESTADO, 'historico.json'),
+  ZELADOR_REPORT_PATH: path.join(SENSEI_ESTADO, 'poda-sensei.md'),
   ZELADOR_GHOST_INACTIVITY_DAYS: 30,
   // Padrões adicionais controlados via CLI para filtragem dinâmica pontual
   CLI_INCLUDE_PATTERNS: [] as string[],
@@ -74,7 +77,7 @@ export const configPadrao = {
     // Arquivos deprecados e pensando
     '.deprecados/**', '**/deprecados/**', '.pensando/**', '**/pensando/**',
     // Estado interno / cache / builds
-    '**/.doutor/**', 'doutor/**', 'dist/**', '**/dist/**', 'coverage/**', '**/coverage/**', 'build/**', '**/build/**',
+    '**/.sensei/**', 'sensei/**', 'dist/**', '**/dist/**', 'coverage/**', '**/coverage/**', 'build/**', '**/build/**',
     // Logs e lockfiles
     '**/*.log', '**/*.lock', 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml',
     // VCS
@@ -116,7 +119,7 @@ export const configPadrao = {
   // 0 = usar número de CPUs
   WORKER_POOL_BATCH_SIZE: 10,
   // Caminho de histórico de métricas (migrado para subdir dedicado; arquivo antigo na raiz ainda lido como fallback em runtime onde aplicável)
-  ANALISE_METRICAS_HISTORICO_PATH: path.join(DOUTOR_ESTADO, 'historico-metricas', 'metricas-historico.json'),
+  ANALISE_METRICAS_HISTORICO_PATH: path.join(SENSEI_ESTADO, 'historico-metricas', 'metricas-historico.json'),
   ANALISE_METRICAS_HISTORICO_MAX: 200,
   // Priorização de arquivos (usa histórico incremental anterior)
   ANALISE_PRIORIZACAO_ENABLED: true,
@@ -128,7 +131,7 @@ export const configPadrao = {
   LOG_ESTRUTURADO: false,
   // Incremental desabilitado por padrão para evitar efeitos colaterais em testes; habilite explicitamente onde necessário
   ANALISE_INCREMENTAL_ENABLED: false,
-  ANALISE_INCREMENTAL_STATE_PATH: path.join(DOUTOR_ESTADO, 'incremental-analise.json'),
+  ANALISE_INCREMENTAL_STATE_PATH: path.join(SENSEI_ESTADO, 'incremental-analise.json'),
   ANALISE_INCREMENTAL_VERSION: 1,
   // Performance (snapshots sintéticos)
   PERF_SNAPSHOT_DIR: path.join('docs', 'perf'),
@@ -140,12 +143,12 @@ export const configPadrao = {
     TYPES_DIR: 'types',
     DOCS_FRAGMENTS_DIR: path.posix.join('docs', 'fragments')
   },
-  // Convenções do projeto analisado (customizável via doutor.config.json)
+  // Convenções do projeto analisado (customizável via sensei.config.json)
   conventions: {
     // Diretório onde tipos dedicados devem viver (ex.: 'src/tipos', 'app/types')
     typesDirectory: path.posix.join('src', 'tipos')
   },
-  // Configuração do detector-markdown (customizável via doutor.config.json)
+  // Configuração do detector-markdown (customizável via sensei.config.json)
   detectorMarkdown: {
     checkProveniencia: true,
     checkLicenses: true,
@@ -165,15 +168,15 @@ export const configPadrao = {
   STRUCTURE_AUTO_FIX: false,
   STRUCTURE_CONCURRENCY: 5,
   ESTRUTURA_CAMADAS: {},
-  STRUCTURE_REVERSE_MAP_PATH: path.join(DOUTOR_ESTADO, 'mapa-reversao.json'),
+  STRUCTURE_REVERSE_MAP_PATH: path.join(SENSEI_ESTADO, 'mapa-reversao.json'),
   // Limite de tamanho (bytes) para considerar mover arquivo em plano de reorganização
   ESTRUTURA_PLANO_MAX_FILE_SIZE: 256 * 1024,
   // ~250KB
   // Limite de arquivos considerados "muitos arquivos na raiz" (ajustável por repo)
   ESTRUTURA_ARQUIVOS_RAIZ_MAX: 10,
   // Compatibilidade/legado
-  STATE_DIR: DOUTOR_ESTADO,
-  ZELADOR_STATE_DIR: DOUTOR_ESTADO,
+  STATE_DIR: SENSEI_ESTADO,
+  ZELADOR_STATE_DIR: SENSEI_ESTADO,
   COMPACT_MODE: false,
   // Modo somente varredura (sem AST, sem técnicas) quando ativado por flag
   SCAN_ONLY: false,
@@ -247,7 +250,7 @@ function mesclarProfundo(target: Record<string, unknown>, src: Record<string, un
 }
 async function carregarArquivoConfig(): Promise<Record<string, unknown> | null> {
   // Ordem de busca simples
-  const candidatos = ['doutor.config.json', 'src/config.json'];
+  const candidatos = ['sensei.config.json', 'src/config.json'];
   for (const nome of candidatos) {
     try {
       const caminho = path.join(process.cwd(), nome);
@@ -333,7 +336,7 @@ function converterConfigSimplificada(config: Record<string, unknown>): Record<st
     resultado.plugins = {
       enabled: enabledPlugins,
       autoload: true,
-      registry: '@doutor/plugins'
+      registry: '@sensei/plugins'
     };
     delete resultado.languages;
   }
@@ -367,7 +370,7 @@ function sincronizarIgnorados() {
 }
 function carregarEnvConfig(): Record<string, unknown> {
   const resultado: Record<string, unknown> = {};
-  // Mapeia cada chave do default para uma env DOUTOR_<KEY>
+  // Mapeia cada chave do default para uma env SENSEI_<KEY>
   const stack: Array<{
     obj: Record<string, unknown>;
     prefix: string;
@@ -384,7 +387,7 @@ function carregarEnvConfig(): Record<string, unknown> {
     } = popped;
     for (const k of Object.keys(obj)) {
       const keyCaminho = prefix ? `${prefix}.${k}` : k;
-      const envNome = `DOUTOR_${keyCaminho.replace(/\./g, '_').toUpperCase()}`;
+      const envNome = `SENSEI_${keyCaminho.replace(/\./g, '_').toUpperCase()}`;
       const currentVal = (obj as Record<string, unknown>)[k];
       if (ehObjetoPlano(currentVal)) {
         stack.push({

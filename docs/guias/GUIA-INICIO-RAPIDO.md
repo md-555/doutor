@@ -1,13 +1,13 @@
-# 🚀 Guia de Início Rápido do Doutor
+# 🚀 Guia de Início Rápido do Sensei
 
-> Proveniência e Autoria: Este documento integra o projeto Doutor (licença MIT).
+> Proveniência e Autoria: Este documento integra o projeto Sensei (licença MIT).
 > Última atualização: 15 de janeiro de 2026
 
 ---
 
-## O que é o Doutor?
+## O que é o Sensei?
 
-O **Doutor** é uma ferramenta de linha de comando (CLI) para analisar, diagnosticar e manter projetos JavaScript/TypeScript (e com suporte heurístico para outras linguagens). Ele identifica problemas de código, verifica integridade de arquivos e sugere melhorias estruturais.
+O **Sensei** é uma ferramenta de linha de comando (CLI) para analisar, diagnosticar e manter projetos JavaScript/TypeScript (e com suporte heurístico para outras linguagens). Ele identifica problemas de código, verifica integridade de arquivos e sugere melhorias estruturais.
 
 **Requisitos:** Node.js >=25.0.0
 
@@ -30,14 +30,14 @@ O projeto também inclui um arquivo `.nvmrc` com o valor `25`. Ao clonar, execut
 
 ```bash
 # Clone o repositório
-git clone https://github.com/ossmoralus/doutor.git
-cd doutor
+git clone https://github.com/ossmoralus/sensei.git
+cd sensei
 
 # Instale as dependências e compile
 npm install
 npm run build
 
-# Link global (permite usar 'doutor' de qualquer diretório)
+# Link global (permite usar 'sensei' de qualquer diretório)
 npm link
 ```
 
@@ -45,17 +45,17 @@ npm link
 
 ```bash
 # No diretório do seu projeto
-npm install --save-dev /caminho/para/doutor
+npm install --save-dev /caminho/para/sensei
 
 # Use via npx
-npx doutor diagnosticar
+npx sensei diagnosticar
 ```
 
 ### Opção 3: Teste Rápido (sem instalar)
 
 ```bash
 # Requer Node.js 24+
-npx github:ossmoralus/doutor diagnosticar --help
+npx github:ossmoralus/sensei diagnosticar --help
 ```
 
 ---
@@ -65,10 +65,10 @@ npx github:ossmoralus/doutor diagnosticar --help
 Execute o comando básico no diretório do seu projeto:
 
 ```bash
-doutor diagnosticar
+sensei diagnosticar
 ```
 
-O Doutor irá:
+O Sensei irá:
 
 1. 📁 **Varrer** todos os arquivos do projeto
 2. 🔍 **Analisar** código em busca de problemas
@@ -102,59 +102,59 @@ O Doutor irá:
 
 ```bash
 # Diagnóstico básico (modo compacto)
-doutor diagnosticar
+sensei diagnosticar
 
 # Diagnóstico detalhado
-doutor diagnosticar --full
+sensei diagnosticar --full
 
 # Apenas visualizar arquivos (sem análise)
-doutor diagnosticar --scan-only
+sensei diagnosticar --scan-only
 ```
 
 ### 2. Exportar Resultados
 
 ```bash
 # Saída JSON para CI/CD
-doutor diagnosticar --json
+sensei diagnosticar --json
 
 # Exportar relatório para arquivo
-doutor diagnosticar --export
+sensei diagnosticar --export
 ```
 
 ### 3. Filtrar Análise
 
 ```bash
 # Analisar apenas pasta src/
-doutor diagnosticar --include "src/**"
+sensei diagnosticar --include "src/**"
 
 # Excluir testes
-doutor diagnosticar --exclude "**/*.test.ts"
+sensei diagnosticar --exclude "**/*.test.ts"
 
 # Combinação
-doutor diagnosticar --include "src/**" --exclude "**/*.test.ts"
+sensei diagnosticar --include "src/**" --exclude "**/*.test.ts"
 ```
 
 ### 4. Correção Automática
 
 ```bash
 # Correção conservadora (segura)
-doutor diagnosticar --auto-fix --auto-fix-mode conservative
+sensei diagnosticar --auto-fix --auto-fix-mode conservative
 
 # Preview das correções (sem aplicar)
-doutor diagnosticar --auto-fix --dry-run
+sensei diagnosticar --auto-fix --dry-run
 ```
 
 ### 5. Verificação de Integridade (Guardian)
 
 ```bash
 # Criar baseline de hashes
-doutor guardian
+sensei guardian
 
 # Verificar alterações
-doutor guardian --diff
+sensei guardian --diff
 
 # Aceitar alterações atuais
-doutor guardian --accept
+sensei guardian --accept
 ```
 
 ---
@@ -164,8 +164,8 @@ doutor guardian --accept
 ### Criar arquivo de configuração
 
 ```bash
-# Criar doutor.config.json na raiz do projeto
-cat > doutor.config.json << 'EOF'
+# Criar sensei.config.json na raiz do projeto
+cat > sensei.config.json << 'EOF'
 {
   "INCLUDE_EXCLUDE_RULES": {
     "globalExcludeGlob": [
@@ -189,10 +189,10 @@ EOF
 Use comentários inline para suprimir ocorrências específicas:
 
 ```typescript
-// @doutor-disable-next-line tipo-inseguro-any
+// @sensei-disable-next-line tipo-inseguro-any
 const dados: any = respostaExterna;
 
-// @doutor-disable hardcoded-secrets
+// @sensei-disable hardcoded-secrets
 const configKey = "chave_configuracao_publica";
 ```
 
@@ -242,8 +242,8 @@ const configKey = "chave_configuracao_publica";
 ### Integração com CI/CD
 
 ```yaml
-# .github/workflows/doutor.yml
-name: Doutor CI
+# .github/workflows/sensei.yml
+name: Sensei CI
 
 on: [push, pull_request]
 
@@ -256,23 +256,23 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Instalar Doutor
+      - name: Instalar Sensei
         run: |
           npm install
           npm run build
 
       - name: Executar Diagnóstico
-        run: npx doutor diagnosticar --json --export
+        run: npx sensei diagnosticar --json --export
 ```
 
 ### Monorepo
 
 ```bash
 # Analisar um pacote específico
-doutor diagnosticar --include "packages/my-package/**"
+sensei diagnosticar --include "packages/my-package/**"
 
 # Analisar múltiplos pacotes
-doutor diagnosticar \
+sensei diagnosticar \
   --include "packages/core/**" \
   --include "packages/utils/**"
 ```
@@ -280,7 +280,7 @@ doutor diagnosticar \
 ### Código Legado
 
 ```json
-// doutor.config.json
+// sensei.config.json
 {
   "rules": {
     "tipo-inseguro": {
@@ -305,13 +305,13 @@ doutor diagnosticar \
 
 ```bash
 # Ver todos os comandos disponíveis
-doutor --help
+sensei --help
 
 # Ajuda de um comando específico
-doutor diagnosticar --help
+sensei diagnosticar --help
 
 # Listar analistas disponíveis
-doutor analistas --listar
+sensei analistas --listar
 ```
 
 ---
@@ -325,26 +325,26 @@ doutor analistas --listar
 npm link
 
 # Ou use npx
-npx doutor diagnosticar
+npx sensei diagnosticar
 ```
 
 ### "Muitos falsos positivos"
 
 1. Use `--exclude` para filtrar arquivos de teste
 2. Configure `testPatterns.allowAnyType: true` para testes
-3. Use `// @doutor-disable-next-line` para casos específicos
+3. Use `// @sensei-disable-next-line` para casos específicos
 
 ### "Análise muito lenta"
 
 ```bash
 # Use modo rápido
-doutor diagnosticar --fast
+sensei diagnosticar --fast
 
 # Limite o escopo
-doutor diagnosticar --include "src/**"
+sensei diagnosticar --include "src/**"
 
 # Aumente workers (paralelização)
-WORKER_POOL_MAX_WORKERS=4 doutor diagnosticar
+WORKER_POOL_MAX_WORKERS=4 sensei diagnosticar
 ```
 
 ---

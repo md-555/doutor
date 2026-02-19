@@ -23,8 +23,8 @@ dist/
 coverage/
 .nyc_output/
 
-# Doutor runtime / caches / reports
-.doutor/
+# Sensei runtime / caches / reports
+.sensei/
 # TypeScript
 *.tsbuildinfo
 

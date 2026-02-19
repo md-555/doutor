@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 import path from 'node:path';
+
 import { listarAnalistas, registroAnalistas } from '@analistas/registry/registry.js';
 import { ExitCode, sair } from '@cli/helpers/exit-codes.js';
 import { config } from '@core/config/config.js';
@@ -7,6 +8,7 @@ import { CliComandoAnalistasMensagens } from '@core/messages/cli/cli-comando-ana
 import { ICONES_DIAGNOSTICO, log } from '@core/messages/index.js';
 import { salvarEstado } from '@shared/persistence/persistencia.js';
 import { Command } from 'commander';
+
 export function comandoAnalistas(): Command {
   return new Command('analistas').description('Lista analistas registrados e seus metadados atuais').option('-j, --json', 'Saída em JSON').option('-o, --output <arquivo>', 'Arquivo para exportar JSON de analistas').option('-d, --doc <arquivo>', 'Gera documentação Markdown dos analistas').action(async (opts: {
     json?: boolean;
@@ -14,7 +16,7 @@ export function comandoAnalistas(): Command {
     doc?: string;
   }) => {
     try {
-      if (process.env.DOUTOR_TEST_FAST === '1') {
+      if (process.env.SENSEI_TEST_FAST === '1') {
         if (opts.json) {
           log.info(JSON.stringify({
             total: 0,

@@ -4,10 +4,12 @@
 // program and convert to TypeScript.
 
 import path from 'node:path';
+
 import { ExitCode, sair } from '@cli/helpers/exit-codes.js';
 import { log } from '@core/messages/index.js';
 import * as licensas from '@licensas/licensas.js';
 import { Command } from 'commander';
+
 export function comandoLicencas(): Command {
   const cmd = new Command('licencas').description('Ferramentas relacionadas a licença');
   cmd.allowUnknownOption(true);

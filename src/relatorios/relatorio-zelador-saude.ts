@@ -3,6 +3,7 @@ import { estatisticasUsoGlobal } from '@analistas/js-ts/analista-padroes-uso.js'
 import chalk from '@core/config/chalk-safe.js';
 import { config } from '@core/config/config.js';
 import { log, logRelatorio, RelatorioMensagens } from '@core/messages/index.js';
+
 import type { LogComBloco, Ocorrencia } from '@';
 
 /**

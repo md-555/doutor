@@ -10,9 +10,12 @@
  */
 
 import path from 'node:path';
+
 import { log, MENSAGENS_RELATORIOS_ANALISE } from '@core/messages/index.js';
 import { salvarEstado } from '@shared/persistence/persistencia.js';
+
 import type { Ocorrencia } from '@';
+
 import type { AsyncAnalysisOptions, AsyncAnalysisReport, AsyncArquivoRanqueado, AsyncCategoria, AsyncCategoriaStats, AsyncIssuesArquivo } from '../types/relatorios/async-analysis.js';
 
 /**

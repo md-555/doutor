@@ -1,12 +1,15 @@
 // SPDX-License-Identifier: MIT
 import crypto from 'node:crypto';
+
 import { config } from '@core/config/config.js';
 import { formatMs } from '@core/config/format.js';
 import { log, logCore } from '@core/messages/index.js';
 import { logAnalistas } from '@core/messages/log/log-helper.js';
+import { createDefaultReporter } from '@core/reporting/default-reporter.js';
 import { WorkerPool } from '@core/workers/worker-pool.js';
 import { lerEstado, salvarEstado } from '@shared/persistence/persistencia.js';
 import XXH from 'xxhashjs';
+
 import type { ContextoExecucao, EstadoIncremental, FileEntryWithAst, GuardianResult, MetricaAnalista, MetricaExecucao, MetricasGlobais, Ocorrencia, ResultadoInquisicao, Tecnica } from '@';
 import { ocorrenciaErroAnalista } from '@';
 // Fallback para infoDestaque quando mock de log não implementa
@@ -26,7 +29,7 @@ export async function executarInquisicao(fileEntriesComAst: FileEntryWithAst[], 
   const ocorrencias: Ocorrencia[] = [];
   const metricasAnalistas: MetricaAnalista[] = [];
   const arquivosValidosSet = new Set(fileEntriesComAst.map(f => f.relPath));
-  const contextoGlobal: ContextoExecucao = {
+  const contextoGlobalBase: ContextoExecucao = {
     baseDir,
     arquivos: fileEntriesComAst,
     ambiente: {
@@ -34,6 +37,7 @@ export async function executarInquisicao(fileEntriesComAst: FileEntryWithAst[], 
       guardian: guardianResultado
     }
   };
+  const reporter = createDefaultReporter();
   const inicioExecucao = performance.now();
 
   // Narrowing helper: detecta se um objeto se parece com NodePath do babel
@@ -86,7 +90,7 @@ export async function executarInquisicao(fileEntriesComAst: FileEntryWithAst[], 
         let resultado: Awaited<ReturnType<typeof tecnica.aplicar>> | undefined;
         if (timeoutMs > 0) {
           // Promise.race entre execução do analista global e timeout
-          const execPromise = tecnica.aplicar('', '', null, undefined, contextoGlobal);
+          const execPromise = tecnica.aplicar('', '', null, undefined, contextoGlobalBase);
           resultado = await (async () => {
             let timer: NodeJS.Timeout | null = null;
             try {
@@ -100,7 +104,7 @@ export async function executarInquisicao(fileEntriesComAst: FileEntryWithAst[], 
           })();
         } else {
           // Execução sem timeout
-          resultado = await tecnica.aplicar('', '', null, undefined, contextoGlobal);
+          resultado = await tecnica.aplicar('', '', null, undefined, contextoGlobalBase);
         }
         if (Array.isArray(resultado)) {
           ocorrencias.push(...resultado);
@@ -166,9 +170,13 @@ export async function executarInquisicao(fileEntriesComAst: FileEntryWithAst[], 
       batchSize: 10,
       timeoutMs: config.ANALISE_TIMEOUT_POR_ANALISTA_MS
     });
-    const resultadoWorkers = await workerPool.processFiles(fileEntriesComAst, tecnicas.filter(t => !t.global),
-    // Apenas técnicas não-globais
-    contextoGlobal);
+    // Importante: não passar funções (ex.: contexto.report) para worker threads.
+    const resultadoWorkers = await workerPool.processFiles(
+      fileEntriesComAst,
+      tecnicas.filter(t => !t.global),
+      // Apenas técnicas não-globais
+      contextoGlobalBase,
+    );
     ocorrencias.push(...resultadoWorkers.occurrences);
     metricasAnalistas.push(...resultadoWorkers.metrics);
     const duracaoTotal = performance.now() - inicioExecucao;
@@ -217,6 +225,21 @@ export async function executarInquisicao(fileEntriesComAst: FileEntryWithAst[], 
   }
 
   // Técnicas por arquivo (modo sequencial padrão)
+  const contextoGlobal: ContextoExecucao = {
+    ...contextoGlobalBase,
+    report: (event) => {
+      try {
+        ocorrencias.push(reporter(event));
+      } catch (e) {
+        // Reporter nunca deve quebrar a análise; se falhar, emite ocorrência genérica.
+        ocorrencias.push(ocorrenciaErroAnalista({
+          mensagem: `Falha no reporter: ${(e as Error).message}`,
+          relPath: event?.relPath || '[report]',
+          origem: 'reporter'
+        }));
+      }
+    }
+  };
   let arquivoAtual = 0;
   const totalArquivos = fileEntriesComAst.length;
   // Limiar para logs detalhados por arquivo
@@ -424,7 +447,7 @@ export async function executarInquisicao(fileEntriesComAst: FileEntryWithAst[], 
   // Agregação de métricas
   let metricasExecucao: MetricaExecucao | null = null;
   if (config.ANALISE_METRICAS_ENABLED) {
-    const metricasGlobais: MetricasGlobais = (globalThis as unknown as Record<string, unknown>).__DOUTOR_METRICAS__ as MetricasGlobais || {
+    const metricasGlobais: MetricasGlobais = (globalThis as unknown as Record<string, unknown>).__SENSEI_METRICAS__ as MetricasGlobais || {
       parsingTimeMs: 0,
       cacheHits: 0,
       cacheMiss: 0
@@ -496,8 +519,8 @@ export async function executarInquisicao(fileEntriesComAst: FileEntryWithAst[], 
 export function registrarUltimasMetricas(metricas: MetricaExecucao | undefined): void {
   try {
     (globalThis as unknown as {
-      __ULTIMAS_METRICAS_DOUTOR__?: MetricaExecucao | null;
-    }).__ULTIMAS_METRICAS_DOUTOR__ = metricas || null;
+      __ULTIMAS_METRICAS_SENSEI__?: MetricaExecucao | null;
+    }).__ULTIMAS_METRICAS_SENSEI__ = metricas || null;
   } catch {
     /* ignore */
   }

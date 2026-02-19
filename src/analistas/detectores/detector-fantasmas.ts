@@ -1,12 +1,15 @@
 // SPDX-License-Identifier: MIT
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+
 import { grafoDependencias } from '@analistas/detectores/detector-dependencias.js';
 import { config } from '@core/config/config.js';
 import { isInsideSrc } from '@core/config/paths.js';
 import { scanRepository } from '@core/execution/scanner.js';
 import { minimatch } from 'minimatch';
+
 import type { ArquivoFantasma, FileMap } from '@';
+
 const EXTENSOES_ALVO = ['.js', '.ts', '.jsx', '.tsx', '.mjs', '.cjs'];
 
 // Janela de inatividade mínima para considerar fantasma (default mais conservador)

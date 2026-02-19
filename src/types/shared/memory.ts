@@ -10,7 +10,7 @@ export type MemoryMessage = {
   metadata?: Record<string, unknown>;
 };
 
-export type DoutorRunRecord = {
+export type SenseiRunRecord = {
   id: string;
   timestamp: string;
   cwd: string;
@@ -22,8 +22,8 @@ export type DoutorRunRecord = {
   error?: string;
 };
 
-export type DoutorContextState = {
+export type SenseiContextState = {
   schemaVersion: 1;
-  lastRuns: DoutorRunRecord[];
+  lastRuns: SenseiRunRecord[];
   preferences: Record<string, unknown>;
 };

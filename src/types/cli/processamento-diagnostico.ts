@@ -2,7 +2,9 @@
 
 // Importações dos tipos unificados
 import type { detectarArquetipos } from '@analistas/detectores/detector-arquetipos.js';
+
 import type { FileEntryWithAst, ResultadoExecucao, ResultadoGuardian } from '@';
+
 export interface OpcoesProcessamentoDiagnostico {
   guardianCheck?: boolean;
   full?: boolean;

@@ -7,6 +7,7 @@ import { DetectorCodigoFragilMensagens } from '@core/messages/analistas/detector
 import { detectarFrameworks } from '@shared/helpers/framework-detector.js';
 import { isWhitelistedConstant } from '@shared/helpers/magic-constants-whitelist.js';
 import { filtrarOcorrenciasSuprimidas } from '@shared/helpers/suppressao.js';
+
 import type { Analista, Fragilidade, Ocorrencia } from '@';
 import { criarOcorrencia } from '@';
 

@@ -14,7 +14,7 @@ import type { BabelFileExtra, ParserOptions, ParserPlugin, RawAst } from '@';
 const localRequire = createRequire(import.meta.url);
 
 /**
- * Plugin core do Doutor - contém parsers para linguagens principais
+ * Plugin core do Sensei - contém parsers para linguagens principais
  * JavaScript, TypeScript, HTML, CSS, XML
  */
 export class CorePlugin implements ParserPlugin {
@@ -309,7 +309,7 @@ export class CorePlugin implements ParserPlugin {
   }
 
   /**
-   * Wrapper para criar BabelFile compatível com doutorExtra
+   * Wrapper para criar BabelFile compatível com senseiExtra
    */
   private wrapMinimal(lang: string, rawAst: unknown): BabelFileExtra {
     return {
@@ -322,7 +322,7 @@ export class CorePlugin implements ParserPlugin {
       },
       comments: [],
       tokens: [],
-      doutorExtra: { lang, rawAst: rawAst as RawAst },
+      senseiExtra: { lang, rawAst: rawAst as RawAst },
     };
   }
 

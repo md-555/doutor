@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: MIT
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
-import type { DoutorContextState, DoutorRunRecord, MemoryMessage } from '@';
+
+import type { MemoryMessage,SenseiContextState, SenseiRunRecord } from '@';
 
 // Re-exporta para compatibilidade com código existente
-export type { DoutorContextState, DoutorRunRecord, MemoryMessage };
+export type { MemoryMessage,SenseiContextState, SenseiRunRecord };
 export class ConversationMemory {
   private history: MemoryMessage[] = [];
   constructor(private maxHistory = 10, private persistCaminho?: string) {}
@@ -29,7 +30,7 @@ export class ConversationMemory {
     return [...this.history];
   }
   getSummary(): {
-    // @doutor-disable: tipo-literal-inline-complexo
+    // @sensei-disable: tipo-literal-inline-complexo
     totalMessages: number;
     userMessages: number;
     assistantMessages: number;
@@ -60,8 +61,8 @@ export class ConversationMemory {
     }
   }
 }
-export class DoutorContextMemory {
-  private state: DoutorContextState = {
+export class SenseiContextMemory {
+  private state: SenseiContextState = {
     schemaVersion: 1,
     lastRuns: [],
     preferences: {}
@@ -71,12 +72,12 @@ export class DoutorContextMemory {
     if (!this.persistCaminho) return;
     try {
       const raw = await readFile(this.persistCaminho, 'utf-8');
-      const parsed = JSON.parse(raw) as Partial<DoutorContextState>;
+      const parsed = JSON.parse(raw) as Partial<SenseiContextState>;
       if (parsed && parsed.schemaVersion === 1) {
         this.state = {
-          // @doutor-disable: tipo-literal-inline-complexo
+          // @sensei-disable: tipo-literal-inline-complexo
           schemaVersion: 1,
-          lastRuns: Array.isArray(parsed.lastRuns) ? parsed.lastRuns as DoutorRunRecord[] : [],
+          lastRuns: Array.isArray(parsed.lastRuns) ? parsed.lastRuns as SenseiRunRecord[] : [],
           preferences: parsed.preferences && typeof parsed.preferences === 'object' ? parsed.preferences as Record<string, unknown> : {}
         };
       }
@@ -84,9 +85,9 @@ export class DoutorContextMemory {
       // mantém defaults
     }
   }
-  getState(): DoutorContextState {
+  getState(): SenseiContextState {
     return {
-      // @doutor-disable: tipo-literal-inline-complexo
+      // @sensei-disable: tipo-literal-inline-complexo
       schemaVersion: 1,
       lastRuns: [...this.state.lastRuns],
       preferences: {
@@ -94,7 +95,7 @@ export class DoutorContextMemory {
       }
     };
   }
-  getLastRun(): DoutorRunRecord | undefined {
+  getLastRun(): SenseiRunRecord | undefined {
     return this.state.lastRuns[this.state.lastRuns.length - 1];
   }
   getPreference<T = unknown>(key: string): T | undefined {
@@ -105,7 +106,7 @@ export class DoutorContextMemory {
     await this.persist();
   }
   async recordRunStart(
-  // @doutor-disable: tipo-literal-inline-complexo
+  // @sensei-disable: tipo-literal-inline-complexo
   input: {
     cwd: string;
     argv: string[];
@@ -113,7 +114,7 @@ export class DoutorContextMemory {
     timestamp?: string;
   }): Promise<string> {
     const id = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
-    const record: DoutorRunRecord = {
+    const record: SenseiRunRecord = {
       id,
       timestamp: input.timestamp ?? new Date().toISOString(),
       cwd: input.cwd,
@@ -128,7 +129,7 @@ export class DoutorContextMemory {
     return id;
   }
   async recordRunEnd(id: string,
-  // @doutor-disable: tipo-literal-inline-complexo
+  // @sensei-disable: tipo-literal-inline-complexo
   update: {
     ok: boolean;
     exitCode?: number;
@@ -166,14 +167,14 @@ export class DoutorContextMemory {
 }
 export async function getDefaultMemory(): Promise<ConversationMemory> {
   // Preferimos memória por projeto (cwd) para evitar misturar repositórios.
-  const persistCaminho = join(process.cwd(), '.doutor', 'history.json');
+  const persistCaminho = join(process.cwd(), '.sensei', 'history.json');
   const mem = new ConversationMemory(10, persistCaminho);
   await mem.init();
   return mem;
 }
-export async function getDefaultContextMemory(): Promise<DoutorContextMemory> {
-  const persistCaminho = join(process.cwd(), '.doutor', 'context.json');
-  const mem = new DoutorContextMemory(20, persistCaminho);
+export async function getDefaultContextMemory(): Promise<SenseiContextMemory> {
+  const persistCaminho = join(process.cwd(), '.sensei', 'context.json');
+  const mem = new SenseiContextMemory(20, persistCaminho);
   await mem.init();
   return mem;
 }

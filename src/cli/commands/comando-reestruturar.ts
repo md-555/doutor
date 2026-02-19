@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// @doutor-disable tipo-literal-inline-complexo
+// @sensei-disable tipo-literal-inline-complexo
 // Justificativa: tipos inline para opções de comando CLI são locais e não precisam de extração
 import { OperarioEstrutura } from '@analistas/estrategistas/operario-estrutura.js';
 import { exportarRelatoriosReestruturacao } from '@cli/handlers/reestruturacao-exporter.js';
@@ -8,11 +8,13 @@ import { ExitCode, sair } from '@cli/helpers/exit-codes.js';
 import { parsearCategorias } from '@cli/helpers/flags-helpers.js';
 import chalk from '@core/config/chalk-safe.js';
 import { config } from '@core/config/config.js';
-import { executarInquisicao, prepararComAst, tecnicas } from '@core/execution/inquisidor.js';
+import { executarInquisicao, prepararComAst } from '@core/execution/inquisidor.js';
 import { CliComandoReestruturarMensagens } from '@core/messages/cli/cli-comando-reestruturar-messages.js';
+import { registroAnalistas as tecnicas } from '@analistas/registry/registry.js';
 import { CABECALHOS, log } from '@core/messages/index.js';
 import { Command } from 'commander';
 import ora from 'ora';
+
 import type { FileEntry, FileEntryWithAst, Ocorrencia, ResultadoInquisicao } from '@';
 import { extrairMensagemErro } from '@';
 
@@ -21,7 +23,7 @@ import { extrairMensagemErro } from '@';
  * Aplica correções estruturais e otimizações ao repositório
  */
 export function comandoReestruturar(aplicarFlagsGlobais: (opts: Record<string, unknown>) => void): Command {
-  return new Command('reestruturar').description('Aplica correções estruturais e otimizações ao repositório.').option('-a, --auto', 'Aplica correções automaticamente sem confirmação (CUIDADO!)', false).option('--aplicar', 'Alias de --auto (deprecated futuramente)', false).option('--somente-plano', 'Exibe apenas o plano sugerido e sai (dry-run)', false).option('--domains', 'Organiza por domains/<entidade>/<categoria>s (opcional; preset doutor usa flat)', false).option('--flat', 'Organiza por src/<categoria>s (sem domains)', false).option('--prefer-estrategista', 'Força uso do estrategista (ignora plano de arquitetos)', false).option('--preset <nome>', 'Preset de estrutura (doutor|node-community|ts-lib). Se omitido, não sugere estrutura automaticamente.').option('--categoria <pair>', 'Override de categoria no formato chave=valor (ex.: controller=handlers). Pode repetir a flag.', (val: string, prev: string[]) => {
+  return new Command('reestruturar').description('Aplica correções estruturais e otimizações ao repositório.').option('-a, --auto', 'Aplica correções automaticamente sem confirmação (CUIDADO!)', false).option('--aplicar', 'Alias de --auto (deprecated futuramente)', false).option('--somente-plano', 'Exibe apenas o plano sugerido e sai (dry-run)', false).option('--domains', 'Organiza por domains/<entidade>/<categoria>s (opcional; preset sensei usa flat)', false).option('--flat', 'Organiza por src/<categoria>s (sem domains)', false).option('--prefer-estrategista', 'Força uso do estrategista (ignora plano de arquitetos)', false).option('--preset <nome>', 'Preset de estrutura (sensei|node-community|ts-lib). Se omitido, não sugere estrutura automaticamente.').option('--categoria <pair>', 'Override de categoria no formato chave=valor (ex.: controller=handlers). Pode repetir a flag.', (val: string, prev: string[]) => {
     prev.push(val);
     return prev;
   }, [] as string[]).option('--include <padrao>', 'Glob pattern a INCLUIR (pode repetir a flag ou usar vírgulas / espaços para múltiplos)', (val: string, prev: string[]) => {
@@ -56,10 +58,10 @@ export function comandoReestruturar(aplicarFlagsGlobais: (opts: Record<string, u
     }).start();
     const baseDir = process.cwd();
     try {
-      // Caminho r�pido de teste: quando DOUTOR_TEST_FAST=1 pulamos varredura e inquisicao pesadas.
+      // Caminho r�pido de teste: quando SENSEI_TEST_FAST=1 pulamos varredura e inquisicao pesadas.
       // Mant�m apenas valida��o e gera��o de plano via Operario (mockado nos testes),
       // reduzindo drasticamente o tempo e riscos de timeouts RPC do Vitest.
-      if (process.env.DOUTOR_TEST_FAST === '1') {
+      if (process.env.SENSEI_TEST_FAST === '1') {
         const fileEntriesComAst: FileEntryWithAst[] = [];
         const map = parsearCategorias(opts.categoria);
         if (opts.domains && opts.flat) {
@@ -113,7 +115,7 @@ export function comandoReestruturar(aplicarFlagsGlobais: (opts: Record<string, u
         return;
       }
       // Aplica flags globais (inclui/exclude) no config
-      // O scanner centralizado j� respeita doutor.config.json e as flags
+      // O scanner centralizado j� respeita sensei.config.json e as flags
       // O resultado j� vem filtrado
       let fileEntriesComAst: FileEntryWithAst[] = [];
       let analiseParaCorrecao: ResultadoInquisicao | {
@@ -134,28 +136,29 @@ export function comandoReestruturar(aplicarFlagsGlobais: (opts: Record<string, u
         // Se iniciarInquisicao existir, use para alinhar com mocks dos testes
         let analise;
         try {
-          const {
-            iniciarInquisicao
-          } = await import('@core/execution/inquisidor.js');
-          if (typeof iniciarInquisicao === 'function') {
-            analise = await iniciarInquisicao(baseDir, {
-              skipExec: false
-            });
-            // Se retornar fileEntries, use executarInquisicao normalmente
-            if (analise && analise.fileEntries) {
-              analiseParaCorrecao = await executarInquisicao(fileEntriesComAst, tecnicas, baseDir, undefined, {
-                verbose: false,
-                compact: true
-              });
-            } else {
-              analiseParaCorrecao = analise as ResultadoInquisicao;
-            }
-          } else {
-            analiseParaCorrecao = await executarInquisicao(fileEntriesComAst, tecnicas, baseDir, undefined, {
-              verbose: false,
-              compact: true
-            });
-          }
+          const { iniciarInquisicao } = await import('@core/execution/inquisidor.js');
+if (typeof iniciarInquisicao === 'function') {
+  analise = await iniciarInquisicao(baseDir, { skipExec: false });
+
+  if (analise && analise.fileEntries) {
+    // Se o resultado tiver fileEntries, é um ResultadoInquisicao completo
+    analiseParaCorrecao = analise as ResultadoInquisicao;
+  } else if (analise && 'ocorrencias' in analise) {
+    // Se tiver apenas ocorrencias, é um resultado parcial (possivelmente de mock) - converte para formato completo
+    analiseParaCorrecao = await executarInquisicao(fileEntriesComAst, tecnicas, baseDir, undefined, {
+      verbose: false,
+      compact: true
+    });
+  } else {
+    analiseParaCorrecao = analise as ResultadoInquisicao;
+  }
+} else {
+  // Se iniciarInquisicao não existir, executa inquisicao diretamente (fallback para testes sem mock)
+  analiseParaCorrecao = await executarInquisicao(fileEntriesComAst, tecnicas, baseDir, undefined, {
+    verbose: false,
+    compact: true
+  });
+}
         } catch (err) {
           // Em testes, se o mock falhar, continue com dados vazios
           if (process.env.VITEST) {
@@ -264,7 +267,7 @@ export function comandoReestruturar(aplicarFlagsGlobais: (opts: Record<string, u
         let answer = '';
         if (process.env.VITEST) {
           // Permite simular resposta customizada via variável de ambiente
-          answer = process.env.DOUTOR_REESTRUTURAR_ANSWER ?? 's';
+          answer = process.env.SENSEI_REESTRUTURAR_ANSWER ?? 's';
         } else {
           try {
             const readline = await import('node:readline/promises');

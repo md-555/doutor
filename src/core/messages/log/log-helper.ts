@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// @doutor-disable tipo-literal-inline-complexo
+// @sensei-disable tipo-literal-inline-complexo
 // Justificativa: tipos inline para sistema de logs
 /**
  * Sistema unificado de helpers de log
@@ -703,7 +703,7 @@ export const logGuardian = {
 };
 
 /**
- * Conselheiro doutoral para bem-estar do desenvolvedor
+ * Conselheiro senseial para bem-estar do desenvolvedor
  */
 export const logConselheiro = {
   volumeAlto(): void {

@@ -1,6 +1,6 @@
-# Doutor CLI
+# Sensei CLI
 
-> Proveniência e Autoria: Este documento integra o projeto Doutor (licença MIT).
+> Proveniência e Autoria: Este documento integra o projeto Sensei (licença MIT).
 > Nada aqui implica cessão de direitos morais/autorais.
 > Conteúdos de terceiros não licenciados de forma compatível não devem ser incluídos.
 > Referências a materiais externos devem ser linkadas e reescritas com palavras próprias.
@@ -11,20 +11,20 @@
 
 **Versão Atual:** 0.3.9 | **Node.js:** >=24.12.0 | **Licença:** MIT
 
-[![Stars](https://img.shields.io/github/stars/md-555/doutor?style=social)](https://github.com/md-555/doutor/stargazers)
-[![Forks](https://img.shields.io/github/forks/md-555/doutor?style=social)](https://github.com/md-555/doutor/network/members)
-[![Issues](https://img.shields.io/github/issues/md-555/doutor)](https://github.com/md-555/doutor/issues)
-[![Contributors](https://img.shields.io/github/contributors/md-555/doutor)](https://github.com/md-555/doutor/graphs/contributors)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/md-555/doutor/blob/main/CONTRIBUTING.md)
+[![Stars](https://img.shields.io/github/stars/md-555/sensei?style=social)](https://github.com/md-555/sensei/stargazers)
+[![Forks](https://img.shields.io/github/forks/md-555/sensei?style=social)](https://github.com/md-555/sensei/network/members)
+[![Issues](https://img.shields.io/github/issues/md-555/sensei)](https://github.com/md-555/sensei/issues)
+[![Contributors](https://img.shields.io/github/contributors/md-555/sensei)](https://github.com/md-555/sensei/graphs/contributors)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/md-555/sensei/blob/main/CONTRIBUTING.md)
 
 ## 🚀 Demo Rápido
 
 ```bash
 # Teste em 30 segundos sem instalar (requer Node.js 24+)
-npx github:md-555/doutor diagnosticar --help
+npx github:md-555/sensei diagnosticar --help
 ```
 
-## 💡 Por que usar o Doutor?
+## 💡 Por que usar o Sensei?
 
 - ⚡ **Performance**: Pool de workers para análise paralela de projetos grandes
 - 🔒 **Segurança**: Guardian verifica integridade de arquivos via hashing
@@ -35,11 +35,11 @@ npx github:md-555/doutor diagnosticar --help
 
 ---
 
-Doutor é uma CLI modular para analisar, diagnosticar e manter projetos (JS/TS e multi-stack leve). Entrega diagnósticos estruturais, verificação de integridade (Guardian), sugestão de reorganização e métricas — tudo com contratos JSON para CI.
+Sensei é uma CLI modular para analisar, diagnosticar e manter projetos (JS/TS e multi-stack leve). Entrega diagnósticos estruturais, verificação de integridade (Guardian), sugestão de reorganização e métricas — tudo com contratos JSON para CI.
 
 ---
 
-> Nota de cobertura: Gate local transitório configurado em **70%** (por métrica) em `doutor.config.json` para acelerar a adição incremental de testes. No **CI Principal** o gate é forçado para **90%** via variáveis de ambiente (`COVERAGE_GATE_*`). Arquivos listados em `scripts/coverage-exclude.json` serão reintegrados gradualmente.
+> Nota de cobertura: Gate local transitório configurado em **70%** (por métrica) em `sensei.config.json` para acelerar a adição incremental de testes. No **CI Principal** o gate é forçado para **90%** via variáveis de ambiente (`COVERAGE_GATE_*`). Arquivos listados em `scripts/coverage-exclude.json` serão reintegrados gradualmente.
 
 ## 🚀 Instalação e Primeiros Passos
 
@@ -47,8 +47,8 @@ Doutor é uma CLI modular para analisar, diagnosticar e manter projetos (JS/TS e
 
 ```bash
 # Clone o repositório
-git clone https://github.com/md-555-37/doutor.git
-cd doutor
+git clone https://github.com/md-555-37/sensei.git
+cd sensei
 
 # Instale dependências e compile
 npm install
@@ -61,7 +61,7 @@ node dist/bin/index.js diagnosticar --json
 **Windows (PowerShell):**
 
 ```powershell
-git clone https://github.com/md-555-37/doutor.git; cd doutor; npm install; npm run build; node dist/bin/index.js diagnosticar --json
+git clone https://github.com/md-555-37/sensei.git; cd sensei; npm install; npm run build; node dist/bin/index.js diagnosticar --json
 ```
 
 ### Instalação Global (Opcional)
@@ -70,27 +70,27 @@ git clone https://github.com/md-555-37/doutor.git; cd doutor; npm install; npm r
 # Instala globalmente para usar em qualquer projeto
 npm install -g .
 
-# Agora você pode usar apenas 'doutor' ao invés de 'node dist/bin/index.js'
-doutor diagnosticar --json
+# Agora você pode usar apenas 'sensei' ao invés de 'node dist/bin/index.js'
+sensei diagnosticar --json
 ```
 
 ### Primeiro Uso - Comandos Essenciais
 
 ```bash
 # Diagnóstico completo do projeto atual
-doutor diagnosticar
+sensei diagnosticar
 
 # Ver apenas problemas críticos (modo executivo)
-doutor diagnosticar --executive
+sensei diagnosticar --executive
 
 # Análise rápida (apenas varredura, sem correções)
-doutor diagnosticar --scan-only
+sensei diagnosticar --scan-only
 
 # Saída estruturada para CI/CD
-doutor diagnosticar --json
+sensei diagnosticar --json
 
 # Verificar integridade dos arquivos
-doutor guardian --diff
+sensei guardian --diff
 ```
 
 ## ✨ Capacidades
@@ -122,16 +122,16 @@ O sistema de análise inclui uma vasta gama de analistas e detectores para uma c
 
 ```bash
 # Paralelização automática ativada por padrão
-doutor diagnosticar
+sensei diagnosticar
 
 # Configuração manual
-WORKER_POOL_MAX_WORKERS=4 doutor diagnosticar
+WORKER_POOL_MAX_WORKERS=4 sensei diagnosticar
 ```
 
 #### Sistema de Supressão Inline
 
 ```typescript
-// @doutor-disable-next-line hardcoded-secrets
+// @sensei-disable-next-line hardcoded-secrets
 const apiKey = "development-key-only";
 ```
 
@@ -149,45 +149,45 @@ Benefícios gerais:
 
 ```bash
 # Modo seguro (recomendado para começar)
-doutor diagnosticar --safe-mode
+sensei diagnosticar --safe-mode
 
 # Modo verbose (mais detalhes)
-doutor diagnosticar --verbose
+sensei diagnosticar --verbose
 
 # Modo silencioso (menos output)
-doutor diagnosticar --silence
+sensei diagnosticar --silence
 
 # Apenas varredura (não executa correções)
-doutor diagnosticar --scan-only
+sensei diagnosticar --scan-only
 ```
 
 ### Saídas Diferentes
 
 ```bash
 # Saída JSON para ferramentas/automação
-doutor diagnosticar --json
+sensei diagnosticar --json
 
 # Saída compacta (menos detalhes)
-doutor diagnosticar --compacto
+sensei diagnosticar --compacto
 
 # Modo executivo (apenas problemas críticos)
-doutor diagnosticar --executive
+sensei diagnosticar --executive
 
 # Exportar relatório para arquivo
-doutor diagnosticar --export relatorio.md
+sensei diagnosticar --export relatorio.md
 ```
 
 ### Debug e Desenvolvimento
 
 ```bash
 # Modo debug (informações detalhadas)
-doutor diagnosticar --debug
+sensei diagnosticar --debug
 
 # Ver apenas erros
-doutor diagnosticar --only-errors
+sensei diagnosticar --only-errors
 
 # Timeout personalizado (em segundos)
-doutor diagnosticar --timeout 60
+sensei diagnosticar --timeout 60
 ```
 
 ## 📋 Workflows de Desenvolvimento
@@ -220,23 +220,23 @@ npm run build
 npm test
 
 # Análise completa
-doutor diagnosticar --json
+sensei diagnosticar --json
 
 # Verificar integridade
-doutor guardian --diff --json
+sensei guardian --diff --json
 ```
 
 ### Debug de Problemas
 
 ```bash
 # Modo debug completo
-doutor diagnosticar --debug --verbose
+sensei diagnosticar --debug --verbose
 
 # Apenas um tipo específico de análise
-doutor diagnosticar --include "src/**/*.ts" --debug
+sensei diagnosticar --include "src/**/*.ts" --debug
 
 # Ver logs detalhados
-DEBUG=* doutor diagnosticar
+DEBUG=* sensei diagnosticar
 ```
 
 ## 🔧 Troubleshooting Comum
@@ -269,51 +269,51 @@ node dist/bin/index.js diagnosticar
 
 ```bash
 # Aumente o timeout
-doutor diagnosticar --timeout 120
+sensei diagnosticar --timeout 120
 
 # Ou via variável
-DOUTOR_ANALISE_TIMEOUT_POR_ANALISTA_MS=60000 doutor diagnosticar
+SENSEI_ANALISE_TIMEOUT_POR_ANALISTA_MS=60000 sensei diagnosticar
 ```
 
 ### "Muitos arquivos analisados"
 
 ```bash
 # Restrinja a análise
-doutor diagnosticar --include "src/**" --exclude "**/*.test.*"
+sensei diagnosticar --include "src/**" --exclude "**/*.test.*"
 
 # Use modo scan-only para preview
-doutor diagnosticar --scan-only
+sensei diagnosticar --scan-only
 ```
 
 ### "Problemas de performance"
 
 ```bash
 # Reduza workers
-WORKER_POOL_MAX_WORKERS=1 doutor diagnosticar
+WORKER_POOL_MAX_WORKERS=1 sensei diagnosticar
 
 # Use modo conservador
 # Use modo conservador
-PONTUACAO_MODO=conservador doutor diagnosticar
+PONTUACAO_MODO=conservador sensei diagnosticar
 ```
 
 ## 📚 Comandos Principais
 
 | Comando        | Descrição                             | Uso Comum                              |
 | -------------- | ------------------------------------- | -------------------------------------- |
-| `diagnosticar` | Análise completa do projeto           | `doutor diagnosticar --json`          |
-| `guardian`     | Verificação de integridade            | `doutor guardian --diff`              |
-| `podar`        | Remoção segura de arquivos órfãos     | `doutor podar --dry-run`              |
-| `reestruturar` | Reorganização de estrutura do projeto | `doutor reestruturar --somente-plano` |
-| `formatar`     | Formatação de código                  | `doutor formatar --write`             |
-| `fix-types`    | Correção de tipos inseguros           | `doutor fix-types --dry-run`          |
-| `metricas`     | Visualizar métricas agregadas         | `doutor metricas --json`              |
-| `perf`         | Análise de performance                | `doutor perf compare`                 |
-| `analistas`    | Listar analistas disponíveis          | `doutor analistas --json`             |
-| `otimizar-svg` | Otimização de arquivos SVG            | `doutor otimizar-svg --write`         |
-| `atualizar`    | Atualização segura do Doutor         | `doutor atualizar`                    |
-| `reverter`     | Reverter mudanças de reestruturação   | `doutor reverter listar`              |
-| `names`        | Extrair nomes para tradução           | `doutor names`                        |
-| `rename`       | Aplicar renomeação de variáveis       | `doutor rename`                       |
+| `diagnosticar` | Análise completa do projeto           | `sensei diagnosticar --json`          |
+| `guardian`     | Verificação de integridade            | `sensei guardian --diff`              |
+| `podar`        | Remoção segura de arquivos órfãos     | `sensei podar --dry-run`              |
+| `reestruturar` | Reorganização de estrutura do projeto | `sensei reestruturar --somente-plano` |
+| `formatar`     | Formatação de código                  | `sensei formatar --write`             |
+| `fix-types`    | Correção de tipos inseguros           | `sensei fix-types --dry-run`          |
+| `metricas`     | Visualizar métricas agregadas         | `sensei metricas --json`              |
+| `perf`         | Análise de performance                | `sensei perf compare`                 |
+| `analistas`    | Listar analistas disponíveis          | `sensei analistas --json`             |
+| `otimizar-svg` | Otimização de arquivos SVG            | `sensei otimizar-svg --write`         |
+| `atualizar`    | Atualização segura do Sensei         | `sensei atualizar`                    |
+| `reverter`     | Reverter mudanças de reestruturação   | `sensei reverter listar`              |
+| `names`        | Extrair nomes para tradução           | `sensei names`                        |
+| `rename`       | Aplicar renomeação de variáveis       | `sensei rename`                       |
 
 ## 🧪 Testes
 
@@ -335,19 +335,19 @@ Gate no CI: aplicado somente no workflow `CI Principal` com 90% (env). Documenta
 
 ```bash
 # Analisar apenas arquivos TypeScript
-doutor diagnosticar --include "**/*.ts" --include "**/*.tsx"
+sensei diagnosticar --include "**/*.ts" --include "**/*.tsx"
 
 # Analisar apenas uma pasta específica
-doutor diagnosticar --include "src/**/*"
+sensei diagnosticar --include "src/**/*"
 
 # Excluir testes e documentação
-doutor diagnosticar --exclude "**/*.test.*" --exclude "**/*.spec.*" --exclude "docs/**"
+sensei diagnosticar --exclude "**/*.test.*" --exclude "**/*.spec.*" --exclude "docs/**"
 
 # Analisar apenas arquivos modificados recentemente (git)
-doutor diagnosticar --include "$(git diff --name-only HEAD~1)"
+sensei diagnosticar --include "$(git diff --name-only HEAD~1)"
 
 # Misturar include e exclude
-doutor diagnosticar --include "src/**/*.ts" --exclude "src/**/*.test.ts"
+sensei diagnosticar --include "src/**/*.ts" --exclude "src/**/*.test.ts"
 ```
 
 ### Regras Importantes
@@ -361,17 +361,17 @@ doutor diagnosticar --include "src/**/*.ts" --exclude "src/**/*.test.ts"
 
 ```bash
 # Apenas código fonte (excluindo testes e config)
-doutor diagnosticar --include "src/**" --include "lib/**" --exclude "**/*.test.*"
+sensei diagnosticar --include "src/**" --include "lib/**" --exclude "**/*.test.*"
 
 # Apenas arquivos JavaScript/TypeScript
-doutor diagnosticar --include "**/*.{js,ts,jsx,tsx,mjs,cjs}"
+sensei diagnosticar --include "**/*.{js,ts,jsx,tsx,mjs,cjs}"
 
 # Excluir diretórios comuns
-doutor diagnosticar --exclude "node_modules/**" --exclude "dist/**" --exclude ".git/**" --exclude "coverage/**"
+sensei diagnosticar --exclude "node_modules/**" --exclude "dist/**" --exclude ".git/**" --exclude "coverage/**"
 
 # Análise focada em uma feature específica
 # Análise focada em uma feature específica
-doutor diagnosticar --include "src/features/auth/**" --include "src/components/auth/**"
+sensei diagnosticar --include "src/features/auth/**" --include "src/components/auth/**"
 ```
 
 ## 🌍 Variáveis de Ambiente Essenciais
@@ -437,7 +437,7 @@ export ALLOW_EXEC=false
 export DEV_MODE=true
 export WORKER_POOL_MAX_WORKERS=2
 export PONTUACAO_MODO=conservador
-doutor diagnosticar --verbose
+sensei diagnosticar --verbose
 ```
 
 **Para CI/CD:**
@@ -446,7 +446,7 @@ doutor diagnosticar --verbose
 export SAFE_MODE=true
 export REPORT_SILENCE_LOGS=true
 export WORKER_POOL_MAX_WORKERS=4
-doutor diagnosticar --json
+sensei diagnosticar --json
 ```
 
 **Para análise rápida:**
@@ -454,7 +454,7 @@ doutor diagnosticar --json
 ```bash
 export WORKER_POOL_MAX_WORKERS=1
 export PONTUACAO_MODO=permissivo
-doutor diagnosticar --scan-only
+sensei diagnosticar --scan-only
 ```
 
 ````
@@ -509,7 +509,7 @@ doutor diagnosticar --scan-only
 
 Os arquivos de configuração ficam na raiz do projeto e são carregados em tempo de execução.
 
-### doutor.config.json (principal)
+### sensei.config.json (principal)
 
 Exemplo (trecho real):
 
@@ -520,7 +520,7 @@ Exemplo (trecho real):
       "node_modules/**",
       "**/node_modules/**",
       ".pnpm/**",
-      "**/.doutor/**",
+      "**/.sensei/**",
       "dist/**",
       "**/dist/**",
       "coverage/**",
@@ -533,7 +533,7 @@ Exemplo (trecho real):
       "yarn.lock",
       "pnpm-lock.yaml",
       "**/.git/**",
-      "preview-doutor/**",
+      "preview-sensei/**",
       "tests/fixtures/**"
     ],
     "globalInclude": [],
@@ -542,7 +542,7 @@ Exemplo (trecho real):
     "defaultExcludes": null
   },
   "ESTRUTURA_ARQUIVOS_RAIZ_MAX": 50,
-  "REPO_ARQUETIPO": "doutor-self",
+  "REPO_ARQUETIPO": "sensei-self",
   "STRUCTURE_AUTO_FIX": false,
   "REPORT_EXPORT_ENABLED": false,
   "coverageGate": {
@@ -562,7 +562,7 @@ Campos úteis:
 - STRUCTURE_AUTO_FIX: ativa técnicas mutáveis (off por padrão)
 - coverageGate: limiares de cobertura por métrica (90%)
 
-### doutor.config.safe.json (modo seguro)
+### sensei.config.safe.json (modo seguro)
 
 Exemplo (trecho real):
 
@@ -574,14 +574,14 @@ Exemplo (trecho real):
   "ALLOW_MUTATE_FS": false,
   "STRUCTURE_AUTO_FIX": false,
   "REPORT_EXPORT_ENABLED": false,
-  "DOUTOR_ALLOW_EXEC": 1,
-  "DOUTOR_ANALISE_TIMEOUT_POR_ANALISTA_MS": 10000,
+  "SENSEI_ALLOW_EXEC": 1,
+  "SENSEI_ANALISE_TIMEOUT_POR_ANALISTA_MS": 10000,
   "productionDefaults": {
     "NODE_ENV": "development",
-    "DOUTOR_MAX_ANALYST_TIMEOUT_MS": 10000,
+    "SENSEI_MAX_ANALYST_TIMEOUT_MS": 10000,
     "WORKER_POOL_MAX_WORKERS": 2,
     "WORKER_POOL_BATCH_SIZE": 10,
-    "DOUTOR_WORKER_HEARTBEAT_MS": 5000,
+    "SENSEI_WORKER_HEARTBEAT_MS": 5000,
     "LOG_ESTRUTURADO": false,
     "REPORT_SILENCE_LOGS": true
   }
@@ -593,14 +593,14 @@ Recomendações:
 - Mantenha SAFE_MODE habilitado em CI e ambientes compartilhados
 - Ajuste productionDefaults para limitar workers/silenciar logs em pipelines
 
-### doutor.repo.arquetipo.json (perfil do repositório)
+### sensei.repo.arquetipo.json (perfil do repositório)
 
 Exemplo (trecho real):
 
 ```json
 {
   "arquetipoOficial": "cli-modular",
-  "descricao": "Projeto personalizado: doutor",
+  "descricao": "Projeto personalizado: sensei",
   "estruturaPersonalizada": {
     "arquivosChave": [
       "eslint.config.js",
@@ -657,7 +657,7 @@ Exemplo (trecho real):
     "recomendado": ["src/", "tests/", "docs/", "README.md", ".env.example"]
   },
   "metadata": { "criadoEm": "2025-09-06T22:15:41.078Z", "versao": "1.0.0" },
-  "nome": "doutor"
+  "nome": "sensei"
 }
 ```
 
@@ -669,7 +669,7 @@ Dicas:
 
 ### Variáveis de ambiente (.env)
 
-Você pode configurar o Doutor via variáveis de ambiente (úteis para CI e ajustes locais). Um arquivo de exemplo está disponível em `.env.example`.
+Você pode configurar o Sensei via variáveis de ambiente (úteis para CI e ajustes locais). Um arquivo de exemplo está disponível em `.env.example`.
 
 Principais variáveis:
 
@@ -678,10 +678,10 @@ Principais variáveis:
   - `WORKER_POOL_MAX_WORKERS` (número ou `auto`)
   - `WORKER_POOL_BATCH_SIZE` (número)
   - `WORKER_POOL_TIMEOUT_MS` (ms por analista; padrão 30000)
-  - `DOUTOR_WORKER_HEARTBEAT_MS` (ms; batimento do worker)
+  - `SENSEI_WORKER_HEARTBEAT_MS` (ms; batimento do worker)
 - Tempo de análise:
-  - `DOUTOR_ANALISE_TIMEOUT_POR_ANALISTA_MS` (ms)
-  - `DOUTOR_MAX_ANALYST_TIMEOUT_MS` (ms; alias compatível)
+  - `SENSEI_ANALISE_TIMEOUT_POR_ANALISTA_MS` (ms)
+  - `SENSEI_MAX_ANALYST_TIMEOUT_MS` (ms; alias compatível)
 - Pontuação Adaptativa:
   - `PONTUACAO_MODO` (padrao|conservador|permissivo)
   - `PONTUACAO_FATOR_ESCALA` (override numérico)
@@ -701,7 +701,7 @@ Exemplos rápidos:
 export WORKER_POOL_MAX_WORKERS=4
 export PONTUACAO_MODO=conservador
 export COVERAGE_GATE_LINES=90
-doutor diagnosticar --json
+sensei diagnosticar --json
 ```
 
 ```powershell
@@ -709,7 +709,7 @@ doutor diagnosticar --json
 $env:WORKER_POOL_MAX_WORKERS = 4
 $env:PONTUACAO_MODO = "conservador"
 $env:COVERAGE_GATE_LINES = 90
-doutor diagnosticar --json
+sensei diagnosticar --json
 ```
 
 ## 📖 Leituras Adicionais

@@ -14,6 +14,7 @@ import type { NodePath } from '@babel/traverse';
 import type { ExportDeclaration, ImportDeclaration, Program } from '@babel/types';
 import { config } from '@core/config/config.js';
 import { traverse } from '@core/config/traverse.js';
+
 import type { EvidenciaContexto, FileEntryWithAst, PackageJson, ResultadoDeteccaoContextual } from '@';
 
 // Re-exporta os tipos para compatibilidade

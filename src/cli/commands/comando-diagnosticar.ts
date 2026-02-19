@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// @doutor-disable tipo-literal-inline-complexo
+// @sensei-disable tipo-literal-inline-complexo
 // Justificativa: tipos inline para opções de comando CLI são locais e não precisam de extração
 import { optionsDiagnosticar } from '@cli/options-diagnosticar.js';
 import { processarDiagnostico } from '@cli/processamento-diagnostico.js';
@@ -8,7 +8,9 @@ import { CABECALHOS, log } from '@core/messages/index.js';
 import { ativarModoJson } from '@shared/helpers/json-mode.js';
 import { Command } from 'commander';
 import ora from 'ora';
+
 import type { ParentWithOpts } from '@';
+
 export function comandoDiagnosticar(aplicarFlagsGlobais: (opts: Record<string, unknown>) => void): Command {
   const cmd = new Command('diagnosticar').alias('diag').description('Executa uma análise completa do repositório');
 
@@ -71,7 +73,7 @@ export function comandoDiagnosticar(aplicarFlagsGlobais: (opts: Record<string, u
     }
 
     // Fast mode de teste: retorna estrutura mínima simulada sem executar análise completa
-    if (process.env.DOUTOR_TEST_FAST === '1') {
+    if (process.env.SENSEI_TEST_FAST === '1') {
       if (opts.json) {
         // Estrutura mínima para satisfazer consumidores dos testes
         console.log(JSON.stringify({

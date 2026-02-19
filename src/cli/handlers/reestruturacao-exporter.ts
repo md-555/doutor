@@ -6,10 +6,12 @@
 
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+
 import { config } from '@core/config/config.js';
 import { CliExportersMensagens } from '@core/messages/cli/cli-exporters-messages.js';
 import { log } from '@core/messages/index.js';
 import { gerarRelatorioReestruturarJson, gerarRelatorioReestruturarMarkdown } from '@relatorios/relatorio-reestruturar.js';
+
 import type { MovimentoEstrutural, ReestruturacaoExportOptions, ReestruturacaoExportResult } from '@';
 
 // Re-export para compatibilidade
@@ -78,7 +80,7 @@ export async function exportarRelatoriosReestruturacao(options: ReestruturacaoEx
 
     // Gerar timestamp único para os arquivos
     const ts = new Date().toISOString().replace(/[:.]/g, '-');
-    const nomeBase = `doutor-reestruturacao-${ts}`;
+    const nomeBase = `sensei-reestruturacao-${ts}`;
 
     // Normalizar movimentos para formato padrão
     const movimentosNormalizados = normalizarMovimentos(movimentos);

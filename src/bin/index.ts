@@ -3,6 +3,7 @@
 // Bootstrap do binário: registra o loader ESM programaticamente e importa ./cli.js
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+
 import type { ErrorLike } from '@';
 import { extrairMensagemErro } from '@';
 
@@ -45,7 +46,7 @@ const entryUrl = pathToFileURL(entryCaminho).toString();
       process.exit(0);
     }
     const msg = typeof message === 'string' ? message : extrairMensagemErro(err);
-    console.error('Erro ao inicializar o doutor:', msg);
+    console.error('Erro ao inicializar o sensei:', msg);
     if (err && typeof err === 'object' && 'stack' in err) {
       console.error((err as {
         stack?: string;
@@ -64,7 +65,7 @@ const entryUrl = pathToFileURL(entryCaminho).toString();
     process.exit(0);
   }
   const msg = typeof message === 'string' ? message : extrairMensagemErro(err);
-  console.error('Erro ao inicializar o doutor:', msg);
+  console.error('Erro ao inicializar o sensei:', msg);
   if (err && typeof err === 'object' && 'stack' in err) {
     console.error((err as {
       stack?: string;

@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: MIT
 import { AnalystOrigens, AnalystTipos, SeverityNiveis, SvgMensagens } from '@core/messages/core/plugin-messages.js';
 import { otimizarSvgLikeSvgo, shouldSugerirOtimizacaoSvg } from '@shared/impar/svgs.js';
+
 import type { Ocorrencia } from '@';
 import { criarAnalista, criarOcorrencia } from '@';
-const disableEnv = process.env.DOUTOR_DISABLE_PLUGIN_SVG === '1';
+
+const disableEnv = process.env.SENSEI_DISABLE_PLUGIN_SVG === '1';
 type Msg = ReturnType<typeof criarOcorrencia>;
 function findLine(src: string, index = 0): number {
   const safeIndex = Math.max(0, index);
@@ -31,7 +33,7 @@ function msg(message: string, relPath: string, nivel: (typeof SeverityNiveis)[ke
 export const analistaSvg = criarAnalista({
   nome: 'analista-svg',
   categoria: 'assets',
-  descricao: 'Heurísticas para SVG + sugestão de otimização (modo Doutor).',
+  descricao: 'Heurísticas para SVG + sugestão de otimização (modo Sensei).',
   global: false,
   test: (relPath: string): boolean => /\.svg$/i.test(relPath),
   aplicar: async (src, relPath): Promise<Ocorrencia[] | null> => {

@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: MIT
-// @doutor-disable tipo-inseguro-unknown tipo-literal-inline-complexo
+// @sensei-disable tipo-inseguro-unknown tipo-literal-inline-complexo
 // Justificativa: unknown é usado para tipagem defensiva de erros e módulos dinâmicos
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+
 import { mapaReversao } from '@analistas/corrections/mapa-reversao.js';
 import { config } from '@core/config/config.js';
 import { resolverPluginSeguro } from '@core/config/seguranca.js';
@@ -10,7 +11,9 @@ import { log, logAuto } from '@core/messages/index.js';
 import { importarModuloSeguro } from '@core/utils/import-safe.js';
 import { reescreverImports } from '@shared/helpers/imports.js';
 import pLimit from 'p-limit';
+
 import type { ConfigPlugin, ErroComMensagem, FileEntryWithAst, ResultadoEstrutural } from '@';
+
 export async function corrigirEstrutura(mapa: ResultadoEstrutural[], fileEntries: FileEntryWithAst[], baseDir: string = process.cwd()): Promise<void> {
   // Captura dinâmica das configs (evita congelar valores em tempo de import)
   const CONCORRENCIA = Number(config.STRUCTURE_CONCURRENCY ?? 5);

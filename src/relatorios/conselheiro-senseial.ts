@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 import { logConselheiro } from '@core/messages/index.js';
 
-import type { ConselhoContextoDoutoral } from '@';
+import type { ConselhoContextoSenseial } from '@';
 
 // Re-exporta para compatibilidade com nome original
-export type ConselhoContexto = ConselhoContextoDoutoral;
+export type ConselhoContexto = ConselhoContextoSenseial;
 
-export function emitirConselhoDoutoral(
-  estresse: ConselhoContextoDoutoral,
+export function emitirConselhoSenseial(
+  estresse: ConselhoContextoSenseial,
 ): void {
   const {
     hora = new Date().getHours(),

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// SPDX-FileCopyrightText: 2025 Doutor Contributors
+// SPDX-FileCopyrightText: 2025 Sensei Contributors
 
 /**
  * @module cli/diagnostico/exporters/json-exporter
@@ -9,6 +9,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+
 import type { JsonExportOptions, Ocorrencia, RelatorioJson } from '@';
 
 // Re-export para compatibilidade
@@ -46,7 +47,7 @@ export function gerarRelatorioJson(dados: Partial<RelatorioJson>, options: Parti
       schemaVersion: '1.0.0',
       modo: 'full',
       flags: [],
-      doutorVersion: (() => {
+      senseiVersion: (() => {
         try {
           // Evita dependência direta de package.json fora do build
           // Em runtime, pode ser enriquecido pela CLI

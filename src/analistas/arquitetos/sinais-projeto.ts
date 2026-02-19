@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 // import path from 'node:path'; // Removido: não utilizado
 import type { ClassDeclaration, ImportDeclaration, Program, Statement, TSEnumDeclaration, TSInterfaceDeclaration, TSTypeAliasDeclaration, VariableDeclaration } from '@babel/types';
+
 import type { FileEntryWithAst, PackageJson, SinaisProjetoAvancados } from '@';
+
 export function extrairSinaisAvancados(fileEntries: FileEntryWithAst[], packageJson?: PackageJson): SinaisProjetoAvancados {
   // Auxiliar para checar se o nó possui id.name string
   const hasIdNome = (node: unknown): node is {

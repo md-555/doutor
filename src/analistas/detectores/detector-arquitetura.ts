@@ -2,10 +2,11 @@
 import type { NodePath } from '@babel/traverse';
 import type { ExportNamedDeclaration, ImportDeclaration, ImportDefaultSpecifier, ImportNamespaceSpecifier, ImportSpecifier, Node } from '@babel/types';
 import { traverse } from '@core/config/traverse.js';
-import { DetectorArquiteturaMensagens } from '@core/messages/analistas/detector-arquitetura-messages.js';
 import * as path from 'path';
+
 import type { AnaliseArquitetural, Analista, ContextoExecucao, EstatisticasArquivo, ExportInfo, ImportInfo, Ocorrencia } from '@';
 import { criarOcorrencia } from '@';
+
 export const analistaArquitetura: Analista = {
   nome: 'arquitetura',
   categoria: 'estrutura',
@@ -28,6 +29,21 @@ export const analistaArquitetura: Analista = {
         analiseCompleta = await analisarArquiteturaCompleta(contexto, estatisticasArquivo);
       } catch (erro) {
         // Em caso de falha na análise contextual, registre ocorrência e continue sem travar
+        if (typeof contexto.report === 'function') {
+          contexto.report({
+            code: 'ARQ_ERRO',
+            tipo: 'erro-analise',
+            nivel: 'aviso',
+            relPath,
+            linha: 1,
+            data: { erro },
+            origem: 'arquitetura',
+          });
+          return [];
+        }
+        const { DetectorArquiteturaMensagens } = await import(
+          '@core/messages/analistas/detector-arquitetura-messages.js'
+        );
         return [criarOcorrencia({
           tipo: 'erro-analise',
           nivel: 'aviso',
@@ -38,51 +54,132 @@ export const analistaArquitetura: Analista = {
       }
 
       // Relatório principal da arquitetura
-      ocorrencias.push(criarOcorrencia({
-        tipo: 'analise-arquitetura',
-        nivel: (analiseCompleta.violacoes?.length ?? 0) > 0 ? 'aviso' : 'info',
-        mensagem: DetectorArquiteturaMensagens.padraoArquitetural(analiseCompleta.padraoIdentificado, analiseCompleta.confianca ?? 0),
-        relPath,
-        linha: 1
-      }));
-
-      // Relatório de características
-      if ((analiseCompleta.caracteristicas?.length ?? 0) > 0) {
+      if (typeof contexto.report === 'function') {
+        contexto.report({
+          code: 'ARQ_PADRAO',
+          tipo: 'analise-arquitetura',
+          nivel: (analiseCompleta.violacoes?.length ?? 0) > 0 ? 'aviso' : 'info',
+          relPath,
+          linha: 1,
+          data: {
+            padraoIdentificado: analiseCompleta.padraoIdentificado,
+            confianca: analiseCompleta.confianca ?? 0,
+          },
+          origem: 'arquitetura',
+        });
+      } else {
+        const { DetectorArquiteturaMensagens } = await import(
+          '@core/messages/analistas/detector-arquitetura-messages.js'
+        );
         ocorrencias.push(criarOcorrencia({
-          tipo: 'caracteristicas-arquitetura',
-          nivel: 'info',
-          mensagem: DetectorArquiteturaMensagens.caracteristicas(analiseCompleta.caracteristicas || []),
+          tipo: 'analise-arquitetura',
+          nivel: (analiseCompleta.violacoes?.length ?? 0) > 0 ? 'aviso' : 'info',
+          mensagem: DetectorArquiteturaMensagens.padraoArquitetural(analiseCompleta.padraoIdentificado, analiseCompleta.confianca ?? 0),
           relPath,
           linha: 1
         }));
       }
 
+      // Relatório de características
+      if ((analiseCompleta.caracteristicas?.length ?? 0) > 0) {
+        if (typeof contexto.report === 'function') {
+          contexto.report({
+            code: 'ARQ_CARACTERISTICAS',
+            tipo: 'caracteristicas-arquitetura',
+            nivel: 'info',
+            relPath,
+            linha: 1,
+            data: { caracteristicas: analiseCompleta.caracteristicas || [] },
+            origem: 'arquitetura',
+          });
+        } else {
+          const { DetectorArquiteturaMensagens } = await import(
+            '@core/messages/analistas/detector-arquitetura-messages.js'
+          );
+          ocorrencias.push(criarOcorrencia({
+            tipo: 'caracteristicas-arquitetura',
+            nivel: 'info',
+            mensagem: DetectorArquiteturaMensagens.caracteristicas(analiseCompleta.caracteristicas || []),
+            relPath,
+            linha: 1
+          }));
+        }
+      }
+
       // Relatório de violações
       for (const violacao of (analiseCompleta.violacoes ?? []).slice(0, 3)) {
-        ocorrencias.push(criarOcorrencia({
-          tipo: 'violacao-arquitetura',
-          nivel: 'aviso',
-          mensagem: DetectorArquiteturaMensagens.violacao(violacao),
-          relPath,
-          linha: 1
-        }));
+        if (typeof contexto.report === 'function') {
+          contexto.report({
+            code: 'ARQ_VIOLACAO',
+            tipo: 'violacao-arquitetura',
+            nivel: 'aviso',
+            relPath,
+            linha: 1,
+            data: { violacao },
+            origem: 'arquitetura',
+          });
+        } else {
+          const { DetectorArquiteturaMensagens } = await import(
+            '@core/messages/analistas/detector-arquitetura-messages.js'
+          );
+          ocorrencias.push(criarOcorrencia({
+            tipo: 'violacao-arquitetura',
+            nivel: 'aviso',
+            mensagem: DetectorArquiteturaMensagens.violacao(violacao),
+            relPath,
+            linha: 1
+          }));
+        }
       }
 
       // Métricas de qualidade
       const metricas = analiseCompleta.metricas;
       if (metricas && typeof metricas === 'object' && 'acoplamento' in metricas && 'coesao' in metricas) {
         if ((metricas.acoplamento ?? 0) > 0.7 || (metricas.coesao ?? 1) < 0.3) {
-          ocorrencias.push(criarOcorrencia({
-            tipo: 'metricas-arquitetura',
-            nivel: 'aviso',
-            mensagem: DetectorArquiteturaMensagens.metricas(metricas.acoplamento ?? 0, metricas.coesao ?? 0),
-            relPath,
-            linha: 1
-          }));
+          if (typeof contexto.report === 'function') {
+            contexto.report({
+              code: 'ARQ_METRICAS',
+              tipo: 'metricas-arquitetura',
+              nivel: 'aviso',
+              relPath,
+              linha: 1,
+              data: {
+                acoplamento: metricas.acoplamento ?? 0,
+                coesao: metricas.coesao ?? 0,
+              },
+              origem: 'arquitetura',
+            });
+          } else {
+            const { DetectorArquiteturaMensagens } = await import(
+              '@core/messages/analistas/detector-arquitetura-messages.js'
+            );
+            ocorrencias.push(criarOcorrencia({
+              tipo: 'metricas-arquitetura',
+              nivel: 'aviso',
+              mensagem: DetectorArquiteturaMensagens.metricas(metricas.acoplamento ?? 0, metricas.coesao ?? 0),
+              relPath,
+              linha: 1
+            }));
+          }
         }
       }
       return ocorrencias;
     } catch (erro) {
+      if (typeof contexto.report === 'function') {
+        contexto.report({
+          code: 'ARQ_ERRO',
+          tipo: 'erro-analise',
+          nivel: 'aviso',
+          relPath,
+          linha: 1,
+          data: { erro },
+          origem: 'arquitetura',
+        });
+        return [];
+      }
+      const { DetectorArquiteturaMensagens } = await import(
+        '@core/messages/analistas/detector-arquitetura-messages.js'
+      );
       return [criarOcorrencia({
         tipo: 'erro-analise',
         nivel: 'aviso',

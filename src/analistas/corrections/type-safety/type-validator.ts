@@ -5,6 +5,7 @@
  */
 
 import type { TypeAnalysis, TypeReplacementValidation } from '@';
+
 import { findExistingType, isSameType } from './type-creator.js';
 
 /**

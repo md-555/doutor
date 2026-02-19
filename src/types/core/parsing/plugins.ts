@@ -83,7 +83,7 @@ export interface ParserOptions {
   allowReturnOutsideFunction?: boolean;
 }
 export interface BabelFileExtra extends BabelFile {
-  doutorExtra?: {
+  senseiExtra?: {
     lang: string;
     rawAst: RawAst;
     metadata?: ParserMetadata;

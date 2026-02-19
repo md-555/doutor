@@ -6,9 +6,11 @@
 
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+
 import { config } from '@core/config/config.js';
 import { CliExportersMensagens } from '@core/messages/cli/cli-exporters-messages.js';
 import { log } from '@core/messages/index.js';
+
 import type { GuardianBaseline, GuardianExportOptions, GuardianExportResult } from '@';
 
 // Re-export para compatibilidade
@@ -66,7 +68,7 @@ async function gerarRelatorioMarkdown(caminho: string, options: GuardianExportOp
   lines.push('# Relatório Guardian - Verificação de Integridade');
   lines.push('');
   lines.push(`**Gerado em:** ${new Date().toISOString()}`);
-  lines.push(`**Comando:** \`doutor guardian\``);
+  lines.push(`**Comando:** \`sensei guardian\``);
   lines.push('');
 
   // Status
@@ -173,7 +175,7 @@ export async function exportarRelatoriosGuardian(options: GuardianExportOptions)
 
     // Gerar timestamp único para os arquivos
     const ts = new Date().toISOString().replace(/[:.]/g, '-');
-    const nomeBase = `doutor-guardian-${ts}`;
+    const nomeBase = `sensei-guardian-${ts}`;
 
     // Gerar relatório Markdown
     const caminhoMd = path.join(dir, `${nomeBase}.md`);

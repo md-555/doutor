@@ -109,8 +109,8 @@ jobs:
       - name: Create Release Archive
         run: |
           cd release
-          tar -czvf ../doutor-${{ needs.validate.outputs.version }}.tar.gz .
-          zip -r ../doutor-${{ needs.validate.outputs.version }}.zip .
+          tar -czvf ../sensei-${{ needs.validate.outputs.version }}.tar.gz .
+          zip -r ../sensei-${{ needs.validate.outputs.version }}.zip .
 
       - name: Extract Changelog Section
         id: changelog
@@ -130,12 +130,12 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ needs.validate.outputs.version }}
-          name: Doutor v${{ needs.validate.outputs.version }}
+          name: Sensei v${{ needs.validate.outputs.version }}
           body: ${{ steps.changelog.outputs.content }}
           draft: false
           prerelease: ${{ inputs.prerelease || false }}
           files: |
-            doutor-${{ needs.validate.outputs.version }}.tar.gz
-            doutor-${{ needs.validate.outputs.version }}.zip
+            sensei-${{ needs.validate.outputs.version }}.tar.gz
+            sensei-${{ needs.validate.outputs.version }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

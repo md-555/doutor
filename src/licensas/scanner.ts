@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: MIT
 import path from 'node:path';
+
 import { exists, findLicenseFile, readPackageJsonSync } from './fs-utils.js';
 import type { ScanOptions, ScanResult } from './licensas.js';
 import { normalizeLicense } from './normalizer.js';
+
 export async function scan({
   root = process.cwd(),
   includeDev = false

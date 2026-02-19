@@ -1,11 +1,11 @@
-# 📚 Guia Completo de Comandos do Doutor
+# 📚 Guia Completo de Comandos do Sensei
 
-> Proveniência e Autoria: Este documento integra o projeto Doutor (licença MIT).
+> Proveniência e Autoria: Este documento integra o projeto Sensei (licença MIT).
 > Última atualização: 15 de janeiro de 2026
 
 ## 🎯 Visão Geral
 
-O Doutor oferece diversos comandos para análise, diagnóstico e manutenção de projetos. Este guia detalha cada comando, suas opções e casos de uso.
+O Sensei oferece diversos comandos para análise, diagnóstico e manutenção de projetos. Este guia detalha cada comando, suas opções e casos de uso.
 
 **Requisitos:** Node.js >=25.0.0
 
@@ -33,10 +33,10 @@ Comando principal para análise completa do projeto.
 ### Uso Básico
 
 ```bash
-doutor diagnosticar
+sensei diagnosticar
 ```
 
-Durante a execução, o Doutor exibe um indicador visual “🔎 Diagnóstico em execução...” para sinalizar processamento.
+Durante a execução, o Sensei exibe um indicador visual “🔎 Diagnóstico em execução...” para sinalizar processamento.
 
 ### Opções Principais
 
@@ -44,96 +44,96 @@ Durante a execução, o Doutor exibe um indicador visual “🔎 Diagnóstico em
 
 ```bash
 # Modo detalhado (mais informações)
-doutor diagnosticar --full
+sensei diagnosticar --full
 
 # Modo compacto (padrão): consolida progresso e mostra o essencial
-doutor diagnosticar --compact
+sensei diagnosticar --compact
 
 # Modo executivo: apenas problemas críticos/alta prioridade
-doutor diagnosticar --executive
+sensei diagnosticar --executive
 
 # Apenas varredura (não prepara AST, sem análise completa)
-doutor diagnosticar --scan-only
+sensei diagnosticar --scan-only
 ```
 
 #### Formatos de Saída
 
 ```bash
 # Saída JSON para ferramentas/automação
-doutor diagnosticar --json
+sensei diagnosticar --json
 
 # Exportar resumo/manifest
-doutor diagnosticar --export
+sensei diagnosticar --export
 
 # Exportar dump completo (fragmentado em shards)
-doutor diagnosticar --export-full
+sensei diagnosticar --export-full
 
 # JSON ASCII (compat legada)
-doutor diagnosticar --json-ascii
+sensei diagnosticar --json-ascii
 ```
 
 #### Filtros
 
 ```bash
 # Incluir padrões
-doutor diagnosticar --include "src/**" --include "scripts/**"
+sensei diagnosticar --include "src/**" --include "scripts/**"
 
 # Excluir padrões
-doutor diagnosticar --exclude "**/*.test.*" --exclude "**/__tests__/**"
+sensei diagnosticar --exclude "**/*.test.*" --exclude "**/__tests__/**"
 
 # Excluir testes rapidamente
-doutor diagnosticar --exclude-tests
+sensei diagnosticar --exclude-tests
 ```
 
 #### Auto-Fix
 
 ```bash
 # Ativar auto-fix
-doutor diagnosticar --auto-fix
+sensei diagnosticar --auto-fix
 
 # Modo conservador / agressivo / equilibrado
-doutor diagnosticar --auto-fix-mode conservative
-doutor diagnosticar --auto-fix-mode aggressive
-doutor diagnosticar --auto-fix-mode balanced
+sensei diagnosticar --auto-fix-mode conservative
+sensei diagnosticar --auto-fix-mode aggressive
+sensei diagnosticar --auto-fix-mode balanced
 
 # Atalhos
-doutor diagnosticar --fix            # alias de --auto-fix
-doutor diagnosticar --fix-safe       # alias de --auto-fix --auto-fix-mode conservative
+sensei diagnosticar --fix            # alias de --auto-fix
+sensei diagnosticar --fix-safe       # alias de --auto-fix --auto-fix-mode conservative
 
 # Dry-run (preview sem modificar)
-DOUTOR_ALLOW_MUTATE_FS=1 doutor diagnosticar --auto-fix --dry-run
+SENSEI_ALLOW_MUTATE_FS=1 sensei diagnosticar --auto-fix --dry-run
 ```
 
 #### Timeout e Performance
 
 ```bash
 # Modo rápido (menos checks)
-doutor diagnosticar --fast
+sensei diagnosticar --fast
 
 # Confiar no compilador (reduz falsos positivos comuns)
-doutor diagnosticar --trust-compiler
+sensei diagnosticar --trust-compiler
 
 # Verificar ciclos com heurística extra
-doutor diagnosticar --verify-cycles
+sensei diagnosticar --verify-cycles
 
 # Ajustes de timeout via ambiente (por analista)
-DOUTOR_ANALISE_TIMEOUT_POR_ANALISTA_MS=60000 doutor diagnosticar
+SENSEI_ANALISE_TIMEOUT_POR_ANALISTA_MS=60000 sensei diagnosticar
 ```
 
 ### Exemplos de Uso
 
 ```bash
 # Padrão compacto com resumo útil
-doutor diagnosticar --compact
+sensei diagnosticar --compact
 
 # Detalhado (inclui amostra maior e blocos completos)
-doutor diagnosticar --full
+sensei diagnosticar --full
 
 # Para CI/CD estruturado
-doutor diagnosticar --json --export
+sensei diagnosticar --json --export
 
 # Correção automática segura
-DOUTOR_ALLOW_MUTATE_FS=1 doutor diagnosticar --fix-safe --dry-run
+SENSEI_ALLOW_MUTATE_FS=1 sensei diagnosticar --fix-safe --dry-run
 ```
 
 ---
@@ -146,26 +146,26 @@ Verificação de integridade dos arquivos via hashes.
 
 ```bash
 # Criar baseline inicial
-doutor guardian
+sensei guardian
 
 # Verificar alterações
-doutor guardian --diff
+sensei guardian --diff
 ```
 
 ### Opções
 
 ```bash
 # Saída JSON
-doutor guardian --json
+sensei guardian --json
 
 # Modo verbose
-doutor guardian --verbose
+sensei guardian --verbose
 
 # Aceitar alterações como novo baseline
-doutor guardian --accept
+sensei guardian --accept
 
 # Forçar recriação do baseline
-doutor guardian --force
+sensei guardian --force
 ```
 
 ### Status de Retorno
@@ -180,13 +180,13 @@ doutor guardian --force
 
 ```bash
 # Verificação rápida no CI
-doutor guardian --diff --json
+sensei guardian --diff --json
 
 # Criar baseline após mudanças válidas
-doutor guardian --accept
+sensei guardian --accept
 
 # Debug detalhado
-doutor guardian --diff --verbose
+sensei guardian --diff --verbose
 ```
 
 ---
@@ -199,36 +199,36 @@ Remoção segura de arquivos órfãos (não referenciados).
 
 ```bash
 # Dry-run (preview sem remover)
-doutor podar --dry-run
+sensei podar --dry-run
 
 # Remoção efetiva
-doutor podar
+sensei podar
 ```
 
 ### Opções
 
 ```bash
 # Modo interativo (confirma cada arquivo)
-doutor podar --interactive
+sensei podar --interactive
 
 # Saída JSON
-doutor podar --json
+sensei podar --json
 
 # Verbose (mostrar análise detalhada)
-doutor podar --verbose
+sensei podar --verbose
 ```
 
 ### Exemplos
 
 ```bash
 # Análise de arquivos órfãos
-doutor podar --dry-run --verbose
+sensei podar --dry-run --verbose
 
 # Limpeza automática
-doutor podar --json
+sensei podar --json
 
 # Limpeza com confirmação
-doutor podar --interactive
+sensei podar --interactive
 ```
 
 ---
@@ -241,36 +241,36 @@ Visualização de métricas e histórico agregado.
 
 ```bash
 # Exibir métricas atuais
-doutor metricas
+sensei metricas
 
 # Formato JSON
-doutor metricas --json
+sensei metricas --json
 ```
 
 ### Opções
 
 ```bash
 # Exibir histórico
-doutor metricas --history
+sensei metricas --history
 
 # Comparar com período anterior
-doutor metricas --compare
+sensei metricas --compare
 
 # Exportar para arquivo
-doutor metricas --export metricas.json
+sensei metricas --export metricas.json
 ```
 
 ### Exemplos
 
 ```bash
 # Dashboard de métricas
-doutor metricas --verbose
+sensei metricas --verbose
 
 # Análise de tendências
-doutor metricas --history --json
+sensei metricas --history --json
 
 # Comparação temporal
-doutor metricas --compare --full
+sensei metricas --compare --full
 ```
 
 ---
@@ -283,37 +283,37 @@ Análise de performance e comparação de snapshots.
 
 ```bash
 # Criar snapshot de performance
-doutor perf snapshot
+sensei perf snapshot
 
 # Comparar snapshots
-doutor perf compare
+sensei perf compare
 ```
 
 ### Opções
 
 ```bash
 # Comparar com baseline
-doutor perf compare --baseline
+sensei perf compare --baseline
 
 # Saída JSON
-doutor perf --json
+sensei perf --json
 
 # Limites personalizados
-doutor perf compare --threshold 10
+sensei perf compare --threshold 10
 ```
 
 ### Exemplos
 
 ```bash
 # Benchmark antes de mudanças
-doutor perf snapshot --name "antes-refactor"
+sensei perf snapshot --name "antes-refactor"
 
 # Benchmark depois e comparar
-doutor perf snapshot --name "depois-refactor"
-doutor perf compare antes-refactor depois-refactor
+sensei perf snapshot --name "depois-refactor"
+sensei perf compare antes-refactor depois-refactor
 
 # Análise de regressão no CI
-doutor perf compare --baseline --json
+sensei perf compare --baseline --json
 ```
 
 ---
@@ -326,36 +326,36 @@ Listar e documentar analistas disponíveis.
 
 ```bash
 # Listar todos os analistas
-doutor analistas
+sensei analistas
 
 # Formato JSON
-doutor analistas --json
+sensei analistas --json
 ```
 
 ### Opções
 
 ```bash
 # Gerar documentação
-doutor analistas --doc docs/ANALISTAS.md
+sensei analistas --doc docs/ANALISTAS.md
 
 # Mostrar apenas ativos
-doutor analistas --active-only
+sensei analistas --active-only
 
 # Incluir metadados
-doutor analistas --full
+sensei analistas --full
 ```
 
 ### Exemplos
 
 ```bash
 # Catálogo completo
-doutor analistas --full --json
+sensei analistas --full --json
 
 # Documentação automática
-doutor analistas --doc docs/ANALISTAS-GERADO.md
+sensei analistas --doc docs/ANALISTAS-GERADO.md
 
 # Debug de analistas
-doutor diagnosticar --listar-analistas
+sensei diagnosticar --listar-analistas
 ```
 
 ---
@@ -368,40 +368,40 @@ Correção interativa de tipos inseguros (any/unknown).
 
 ```bash
 # Modo interativo
-doutor fix-types --interactive
+sensei fix-types --interactive
 
 # Auto-fix conservador
-doutor fix-types --auto-fix --auto-fix-mode conservative
+sensei fix-types --auto-fix --auto-fix-mode conservative
 ```
 
 ### Opções
 
 ```bash
 # Mostrar diff antes de aplicar
-doutor fix-types --show-diff
+sensei fix-types --show-diff
 
 # Dry-run
-doutor fix-types --dry-run
+sensei fix-types --dry-run
 
 # Validar sintaxe após correção
-doutor fix-types --validate-only
+sensei fix-types --validate-only
 
 # Focar em tipo específico
-doutor fix-types --tipo any
-doutor fix-types --tipo unknown
+sensei fix-types --tipo any
+sensei fix-types --tipo unknown
 ```
 
 ### Exemplos
 
 ```bash
 # Correção segura e interativa
-doutor fix-types --interactive --show-diff
+sensei fix-types --interactive --show-diff
 
 # Correção automática de 'any'
-doutor fix-types --tipo any --auto-fix --dry-run
+sensei fix-types --tipo any --auto-fix --dry-run
 
 # Validação pós-correção
-doutor fix-types --validate-only
+sensei fix-types --validate-only
 ```
 
 ---
@@ -414,44 +414,44 @@ Reorganização de estrutura do projeto com plano de moves.
 
 ```bash
 # Ver plano sem aplicar
-doutor reestruturar --somente-plano
+sensei reestruturar --somente-plano
 
 # Aplicar reestruturação
-doutor reestruturar --auto
+sensei reestruturar --auto
 ```
 
 ### Opções
 
 ```bash
 # Organização por domains
-doutor reestruturar --domains
+sensei reestruturar --domains
 
 # Organização flat
-doutor reestruturar --flat
+sensei reestruturar --flat
 
 # Usar preset específico
-doutor reestruturar --preset doutor
-doutor reestruturar --preset node-community
-doutor reestruturar --preset ts-lib
+sensei reestruturar --preset sensei
+sensei reestruturar --preset node-community
+sensei reestruturar --preset ts-lib
 
 # Override de categoria
-doutor reestruturar --categoria controller=handlers
+sensei reestruturar --categoria controller=handlers
 
 # Filtros
-doutor reestruturar --include "src/**" --exclude "**/*.test.*"
+sensei reestruturar --include "src/**" --exclude "**/*.test.*"
 ```
 
 ### Exemplos
 
 ```bash
 # Preview de reestruturação
-doutor reestruturar --somente-plano --verbose
+sensei reestruturar --somente-plano --verbose
 
 # Aplicar com preset
-doutor reestruturar --preset doutor --auto
+sensei reestruturar --preset sensei --auto
 
 # Reestruturar apenas uma pasta
-doutor reestruturar --include "src/old-module/**" --auto
+sensei reestruturar --include "src/old-module/**" --auto
 ```
 
 ---
@@ -464,23 +464,23 @@ Aplica formatação de código com Prettier ou motor interno.
 
 ```bash
 # Verificar formatação
-doutor formatar --check
+sensei formatar --check
 
 # Aplicar formatação
-doutor formatar --write
+sensei formatar --write
 ```
 
 ### Opções
 
 ```bash
 # Escolher motor
-doutor formatar --engine auto      # padrão (tenta Prettier, fallback interno)
-doutor formatar --engine prettier  # força Prettier
-doutor formatar --engine interno   # usa motor interno
+sensei formatar --engine auto      # padrão (tenta Prettier, fallback interno)
+sensei formatar --engine prettier  # força Prettier
+sensei formatar --engine interno   # usa motor interno
 
 # Filtros de arquivos
-doutor formatar --include "src/**/*.ts"
-doutor formatar --exclude "**/*.generated.*"
+sensei formatar --include "src/**/*.ts"
+sensei formatar --exclude "**/*.generated.*"
 ```
 
 ### Arquivos Suportados
@@ -496,13 +496,13 @@ doutor formatar --exclude "**/*.generated.*"
 
 ```bash
 # Verificar tudo antes de commit
-doutor formatar --check
+sensei formatar --check
 
 # Formatar apenas arquivos TypeScript
-doutor formatar --write --include "**/*.ts"
+sensei formatar --write --include "**/*.ts"
 
 # CI: verificar formatação
-doutor formatar --check || exit 1
+sensei formatar --check || exit 1
 ```
 
 ---
@@ -515,69 +515,69 @@ Otimiza arquivos SVG usando otimizador interno (compatível com svgo).
 
 ```bash
 # Preview sem modificar
-doutor otimizar-svg --dry
+sensei otimizar-svg --dry
 
 # Aplicar otimizações
-doutor otimizar-svg --write
+sensei otimizar-svg --write
 ```
 
 ### Opções
 
 ```bash
 # Diretório específico
-doutor otimizar-svg --dir assets/icons
+sensei otimizar-svg --dir assets/icons
 
 # Filtros
-doutor otimizar-svg --include "**/*.svg"
-doutor otimizar-svg --exclude "**/node_modules/**"
+sensei otimizar-svg --include "**/*.svg"
+sensei otimizar-svg --exclude "**/node_modules/**"
 ```
 
 ### Exemplos
 
 ```bash
 # Analisar potencial de otimização
-doutor otimizar-svg --dry --verbose
+sensei otimizar-svg --dry --verbose
 
 # Otimizar pasta de ícones
-doutor otimizar-svg --dir src/assets/icons --write
+sensei otimizar-svg --dir src/assets/icons --write
 
 # Otimizar SVGs específicos
-doutor otimizar-svg --include "public/**/*.svg" --write
+sensei otimizar-svg --include "public/**/*.svg" --write
 ```
 
 ---
 
 ## atualizar
 
-Atualiza o Doutor com verificação de integridade prévia via Guardian.
+Atualiza o Sensei com verificação de integridade prévia via Guardian.
 
 ### Uso Básico
 
 ```bash
 # Atualização local
-doutor atualizar
+sensei atualizar
 
 # Atualização global
-doutor atualizar --global
+sensei atualizar --global
 ```
 
 ### Fluxo de Execução
 
 1. Executa análise do projeto
 2. Verifica integridade via Guardian
-3. Se OK, executa `npm install doutor@latest`
+3. Se OK, executa `npm install sensei@latest`
 4. Reporta sucesso/falha
 
 ### Exemplos
 
 ```bash
 # Atualização segura
-doutor atualizar
+sensei atualizar
 
 # Se Guardian detectar alterações, primeiro aceite:
-doutor guardian --diff
-doutor guardian --accept-baseline
-doutor atualizar
+sensei guardian --diff
+sensei guardian --accept-baseline
+sensei atualizar
 ```
 
 ---
@@ -590,49 +590,49 @@ Gerencia o mapa de reversão para operações de reestruturação.
 
 ```bash
 # Listar todos os moves registrados
-doutor reverter listar
+sensei reverter listar
 
 # Reverter arquivo específico
-doutor reverter arquivo <caminho>
+sensei reverter arquivo <caminho>
 
 # Reverter move por ID
-doutor reverter move <id>
+sensei reverter move <id>
 
 # Limpar histórico de reversão
-doutor reverter limpar
-doutor reverter limpar --force
+sensei reverter limpar
+sensei reverter limpar --force
 ```
 
 ### Exemplos
 
 ```bash
 # Ver histórico de moves
-doutor reverter listar
+sensei reverter listar
 
 # Reverter um arquivo movido
-doutor reverter arquivo src/new-location/file.ts
+sensei reverter arquivo src/new-location/file.ts
 
 # Reverter move específico
-doutor reverter move abc123def
+sensei reverter move abc123def
 
 # Limpar tudo (cuidado!)
-doutor reverter limpar --force
+sensei reverter limpar --force
 ```
 
 ---
 
 ## histórico
 
-Utilitários globais para gerenciar o histórico de interações do Doutor.
+Utilitários globais para gerenciar o histórico de interações do Sensei.
 
 ### Flags
 
 ```bash
-doutor --historico         # Exibe resumo do histórico
-doutor --limpar-historico  # Limpa o histórico persistido
+sensei --historico         # Exibe resumo do histórico
+sensei --limpar-historico  # Limpa o histórico persistido
 ```
 
-O histórico é persistido em `~/.doutor/history.json`. Cada execução do CLI registra os argumentos usados.
+O histórico é persistido em `~/.sensei/history.json`. Cada execução do CLI registra os argumentos usados.
 
 ## 🌍 Variáveis de Ambiente Globais
 
@@ -667,20 +667,20 @@ export PONTUACAO_FATOR_ESCALA=2.0
 
 ```bash
 # 1. Análise inicial
-doutor diagnosticar --verbose
+sensei diagnosticar --verbose
 
 # 2. Correção de tipos
-doutor fix-types --interactive
+sensei fix-types --interactive
 
 # 3. Verificação de integridade
-doutor guardian --diff
+sensei guardian --diff
 
 # 4. Limpeza de órfãos
-doutor podar --dry-run
-doutor podar
+sensei podar --dry-run
+sensei podar
 
 # 5. Análise final
-doutor diagnosticar --full --export relatorio-final.md
+sensei diagnosticar --full --export relatorio-final.md
 ```
 
 ### Workflow de CI/CD
@@ -688,36 +688,36 @@ doutor diagnosticar --full --export relatorio-final.md
 ```bash
 # 1. Build e análise
 npm run build
-doutor diagnosticar --json --silence > diagnostico.json
+sensei diagnosticar --json --silence > diagnostico.json
 
 # 2. Verificação de integridade
-doutor guardian --diff --json > guardian.json
+sensei guardian --diff --json > guardian.json
 
 # 3. Métricas
-doutor metricas --json > metricas.json
+sensei metricas --json > metricas.json
 
 # 4. Análise de performance
-doutor perf compare --baseline --json > perf.json
+sensei perf compare --baseline --json > perf.json
 ```
 
 ### Workflow de Refatoração
 
 ```bash
 # 1. Snapshot antes
-doutor perf snapshot --name "antes-refactor"
-doutor guardian
+sensei perf snapshot --name "antes-refactor"
+sensei guardian
 
 # 2. Fazer mudanças...
 
 # 3. Análise após mudanças
-doutor diagnosticar --full
-doutor guardian --diff
+sensei diagnosticar --full
+sensei guardian --diff
 
 # 4. Performance comparison
-doutor perf compare antes-refactor --json
+sensei perf compare antes-refactor --json
 
 # 5. Aceitar se OK
-doutor guardian --accept
+sensei guardian --accept
 ```
 
 ---
@@ -741,11 +741,11 @@ npm install -g .
 
 ```bash
 # Aumentar timeout
-doutor diagnosticar --timeout 120
+sensei diagnosticar --timeout 120
 
 # Via variável
-export DOUTOR_ANALISE_TIMEOUT_POR_ANALISTA_MS=120000
-doutor diagnosticar
+export SENSEI_ANALISE_TIMEOUT_POR_ANALISTA_MS=120000
+sensei diagnosticar
 ```
 
 ### Performance Lenta
@@ -753,10 +753,10 @@ doutor diagnosticar
 ```bash
 # Reduzir workers
 export WORKER_POOL_MAX_WORKERS=1
-doutor diagnosticar
+sensei diagnosticar
 
 # Restringir escopo
-doutor diagnosticar --include "src/**" --exclude "**/*.test.*"
+sensei diagnosticar --include "src/**" --exclude "**/*.test.*"
 ```
 
 ---
@@ -765,8 +765,8 @@ doutor diagnosticar --include "src/**" --exclude "**/*.test.*"
 
 - [README Principal](../README.md)
 - [Sistema de Type Safety](TYPE-SAFETY-SYSTEM.md)
-- [Filtros Include/Exclude](GUIA_FILTROS_DOUTOR.md)
-- [Configuração Local](CONFIGURAR-DOUTOR-LOCAL.md)
+- [Filtros Include/Exclude](GUIA_FILTROS_SENSEI.md)
+- [Configuração Local](CONFIGURAR-SENSEI-LOCAL.md)
 
 ---
 

@@ -35,9 +35,9 @@ export interface OpcoesProcessamentoFiltros {
 }
 
 /**
- * Flags globais aplicáveis em todos os comandos do Doutor
+ * Flags globais aplicáveis em todos os comandos do Sensei
  */
-export interface DoutorGlobalFlags {
+export interface SenseiGlobalFlags {
   silence?: boolean;
   verbose?: boolean;
   export?: boolean;

@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
-// @doutor-disable tipo-literal-inline-complexo
+// @sensei-disable tipo-literal-inline-complexo
 // Justificativa: tipos inline para opções de comando CLI são locais e não precisam de extração
 import path from 'node:path';
+
 import { ExitCode, sair } from '@cli/helpers/exit-codes.js';
 import { config } from '@core/config/config.js';
 import { formatMs } from '@core/config/format.js';
@@ -9,7 +10,9 @@ import { CliComandoMetricasMensagens } from '@core/messages/cli/cli-comando-metr
 import { ICONES_DIAGNOSTICO, log, logMetricas } from '@core/messages/index.js';
 import { lerEstado, salvarEstado } from '@shared/persistence/persistencia.js';
 import { Command } from 'commander';
+
 import type { MetricaExecucao } from '@';
+
 interface RegistroHistorico extends MetricaExecucao {
   timestamp: number;
 }

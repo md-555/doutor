@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 import { RelatorioMensagens } from '@core/messages/index.js';
 import { salvarEstado } from '@shared/persistence/persistencia.js';
+
 import type { OpcoesRelatorioPoda, Pendencia, PendenciaProcessavel } from '@';
+
 export async function gerarRelatorioPodaMarkdown(caminho: string, podados: Pendencia[], mantidos: Pendencia[], opcoes?: OpcoesRelatorioPoda): Promise<void> {
   const dataISO = new Date().toISOString();
   const totalPodados = podados.length;

@@ -23,12 +23,12 @@ export function getAvailablePlugins(): string[] {
 }
 
 /**
- * Configuração padrão de plugins para o Doutor
+ * Configuração padrão de plugins para o Sensei
  */
 export const PADRAO_PLUGIN_CONFIGURACAO = {
   enabled: ['core'],
   autoload: true,
-  registry: '@doutor/plugins'
+  registry: '@sensei/plugins'
 };
 
 /**

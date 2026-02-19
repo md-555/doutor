@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 // Gerador de relatórios: Markdown e JSON
 import { gerarHeaderRelatorio, gerarSecaoGuardian, gerarTabelaOcorrencias, gerarTabelaResumoTipos, RelatorioMensagens } from '@core/messages/index.js';
+
 import type { GeradorMarkdownOptions, Ocorrencia, ResultadoInquisicaoCompleto } from '@';
+
 export async function gerarRelatorioMarkdown(resultado: ResultadoInquisicaoCompleto, outputCaminho: string, modoBrief = false, options?: GeradorMarkdownOptions): Promise<void> {
   const {
     totalArquivos = 0,
@@ -98,7 +100,7 @@ export async function gerarRelatorioJson(resultado: ResultadoInquisicaoCompleto,
   } = await import('@core/schema/version.js');
 
   // Criar relatório versionado (mantemos metadados, mas salvamos os dados brutos para compatibilidade)
-  const relatorioVersionado = criarRelatorioComVersao(resultado, undefined, 'Relatório completo de diagnóstico do Doutor');
+  const relatorioVersionado = criarRelatorioComVersao(resultado, undefined, 'Relatório completo de diagnóstico do Sensei');
   const {
     salvarEstado
   } = await import('@shared/persistence/persistencia.js');

@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: MIT
 import { AnalystOrigens, AnalystTipos, CssInJsMensagens, SeverityNiveis } from '@core/messages/core/plugin-messages.js';
+
 import type { Ocorrencia } from '@';
 import { criarAnalista, criarOcorrencia } from '@';
-const disableEnv = process.env.DOUTOR_DISABLE_PLUGIN_CSS_IN_JS === '1';
+
+const disableEnv = process.env.SENSEI_DISABLE_PLUGIN_CSS_IN_JS === '1';
 type Msg = ReturnType<typeof criarOcorrencia>;
 function findLine(src: string, index = 0): number {
   return src.slice(0, index).split(/\n/).length;

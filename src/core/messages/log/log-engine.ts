@@ -8,7 +8,9 @@ import { config } from '@core/config/config.js';
 import { LogContextConfiguracao, LogMensagens } from '@core/messages/log/log-messages.js';
 import { ICONES_FEEDBACK } from '@core/messages/ui/icons.js';
 import { isJsonMode } from '@shared/helpers/json-mode.js';
+
 import type { FileMap, LogContext, LogData, LogLevel, LogTemplate, ProjetoMetricas } from '@';
+
 class LogEngineAdaptativo {
   private static instance: LogEngineAdaptativo;
   private contextoAtual: LogContext = 'medio';

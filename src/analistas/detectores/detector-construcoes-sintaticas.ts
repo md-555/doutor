@@ -3,7 +3,9 @@ import type { NodePath } from '@babel/traverse';
 import type { ArrowFunctionExpression, ClassDeclaration, FunctionDeclaration, ImportDeclaration, NewExpression, Node, TSEnumDeclaration, TSInterfaceDeclaration, TSTypeAliasDeclaration, VariableDeclaration } from '@babel/types';
 import { traverse } from '@core/config/traverse.js';
 import { DetectorConstrucoesSintaticasMensagens } from '@core/messages/analistas/detector-construcoes-sintaticas-messages.js';
+
 import { type Analista, type ConstrucaoSintatica, criarOcorrencia, type Ocorrencia } from '@';
+
 export const analistaConstrucoesSintaticas: Analista = {
   nome: 'construcoes-sintaticas',
   categoria: 'estrutura',

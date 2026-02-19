@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 /**
- * Tipos para o conselheiro doutoral
+ * Tipos para o conselheiro senseial
  */
 
 /**
- * Contexto para emissão de conselhos doutor
+ * Contexto para emissão de conselhos sensei
  */
-export interface ConselhoContextoDoutoral {
+export interface ConselhoContextoSenseial {
   hora?: number;
   arquivosParaCorrigir?: number;
   arquivosParaPodar?: number;

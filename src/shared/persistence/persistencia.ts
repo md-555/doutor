@@ -1,11 +1,14 @@
 // SPDX-License-Identifier: MIT
-// @doutor-disable tipo-inseguro-unknown
+// @sensei-disable tipo-inseguro-unknown
 // Justificativa: unknown é usado para serialização genérica que aceita qualquer entrada
 import { promises as fs } from 'node:fs';
 import * as fsCb from 'node:fs';
 import path from 'node:path';
+
 import { ExcecoesMensagens } from '@core/messages/core/excecoes-messages.js';
+
 import type { GlobalComVitest, SalvarBinarioFn, SalvarEstadoFn, VitestSpyWrapper } from '@';
+
 const RAIZ = process.cwd();
 const IS_TEST = (process.env.VITEST ?? '') !== '';
 function safeGet<T extends object, K extends PropertyKey>(obj: T, key: K): unknown {
@@ -19,7 +22,7 @@ function safeGet<T extends object, K extends PropertyKey>(obj: T, key: K): unkno
 function assertInsideRoot(caminho: string): void {
   // Permite fora da raiz explicitamente em testes ou quando habilitado
   // Qualquer valor truthy em VITEST deve liberar a restrição (Vitest define VITEST="true")
-  if ((process.env.VITEST ?? '') !== '' || process.env.DOUTOR_ALLOW_OUTSIDE_FS === '1') return;
+  if ((process.env.VITEST ?? '') !== '' || process.env.SENSEI_ALLOW_OUTSIDE_FS === '1') return;
   const resolved = path.resolve(caminho);
   if (!resolved.startsWith(path.resolve(RAIZ))) {
     throw new Error(ExcecoesMensagens.persistenciaNegadaForaRaizProjeto(caminho));
@@ -72,7 +75,7 @@ async function salvarEstadoImpl<T = unknown>(caminho: string, dados: T): Promise
   }).catch(() => {});
   const isString = typeof dados === 'string';
   const payload = isString ? dados as string : stableStringify(dados);
-  const tempArquivoCaminho = path.join(dir, `.tmp-bin-${Date.now()}-${Math.random().toString(16).slice(2)}.doutor`);
+  const tempArquivoCaminho = path.join(dir, `.tmp-bin-${Date.now()}-${Math.random().toString(16).slice(2)}.sensei`);
   // Escreve diretamente com fs.promises para manter compat em ambientes mockados
   await writeFileSafe(tempArquivoCaminho, payload, {
     encoding: 'utf-8',

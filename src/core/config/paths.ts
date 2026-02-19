@@ -5,7 +5,7 @@ export const SRC_RAIZ = 'src';
 export const SRC_GLOB = 'src/**';
 
 // Diretórios sempre tratados como meta (independente de SRC)
-export const META_DIRS = ['.github', '.vscode', '.doutor'];
+export const META_DIRS = ['.github', '.vscode', '.sensei'];
 
 // Normaliza para separador POSIX
 

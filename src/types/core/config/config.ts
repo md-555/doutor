@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 /**
- * Tipos para configuração do Doutor
+ * Tipos para configuração do Sensei
  * Consolidação de: src/core/config/auto/*, src/core/config/*.ts
  */
 

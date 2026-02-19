@@ -5,7 +5,9 @@
  */
 
 import { formatMs } from '@core/config/format.js';
+
 import type { GuardianInfo, MetadadosRelatorioEstendido, ProblemaAgrupado } from '@';
+
 import { RelatorioMensagens } from './relatorio-messages.js';
 
 // Re-exporta o tipo para compatibilidade
@@ -196,7 +198,7 @@ export function gerarFooterRelatorio(timestampISO?: string): string[] {
   const lines: string[] = [];
   lines.push(RelatorioMensagens.comum.separadores.secao);
   lines.push('');
-  lines.push('_Gerado por Doutor CLI_');
+  lines.push('_Gerado por Sensei CLI_');
   if (timestampISO) {
     lines.push(`_${timestampISO}_`);
   }

@@ -4,8 +4,10 @@ import type { ArrowFunctionExpression, ClassMethod, FunctionDeclaration, Functio
 import { traverse } from '@core/config/traverse.js';
 import { DetectorAgregadosMensagens } from '@core/messages/analistas/detector-agregados-messages.js';
 import { createHash } from 'crypto';
+
 import type { Analista, BlocoFuncao, ContextoExecucao, DuplicacaoEncontrada, Ocorrencia } from '@';
 import { criarOcorrencia } from '@';
+
 export const analistaDuplicacoes: Analista = {
   nome: 'detector-duplicacoes',
   categoria: 'estrutura',

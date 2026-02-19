@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
-// @doutor-disable tipo-literal-inline-complexo
+// @sensei-disable tipo-literal-inline-complexo
 // Justificativa: tipos locais para arquétipos personalizados
 /**
- * Sistema de Arquétipos Personalizados do Doutor
+ * Sistema de Arquétipos Personalizados do Sensei
  *
  * Permite que usuários criem arquétipos personalizados para seus projetos,
  * mantendo compatibilidade com arquétipos oficiais e oferecendo sugestões
@@ -11,26 +11,28 @@
 
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+
 import { ARQUETIPOS } from '@analistas/estrategistas/arquetipos-defs.js';
 // NOTA: parseFileAST ainda não foi implementado no módulo de parsing
 // import { parseFileAST } from '@core/parsing/parser.js';
 import { log } from '@core/messages/index.js';
-import { DOUTOR_ARQUIVOS } from '@core/registry/paths.js';
+import { SENSEI_ARQUIVOS } from '@core/registry/paths.js';
 import { lerEstado, salvarEstado } from '@shared/persistence/persistencia.js';
+
 import type { ArquetipoEstruturaDef, ArquetipoPersonalizado } from '@';
 
 // Nome do arquivo legado (para compatibilidade)
-const ARQUETIPO_PERSONALIZADO_FILENAME = 'doutor.repo.arquetipo.json';
+const ARQUETIPO_PERSONALIZADO_FILENAME = 'sensei.repo.arquetipo.json';
 
 /**
  * Carrega o arquétipo personalizado do projeto atual
- * Tenta primeiro o novo caminho (.doutor/estrutura.arquetipo.json),
- * depois o legado (raiz/doutor.repo.arquetipo.json)
+ * Tenta primeiro o novo caminho (.sensei/estrutura.arquetipo.json),
+ * depois o legado (raiz/sensei.repo.arquetipo.json)
  */
 
 export async function carregarArquetipoPersonalizado(baseDir: string = process.cwd()): Promise<ArquetipoPersonalizado | null> {
   // Tentar novo caminho primeiro
-  const novoCaminho = DOUTOR_ARQUIVOS.ESTRUTURA_ARQUETIPO;
+  const novoCaminho = SENSEI_ARQUIVOS.ESTRUTURA_ARQUETIPO;
   const caminhoLegado = path.join(baseDir, ARQUETIPO_PERSONALIZADO_FILENAME);
   try {
     // Tenta novo caminho
@@ -62,7 +64,7 @@ export async function carregarArquetipoPersonalizado(baseDir: string = process.c
 }
 /**
  * Salva o arquétipo personalizado do projeto atual
- * Usa o novo caminho (.doutor/estrutura.arquetipo.json)
+ * Usa o novo caminho (.sensei/estrutura.arquetipo.json)
  */
 export async function salvarArquetipoPersonalizado(arquetipo: Omit<ArquetipoPersonalizado, 'metadata'>, _baseDir: string = process.cwd()): Promise<void> {
   const arquetipoCompleto: ArquetipoPersonalizado = {
@@ -75,12 +77,12 @@ export async function salvarArquetipoPersonalizado(arquetipo: Omit<ArquetipoPers
   };
 
   // Usar novo caminho centralizado
-  const novoCaminho = DOUTOR_ARQUIVOS.ESTRUTURA_ARQUETIPO;
+  const novoCaminho = SENSEI_ARQUIVOS.ESTRUTURA_ARQUETIPO;
 
-  // Garantir que o diretório .doutor existe
-  const doutorDir = path.dirname(novoCaminho);
+  // Garantir que o diretório .sensei existe
+  const senseiDir = path.dirname(novoCaminho);
   try {
-    await fs.mkdir(doutorDir, {
+    await fs.mkdir(senseiDir, {
       recursive: true
     });
   } catch {
@@ -98,7 +100,7 @@ export async function salvarArquetipoPersonalizado(arquetipo: Omit<ArquetipoPers
 export async function existeArquetipoPersonalizado(baseDir: string = process.cwd()): Promise<boolean> {
   // Verificar novo caminho primeiro
   try {
-    await fs.access(DOUTOR_ARQUIVOS.ESTRUTURA_ARQUETIPO);
+    await fs.access(SENSEI_ARQUIVOS.ESTRUTURA_ARQUETIPO);
     return true;
   } catch {
     // Tentar caminho legado
@@ -132,7 +134,7 @@ export function gerarSugestaoArquetipoPersonalizado(projetoDesconhecido: {
   const sugestao = `
 🌟 Projeto personalizado detectado: "${projetoDesconhecido.nome}"
 
-O Doutor identificou uma estrutura de projeto que não corresponde a arquétipos oficiais,
+O Sensei identificou uma estrutura de projeto que não corresponde a arquétipos oficiais,
 mas você pode criar um arquétipo personalizado para receber sugestões otimizadas!
 
 📁 Estrutura detectada:
@@ -143,10 +145,10 @@ ${projetoDesconhecido.arquivosRaiz.slice(0, 5).map(file => `  • ${file}`).join
 ${projetoDesconhecido.arquivosRaiz.length > 5 ? `  • ... e mais ${projetoDesconhecido.arquivosRaiz.length - 5} arquivos` : ''}
 
 💡 Para criar seu arquétipo personalizado, execute:
-   doutor diagnosticar --criar-arquetipo
+   sensei diagnosticar --criar-arquetipo
 
-Isso criará um arquivo 'doutor.repo.arquetipo.json' com base na estrutura atual,
-que o Doutor usará para oferecer sugestões personalizadas mantendo as melhores práticas.
+Isso criará um arquivo 'sensei.repo.arquetipo.json' com base na estrutura atual,
+que o Sensei usará para oferecer sugestões personalizadas mantendo as melhores práticas.
 `;
   return sugestao;
 }

@@ -10,7 +10,9 @@ import { iniciarInquisicao } from '@core/execution/inquisidor.js';
 import { CliComandoPodarMensagens } from '@core/messages/cli/cli-comando-podar-messages.js';
 import { ICONES_DIAGNOSTICO, log, logSistema } from '@core/messages/index.js';
 import { Command } from 'commander';
+
 import type { ArquivoFantasma, ResultadoPoda } from '@';
+
 export function comandoPodar(aplicarFlagsGlobais: (opts: Record<string, unknown>) => void): Command {
   return new Command('podar').description('Remove arquivos órfãos e lixo do repositório.').option('-f, --force', 'Remove arquivos sem confirmação (CUIDADO!)', false).option('--include <padrao>', 'Glob pattern a INCLUIR (pode repetir a flag ou usar vírgulas / espaços para múltiplos)', (val: string, prev: string[]) => {
     prev.push(val);

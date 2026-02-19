@@ -2,6 +2,7 @@
 import { execFile as _execFile } from 'node:child_process';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
+
 export interface DisclaimerOptions {
   root?: string;
   disclaimerPath?: string;
@@ -46,7 +47,7 @@ async function listMarkdown(root: string): Promise<string[]> {
       for (const e of entries) {
         const p = path.join(dir, e.name);
         if (e.isDirectory()) {
-          if (/^(node_modules|dist|\.git|pre-public|preview-doutor|coverage|relatorios|\.doutor)$/i.test(e.name)) continue;
+          if (/^(node_modules|dist|\.git|pre-public|preview-sensei|coverage|relatorios|\.sensei)$/i.test(e.name)) continue;
           out.push(...(await walk(p)));
         } else if (/\.md$/i.test(e.name)) {
           out.push(path.relative(root, p));
@@ -95,7 +96,7 @@ export async function verifyDisclaimer({
 }: Pick<DisclaimerOptions, 'root' | 'disclaimerPath'> = {}): Promise<{
   missing: string[];
 }> {
-  const files = (await listMarkdown(root)).filter(f => f !== disclaimerPath && !f.startsWith('pre-public/') && !f.startsWith('preview-doutor/')).filter(f => !f.startsWith('.abandonados/') && !f.startsWith('.deprecados/') && !f.startsWith('coverage/') && !f.startsWith('relatorios/'));
+  const files = (await listMarkdown(root)).filter(f => f !== disclaimerPath && !f.startsWith('pre-public/') && !f.startsWith('preview-sensei/')).filter(f => !f.startsWith('.abandonados/') && !f.startsWith('.deprecados/') && !f.startsWith('coverage/') && !f.startsWith('relatorios/'));
   const missing: string[] = [];
   for (const rel of files) {
     const abs = path.join(root, rel);

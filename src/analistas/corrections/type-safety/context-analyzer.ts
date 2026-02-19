@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// @doutor-disable problema-documentacao
+// @sensei-disable problema-documentacao
 // Justificativa: funções estão tipadas, detector está identificando falsos positivos
 /**
  * Analisador de contexto para Type Safety Auto-Fix
@@ -19,6 +19,7 @@
  * Retorna: 'legitimo' | 'melhoravel' | 'corrigir' + confiança (0-100)
  */
 import type { CategorizacaoUnknown } from '@';
+
 export function isInString(code: string, position: number): boolean {
   // Normaliza line endings para \n (Windows compatibility)
   const normalizedCodigo = code.replace(/\r\n/g, '\n');

@@ -1,19 +1,19 @@
-> **Proveniência e Autoria**: Este documento integra o projeto Doutor (licença MIT).
+> **Proveniência e Autoria**: Este documento integra o projeto Sensei (licença MIT).
 > Nada aqui implica cessão de direitos morais/autorais.
 > Conteúdos de terceiros não licenciados de forma compatível não devem ser incluídos.
 > Referências a materiais externos devem ser linkadas e reescritas com palavras próprias.
 
 # Política de Segurança
 
-A segurança é uma prioridade máxima para o projeto Doutor. Valorizamos a comunidade de usuários e colaboradores que ajudam a identificar e corrigir vulnerabilidades. Este documento descreve como reportar vulnerabilidades de segurança de forma responsável.
+A segurança é uma prioridade máxima para o projeto Sensei. Valorizamos a comunidade de usuários e colaboradores que ajudam a identificar e corrigir vulnerabilidades. Este documento descreve como reportar vulnerabilidades de segurança de forma responsável.
 
 ## Relatando Vulnerabilidades
 
-Se você descobrir uma vulnerabilidade de segurança no Doutor, por favor, reporte-a de forma privada para evitar exposição pública antes da correção. Não crie issues públicas ou divulgue detalhes da vulnerabilidade.
+Se você descobrir uma vulnerabilidade de segurança no Sensei, por favor, reporte-a de forma privada para evitar exposição pública antes da correção. Não crie issues públicas ou divulgue detalhes da vulnerabilidade.
 
 ### Métodos de Relato:
 
-- **GitHub Security Advisories**: Use o [formulário de advisories do GitHub](https://github.com/md-555/doutor/security/advisories/new) para relatar vulnerabilidades de forma privada.
+- **GitHub Security Advisories**: Use o [formulário de advisories do GitHub](https://github.com/md-555/sensei/security/advisories/new) para relatar vulnerabilidades de forma privada.
 - **Issues Privadas**: Abra uma issue no repositório com o rótulo `security` e marque como privada, se possível. Evite incluir detalhes sensíveis no título ou descrição inicial.
 - **E-mail**: Contate o mantenedor diretamente via e-mail (consulte o perfil do GitHub de [@ossmoralus](https://github.com/md-555) para obter o e-mail).
 
@@ -46,6 +46,6 @@ Apenas a versão mais recente e as versões ativas de manutenção recebem corre
 Para questões relacionadas à segurança, entre em contato:
 
 - **Mantenedor**: Italo C Lopes ([@md-555](https://github.com/md-555))
-- **Repositório**: [https://github.com/md-555/doutor](https://github.com/md-555/doutor)
+- **Repositório**: [https://github.com/md-555/sensei](https://github.com/md-555/sensei)
 
-Obrigado por ajudar a manter o Doutor seguro!
+Obrigado por ajudar a manter o Sensei seguro!

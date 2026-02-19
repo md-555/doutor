@@ -1,13 +1,16 @@
 // SPDX-License-Identifier: MIT
 import type { Dirent, Stats } from 'node:fs';
 import { promises as fs } from 'node:fs';
+
 import { config } from '@core/config/config.js';
 import { ExcecoesMensagens } from '@core/messages/core/excecoes-messages.js';
 import { logVarredor } from '@core/messages/log/log-helper.js';
 import { lerArquivoTexto, lerEstado } from '@shared/persistence/persistencia.js';
 import micromatch from 'micromatch';
 import path from 'path';
+
 import type { FileEntry, FileMap, ScanOptions } from '@';
+
 export type { ScanOptions };
 export async function scanRepository(baseDir: string, options: ScanOptions = {}): Promise<FileMap> {
   // Log de início da varredura
@@ -171,7 +174,7 @@ export async function scanRepository(baseDir: string, options: ScanOptions = {})
       // Normaliza para separador POSIX para que micromatch funcione de forma consistente no Windows
       const relPath = toPosix(relPathRaw);
 
-      // Regra fixa do Doutor: não analisar testes (deixa para o runner, ex.: Vitest)
+      // Regra fixa do Sensei: não analisar testes (deixa para o runner, ex.: Vitest)
       const isTestLike = (p: string): boolean => {
         const rp = toPosix(p);
         if (/(^|\/)__(tests|mocks)__(\/|$)/.test(rp)) return true;

@@ -12,7 +12,7 @@ questions:
     attributes:
       label: "Descreva sua dúvida"
       description: "Contexto, comportamento esperado e o que ocorreu. Inclua trechos mínimos de código quando relevante."
-      placeholder: "Ex.: Ao executar `doutor ...` recebo o erro X..."
+      placeholder: "Ex.: Ao executar `sensei ...` recebo o erro X..."
       required: true
       min_length: 20
 
@@ -25,8 +25,8 @@ questions:
   - type: input
     id: ambiente
     attributes:
-      label: "Ambiente (SO, Node, versão do doutor)"
-      placeholder: "Ex.: Linux, Node 18, doutor v0.3.0"
+      label: "Ambiente (SO, Node, versão do sensei)"
+      placeholder: "Ex.: Linux, Node 18, sensei v0.3.0"
 
   - type: dropdown
     id: prioridade

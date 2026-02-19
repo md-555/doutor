@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 import fs from 'node:fs';
 import path from 'node:path';
+
 import { detectarArquetipos } from '@analistas/detectores/detector-arquetipos.js';
 import { normalizarOcorrenciaParaJson } from '@cli/diagnostico/normalizar-ocorrencias-json.js';
 import { exibirBlocoFiltros, listarAnalistas } from '@cli/processing/display.js';
@@ -13,7 +14,7 @@ import { ExcecoesMensagens } from '@core/messages/core/excecoes-messages.js';
 import { log, logGuardian, logRelatorio, logSistema, MENSAGENS_AUTOFIX } from '@core/messages/index.js';
 import { aplicarSupressaoOcorrencias } from '@core/parsing/filters.js';
 import { scanSystemIntegrity } from '@guardian/sentinela.js';
-import { emitirConselhoDoutoral } from '@relatorios/conselheiro-doutoral.js';
+import { emitirConselhoSenseial } from '@relatorios/conselheiro-senseial.js';
 import { gerarRelatorioMarkdown } from '@relatorios/gerador-relatorio.js';
 import fragmentarRelatorio from '@shared/data-processing/fragmentar-relatorio.js';
 import { stringifyJsonEscaped } from '@shared/data-processing/json.js';
@@ -231,7 +232,7 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
     // Executar Guardian se solicitado
     if (config.GUARDIAN_ENABLED) {
       // Usa optional chaining para evitar erro quando o mock não prover `fase`
-      (log as typeof log & LogExtensions).fase?.('Verificando integridade do Doutor');
+      (log as typeof log & LogExtensions).fase?.('Verificando integridade do Sensei');
       try {
         const resultado = await scanSystemIntegrity(fileEntries, {
           suppressLogs: true
@@ -283,12 +284,12 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
       if (config.REPORT_EXPORT_ENABLED) {
         try {
           const ts = new Date().toISOString().replace(/[:.]/g, '-');
-          const dir = typeof config.REPORT_OUTPUT_DIR === 'string' ? config.REPORT_OUTPUT_DIR : path.join(baseDir, 'doutor-reports');
+          const dir = typeof config.REPORT_OUTPUT_DIR === 'string' ? config.REPORT_OUTPUT_DIR : path.join(baseDir, 'sensei-reports');
           const fs = await import('node:fs');
           await fs.promises.mkdir(dir, {
             recursive: true
           });
-          const nome = `doutor-scan-${ts}`;
+          const nome = `sensei-scan-${ts}`;
           const resumo = {
             modo: 'scan-only',
             totalArquivos: fileEntries.length,
@@ -450,7 +451,7 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
         }
       }
     } catch {}
-    // Aplicar supressões configuradas em doutor.config.json
+    // Aplicar supressões configuradas em sensei.config.json
     ocorrenciasFiltradas = aplicarSupressaoOcorrencias(ocorrenciasFiltradas, config as unknown as FiltrosConfig || undefined);
     const totalOcorrenciasProcessadas = ocorrenciasFiltradas.length;
 
@@ -586,7 +587,7 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
             logSistema.autoFixEstatisticas(estatisticas);
 
             // Validação ESLint pós-auto-fix para harmonia total
-            if (process.env.DOUTOR_ESLINT_VALIDATION !== '0' && autoCorrecaoConfiguracao.validateAfterFix) {
+            if (process.env.SENSEI_ESLINT_VALIDATION !== '0' && autoCorrecaoConfiguracao.validateAfterFix) {
               try {
                 log.info(MENSAGENS_AUTOFIX.logs.validacaoEslint);
                 const {
@@ -1115,8 +1116,8 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
         }
 
         // Ler parse erros das variáveis globais (para testes e cenários especiais)
-        const parseErrosGlobais = (globalThis as Record<string, unknown>).__DOUTOR_PARSE_ERROS__ as unknown[] || [];
-        const parseErrosOriginais = (globalThis as Record<string, unknown>).__DOUTOR_PARSE_ERROS_ORIGINAIS__ as number || 0;
+        const parseErrosGlobais = (globalThis as Record<string, unknown>).__SENSEI_PARSE_ERROS__ as unknown[] || [];
+        const parseErrosOriginais = (globalThis as Record<string, unknown>).__SENSEI_PARSE_ERROS_ORIGINAIS__ as number || 0;
 
         // Adicionar parse erros globais à contagem
         if (parseErrosGlobais.length > 0 || parseErrosOriginais > 0) {
@@ -1208,7 +1209,7 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
           // Adicionar metadados de versão do schema e timestamp para compatibilidade
           const schemaMeta = {
             schemaVersion: '1.0.0',
-            doutorVersion: '0.0.0',
+            senseiVersion: '0.0.0',
             timestamp: new Date().toISOString()
           };
           const saidaComMeta = {
@@ -1276,9 +1277,9 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
 
         // Mensagem final
         // Emitir 'Tudo pronto' apenas uma vez
-        if (!config.COMPACT_MODE && !process.env.__DOUTOR_TUDO_PRONTO_EMITIDO) {
+        if (!config.COMPACT_MODE && !process.env.__SENSEI_TUDO_PRONTO_EMITIDO) {
           log.info(CliProcessamentoDiagnosticoMensagens.tudoPronto);
-          (process.env as unknown as Record<string, string>).__DOUTOR_TUDO_PRONTO_EMITIDO = '1';
+          (process.env as unknown as Record<string, string>).__SENSEI_TUDO_PRONTO_EMITIDO = '1';
         }
 
         // Log de diagnóstico concluído para testes
@@ -1299,15 +1300,15 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
           totalOcorrenciasAnaliticas: totalOcorrencias,
           integridadeGuardian: guardianResultado?.status || 'nao-verificado'
         };
-        emitirConselhoDoutoral(contextoConselho);
+        emitirConselhoSenseial(contextoConselho);
         if (config.REPORT_EXPORT_ENABLED) {
           const ts = new Date().toISOString().replace(/[:.]/g, '-');
-          const dir = typeof config.REPORT_OUTPUT_DIR === 'string' ? config.REPORT_OUTPUT_DIR : path.join(baseDir, 'doutor-reports');
+          const dir = typeof config.REPORT_OUTPUT_DIR === 'string' ? config.REPORT_OUTPUT_DIR : path.join(baseDir, 'sensei-reports');
           const fs = await import('node:fs');
           await fs.promises.mkdir(dir, {
             recursive: true
           });
-          const outputCaminho = path.join(dir, `doutor-diagnostico-${ts}.md`);
+          const outputCaminho = path.join(dir, `sensei-diagnostico-${ts}.md`);
           const resultadoCompleto = {
             ...resultadoExecucao,
             fileEntries: fileEntriesComAst,
@@ -1381,7 +1382,7 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
               ocorrencias: ocorrenciasLimpas
             };
             const salvar = await getSalvarEstado();
-            await salvar(path.join(dir, `doutor-relatorio-summary-${ts}.json`), relatorioResumo);
+            await salvar(path.join(dir, `sensei-relatorio-summary-${ts}.json`), relatorioResumo);
 
             // Se exportação full estiver ativa, grava também o payload completo em arquivo separado
             let fragmentResultado: {
@@ -1407,7 +1408,7 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
                 log.info(CliProcessamentoDiagnosticoMensagens.relatorioFullFragmentado(fragmentResultado.manifestFile));
               } catch {
                 // Fallback: salvar como único arquivo caso a fragmentação falhe
-                await salvar(path.join(dir, `doutor-relatorio-full-${ts}.json`), relatorioFull);
+                await salvar(path.join(dir, `sensei-relatorio-full-${ts}.json`), relatorioFull);
               }
             }
 
@@ -1465,9 +1466,9 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
             log.imprimirBloco(tituloResumo, [...cabecalho, ...linhasResumo]);
           }
         }
-        if (!config.COMPACT_MODE && !process.env.__DOUTOR_TUDO_PRONTO_EMITIDO) {
+        if (!config.COMPACT_MODE && !process.env.__SENSEI_TUDO_PRONTO_EMITIDO) {
           log.info(CliProcessamentoDiagnosticoMensagens.tudoPronto);
-          (process.env as unknown as Record<string, string>).__DOUTOR_TUDO_PRONTO_EMITIDO = '1';
+          (process.env as unknown as Record<string, string>).__SENSEI_TUDO_PRONTO_EMITIDO = '1';
         }
       } catch {}
     }
@@ -1532,8 +1533,8 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
           parseErros.totalExibidos++;
         }
       }
-      const parseErrosGlobais = (globalThis as Record<string, unknown>).__DOUTOR_PARSE_ERROS__ as unknown[] || [];
-      const parseErrosOriginais = (globalThis as Record<string, unknown>).__DOUTOR_PARSE_ERROS_ORIGINAIS__ as number || 0;
+      const parseErrosGlobais = (globalThis as Record<string, unknown>).__SENSEI_PARSE_ERROS__ as unknown[] || [];
+      const parseErrosOriginais = (globalThis as Record<string, unknown>).__SENSEI_PARSE_ERROS_ORIGINAIS__ as number || 0;
       if (parseErrosGlobais.length > 0 || parseErrosOriginais > 0) {
         parseErros.totalOriginais = Math.max(parseErros.totalOriginais, parseErrosOriginais);
         if (parseErrosGlobais.length > 0) {
@@ -1602,7 +1603,7 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
           } catch {}
           const schemaMeta = {
             schemaVersion: '1.0.0',
-            doutorVersion: pkgVersion,
+            senseiVersion: pkgVersion,
             timestamp: new Date().toISOString()
           };
           const saidaComMeta = {
@@ -1619,13 +1620,13 @@ export async function processarDiagnostico(opts: OpcoesProcessamentoDiagnostico)
           if (config.REPORT_EXPORT_ENABLED) {
             try {
               const ts = new Date().toISOString().replace(/[:.]/g, '-');
-              const dir = typeof config.REPORT_OUTPUT_DIR === 'string' ? config.REPORT_OUTPUT_DIR : path.join(baseDir, 'doutor-reports');
+              const dir = typeof config.REPORT_OUTPUT_DIR === 'string' ? config.REPORT_OUTPUT_DIR : path.join(baseDir, 'sensei-reports');
               const fs = await import('node:fs');
               await fs.promises.mkdir(dir, {
                 recursive: true
               });
               const salvar = await getSalvarEstado();
-              await salvar(path.join(dir, `doutor-diagnostico-${ts}.json`), saidaComMeta);
+              await salvar(path.join(dir, `sensei-diagnostico-${ts}.json`), saidaComMeta);
               log.sucesso(CliProcessamentoDiagnosticoMensagens.relatoriosExportadosPara(dir));
             } catch (e) {
               log.erro(CliProcessamentoDiagnosticoMensagens.falhaSalvarRelatorioJson((e as Error).message));

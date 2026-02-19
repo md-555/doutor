@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 import { ICONES_ACAO, ICONES_COMANDO, ICONES_DIAGNOSTICO, ICONES_STATUS } from '../ui/icons.js';
+
 export const CliComandoReestruturarMensagens = {
   inicio: `\n${ICONES_COMANDO.reestruturar} Iniciando processo de reestruturação...\n`,
   spinnerCalculandoPlano: `${ICONES_DIAGNOSTICO.progresso} Calculando plano de reestruturação...`,

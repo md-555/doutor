@@ -3,8 +3,10 @@ import type { NodePath } from '@babel/traverse';
 import type { Node } from '@babel/types';
 import { config } from '@core/config/config.js';
 import { detectarContextoProjeto } from '@shared/contexto-projeto.js';
+
 import type { FileLike, FunctionLikeNode, Ocorrencia } from '@';
 import { criarAnalista, isBabelNode } from '@';
+
 function isNodePath(x: unknown): x is NodePath<Node> {
   return typeof x === 'object' && x !== null && 'node' in x && isBabelNode(x.node) && typeof (x as {
     traverse?: unknown;

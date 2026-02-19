@@ -7,6 +7,7 @@ import { traverse } from '@core/config/traverse.js';
 import { PadroesUsoMensagens } from '@core/messages/analistas/analista-padroes-uso-messages.js';
 import { detectarContextoProjeto } from '@shared/contexto-projeto.js';
 import { garantirArray, incrementar } from '@shared/helpers/helpers-analistas.js';
+
 import type { ContextoExecucao, Estatisticas, Ocorrencia, TecnicaAplicarResultado } from '@';
 import { criarOcorrencia, ocorrenciaErroAnalista } from '@';
 

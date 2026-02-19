@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 import { ICONES_ACAO, ICONES_ARQUIVO, ICONES_FEEDBACK } from './icons.js';
+
 export const SugestoesContextuaisMensagens = {
   arquetipoNaoIdentificado: 'Não foi possível identificar um arquétipo específico. Considere adicionar mais estrutura ao projeto.',
   projetoIdentificado: (tecnologia: string | undefined, confiancaPercent: number) => `${ICONES_FEEDBACK.info} Projeto identificado como: ${tecnologia} (confiança: ${confiancaPercent}%)`,

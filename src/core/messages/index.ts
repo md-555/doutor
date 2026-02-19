@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 /**
- * Sistema de Mensagens Centralizado do Doutor
+ * Sistema de Mensagens Centralizado do Sensei
  *
  * Este módulo centraliza TODAS as mensagens, logs e templates do sistema.
  * Organizado em subpastas por domínio:
@@ -15,7 +15,7 @@
 
   /* -------------------------- SISTEMA DE LOG -------------------------- */
 
-export { log, logAnalistas, logAuto, logConselheiro, LogContextConfiguracao, logCore, logEngine, LogEngineAdaptativo, logFiltros, logGuardian, LogMensagens, logMetricas, logOcorrencias, logProjeto, logRelatorio, logVarredor, logSistema } from './log/index.js';
+export { log, logAnalistas, logAuto, logConselheiro, LogContextConfiguracao, logCore, logEngine, LogEngineAdaptativo, logFiltros, logGuardian, LogMensagens, logMetricas, logOcorrencias, logProjeto, logRelatorio, logSistema,logVarredor } from './log/index.js';
 
   /* -------------------------- MENSAGENS DE RELATÓRIOS -------------------------- */
 
@@ -30,7 +30,7 @@ export { type AgrupamentoConfig, AGRUPAMENTOS_MENSAGEM, type ConfigPrioridade, c
 export * from './core/index.js';
   /* -------------------------- MENSAGENS DE ZELADORES -------------------------- */
 
-export { ERROS_IMPORTS, SAIDA_CODIGOS, formatarComTimestamp, formatarDuracao, formatarEstatistica, formatarListaArquivos, gerarResumoImports, ICONES_ZELADOR, MENSAGENS_ESTRUTURA, MENSAGENS_IMPORTS, MENSAGENS_TIPOS, MENSAGENS_ZELADOR_GERAL, PROGRESSO_IMPORTS, MODELOS_SAIDA } from './zeladores/index.js';
+export { ERROS_IMPORTS, formatarComTimestamp, formatarDuracao, formatarEstatistica, formatarListaArquivos, gerarResumoImports, ICONES_ZELADOR, MENSAGENS_ESTRUTURA, MENSAGENS_IMPORTS, MENSAGENS_TIPOS, MENSAGENS_ZELADOR_GERAL, MODELOS_SAIDA,PROGRESSO_IMPORTS, SAIDA_CODIGOS } from './zeladores/index.js';
 
   /* -------------------------- MENSAGENS DE CLI (COMANDOS E HANDLERS) -------------------------- */
 

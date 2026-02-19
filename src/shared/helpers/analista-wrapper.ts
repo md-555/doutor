@@ -4,6 +4,7 @@
  */
 
 import type { Analista, Ocorrencia } from '@';
+
 import { filtrarOcorrenciasSuprimidas } from './suppressao.js';
 
 /**

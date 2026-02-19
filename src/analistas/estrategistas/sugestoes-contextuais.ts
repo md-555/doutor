@@ -15,7 +15,9 @@ import type { NodePath } from '@babel/traverse';
 import type { Node } from '@babel/types';
 import { log } from '@core/messages/index.js';
 import { SugestoesContextuaisMensagens } from '@core/messages/ui/sugestoes-contextuais-messages.js';
+
 import type { Analista, ContextoExecucao, Ocorrencia, PackageJson } from '@';
+
 export const analistaSugestoesContextuais: Analista = {
   nome: 'sugestoes-contextuais',
   categoria: 'estrategia',

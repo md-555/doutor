@@ -5,8 +5,10 @@ import type { NodePath, Visitor } from '@babel/traverse';
 import traverse from '@babel/traverse';
 import * as t from '@babel/types';
 import { AnalystOrigens, AnalystTipos, ReactHooksMensagens, SeverityNiveis } from '@core/messages/core/plugin-messages.js';
+
 import { criarAnalista, criarOcorrencia } from '@';
-const disableEnv = process.env.DOUTOR_DISABLE_PLUGIN_REACT_HOOKS === '1';
+
+const disableEnv = process.env.SENSEI_DISABLE_PLUGIN_REACT_HOOKS === '1';
 type Msg = ReturnType<typeof criarOcorrencia>;
 function hasHooksUsage(src: string): boolean {
   return /use(State|Effect|Memo|Callback|Reducer|Ref|LayoutEffect|ImperativeHandle|Transition)/.test(src);

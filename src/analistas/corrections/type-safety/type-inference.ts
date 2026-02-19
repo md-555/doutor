@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// @doutor-disable tipo-literal-inline-complexo
+// @sensei-disable tipo-literal-inline-complexo
 // Justificativa: tipos locais para inferência de tipos
 /**
  * Módulo de inferência de tipos
@@ -7,6 +7,7 @@
  */
 
 import type { InferredInterface, PropertyUsage, TypeAnalysis, UsagePattern } from '@';
+
 import { toKebabCase } from './context-analyzer.js';
 
 /**

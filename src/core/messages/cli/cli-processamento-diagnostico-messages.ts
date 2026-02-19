@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 import { ICONES_ACAO, ICONES_ARQUIVO, ICONES_FEEDBACK, ICONES_STATUS } from '../ui/icons.js';
+
 export const CliProcessamentoDiagnosticoMensagens = {
   linhaEmBranco: '',
   templateArquetipoPreview: 'Template de arquétipo personalizado gerado (pré-visualização)',

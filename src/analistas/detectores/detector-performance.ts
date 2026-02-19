@@ -5,8 +5,10 @@ import { traverse } from '@core/config/traverse.js';
 import { DetectorAgregadosMensagens } from '@core/messages/analistas/detector-agregados-messages.js';
 import { detectarContextoProjeto } from '@shared/contexto-projeto.js';
 import { filtrarOcorrenciasSuprimidas } from '@shared/helpers/suppressao.js';
+
 import type { Analista, Ocorrencia, ProblemaPerformance } from '@';
 import { criarOcorrencia } from '@';
+
 export const analistaDesempenho: Analista = {
   nome: 'performance',
   categoria: 'performance',

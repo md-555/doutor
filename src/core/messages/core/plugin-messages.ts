@@ -120,7 +120,7 @@ export const XmlMensagens = {
 
 export const FormatadorMensagens = {
   naoFormatado: (parser: string, detalhes?: string) => {
-    const base = `Arquivo parece não estar formatado (parser: ${parser}). Considere normalizar com o formatador do Doutor.`;
+    const base = `Arquivo parece não estar formatado (parser: ${parser}). Considere normalizar com o formatador do Sensei.`;
     if (!detalhes) return base;
     return `${base} (${detalhes})`;
   },

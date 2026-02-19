@@ -4,6 +4,7 @@ import { detectarArquetipoNode } from '@analistas/plugins/detector-node.js';
 import { detectarArquetipoXML } from '@analistas/plugins/detector-xml.js';
 import { pontuarTodos } from '@analistas/pontuadores/pontuador.js';
 import { detectarContextoProjeto } from '@shared/contexto-projeto.js';
+
 import type { ArquetipoDeteccaoAnomalia, ArquetipoEstruturaDef, ResultadoDeteccaoArquetipo } from '@';
 
 // Evita warning de unused import - função usada em runtime

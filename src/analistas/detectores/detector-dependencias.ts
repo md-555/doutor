@@ -1,11 +1,14 @@
 // SPDX-License-Identifier: MIT
 import path from 'node:path';
+
 import type { NodePath } from '@babel/traverse';
 import type * as t from '@babel/types';
 import { config } from '@core/config/config.js';
 import { traverse } from '@core/config/traverse.js';
 import { DetectorDependenciasMensagens } from '@core/messages/analistas/detector-dependencias-messages.js';
+
 import type { ContextoExecucao, Ocorrencia, TecnicaAplicarResultado } from '@';
+
 export const grafoDependencias = new Map<string, Set<string>>();
 
 /**

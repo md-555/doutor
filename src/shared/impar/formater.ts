@@ -3,8 +3,11 @@
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
+
 import { XMLValidator } from 'fast-xml-parser';
+
 import type { FormatadorMinimoParser, FormatadorMinimoResult } from '@';
+
 import type { FormatterFn } from './formatter-registry.js';
 import { getFormatterForPath, registerFormatter } from './formatter-registry.js';
 import { getSyntaxInfoForPath } from './syntax-map.js';
@@ -467,7 +470,7 @@ function normalizarSeparadoresDeSecao(code: string, opts: {
     titulo: string | null;
   } | null => {
     // Formato legado aceito (compat): /* -------------------------- substituir por titulo (opcionalmente com um título embutido) -------------------------- */
-    const m = line.match(/^\s*\/\*\s*-{10,}\s*substituir\s+por\s+titulo\s+@doutor-secao(?:\((.+?)\))?\s*-{10,}\s*\*\/\s*$/i);
+    const m = line.match(/^\s*\/\*\s*-{10,}\s*substituir\s+por\s+titulo\s+@sensei-secao(?:\((.+?)\))?\s*-{10,}\s*\*\/\s*$/i);
     if (!m) return null;
     const raw = (m[1] ?? '').trim();
     return {
@@ -477,7 +480,7 @@ function normalizarSeparadoresDeSecao(code: string, opts: {
   const isSeparadorSemTitulo = (line: string): boolean => {
     // Ex.: /* -------------------------- substituir por titulo -------------------------- */
     // Ex.: /* -------------------------- - -------------------------- */
-    return /^\s*\/\*\s*-{10,}\s*substituir\s+por\s+titulo\s*-{10,}\s*\*\/\s*$/i.test(line) || /^\s*\/\*\s*-{10,}\s*-\s*-{10,}\s*\*\/\s*$/.test(line) || /^\s*\/\*\s*-{10,}\s*@doutor-secao\s*-{10,}\s*\*\/\s*$/i.test(line);
+    return /^\s*\/\*\s*-{10,}\s*substituir\s+por\s+titulo\s*-{10,}\s*\*\/\s*$/i.test(line) || /^\s*\/\*\s*-{10,}\s*-\s*-{10,}\s*\*\/\s*$/.test(line) || /^\s*\/\*\s*-{10,}\s*@sensei-secao\s*-{10,}\s*\*\/\s*$/i.test(line);
   };
   const buildSeparatorWithTitle = (title: string): string => {
     return `  /* -------------------------- ${title} -------------------------- */`;
@@ -676,7 +679,7 @@ function formatarMarkdownMinimo(code: string): FormatadorMinimoResult {
     parser: 'markdown',
     formatted,
     changed: formatted !== normalizarNewlinesFinais(normalized),
-    reason: changedFences || changedInline || changedHeadings || changedBlanks ? 'estilo-doutor-markdown' : 'normalizacao-basica'
+    reason: changedFences || changedInline || changedHeadings || changedBlanks ? 'estilo-sensei-markdown' : 'normalizacao-basica'
   };
 }
 function formatarYamlMinimo(code: string): FormatadorMinimoResult {
@@ -692,7 +695,7 @@ function formatarYamlMinimo(code: string): FormatadorMinimoResult {
     parser: 'yaml',
     formatted,
     changed: formatted !== normalizarNewlinesFinais(normalized),
-    reason: changedBlanks ? 'estilo-doutor-yaml' : 'normalizacao-basica'
+    reason: changedBlanks ? 'estilo-sensei-yaml' : 'normalizacao-basica'
   };
 }
 function tokenizeXml(src: string): Array<{
@@ -997,7 +1000,7 @@ async function carregarPrettierDoProjeto(baseDir: string): Promise<PrettierApi |
       // ignora
     }
 
-    // 2) Fallback: tenta resolver do contexto do Doutor (útil em dev, monorepos, etc.).
+    // 2) Fallback: tenta resolver do contexto do Sensei (útil em dev, monorepos, etc.).
     {
       const api = await tryResolveFrom(createRequire(import.meta.url));
       if (api) return api;
@@ -1005,7 +1008,7 @@ async function carregarPrettierDoProjeto(baseDir: string): Promise<PrettierApi |
 
     // 3) Fallback: bundle local em feedback/prettier (quando existe no workspace).
     // Mantém isso “best effort” para não mudar comportamento em instalações normais.
-    const feedbackDir = process.env.DOUTOR_PRETTIER_FEEDBACK_DIR || path.join(base, 'feedback', 'prettier');
+    const feedbackDir = process.env.SENSEI_PRETTIER_FEEDBACK_DIR || path.join(base, 'feedback', 'prettier');
     const feedbackPkg = path.join(feedbackDir, 'package.json');
     if (fs.existsSync(feedbackPkg)) {
       const candidates = [path.join(feedbackDir, 'index.mjs'), path.join(feedbackDir, 'index.cjs')];

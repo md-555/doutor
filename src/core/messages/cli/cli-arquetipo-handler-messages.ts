@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 import { ICONES_FEEDBACK } from '../ui/icons.js';
+
 export const CliArquetipoHandlerMensagens = {
   timeoutDeteccao: `${ICONES_FEEDBACK.atencao} Detecção de arquetipos expirou (timeout)`,
   erroDeteccao: (mensagem: string) => `Erro na detecção de arquetipos: ${mensagem}`,

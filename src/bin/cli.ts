@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+
 import { registrarComandos } from '@cli/comandos.js';
 import { comandoPerf } from '@cli/commands/index.js';
 import { ExitCode, sair } from '@cli/helpers/exit-codes.js';
@@ -15,7 +16,7 @@ import type { CommanderError } from 'commander';
 import { Command } from 'commander';
 
 // 🌐 Flags globais aplicáveis em todos os comandos
-import type { DoutorGlobalFlags, ErrorLike } from '@';
+import type { ErrorLike,SenseiGlobalFlags } from '@';
 import { extrairMensagemErro } from '@';
 
 // caminho do módulo (usado para localizar arquivos de configuração)
@@ -43,7 +44,7 @@ const program = new Command();
 
 // �️ Função para aplicar flags globais
 async function aplicarFlagsGlobais(opts: unknown) {
-  const flags = opts as DoutorGlobalFlags;
+  const flags = opts as SenseiGlobalFlags;
   // Sanitização e normalização (pode lançar)
   try {
     // lazy import para não criar ciclo
@@ -58,7 +59,7 @@ async function aplicarFlagsGlobais(opts: unknown) {
   config.REPORT_SILENCE_LOGS = Boolean(flags.silence);
   config.REPORT_EXPORT_ENABLED = Boolean(flags.export);
   config.REPORT_EXPORT_FULL = Boolean((flags as Record<string, unknown>)['exportFull']);
-  const debugAtivo = Boolean(flags.debug) || process.env.DOUTOR_DEBUG === 'true';
+  const debugAtivo = Boolean(flags.debug) || process.env.SENSEI_DEBUG === 'true';
   config.DEV_MODE = debugAtivo;
   config.SCAN_ONLY = Boolean(flags.scanOnly);
   // Se silence está ativo, verbose é sempre falso
@@ -83,8 +84,8 @@ export async function mainCli(): Promise<void> {
   // Inicializa memória de conversas
 
   // Handler de rejeições não tratadas com mensagem identificável (usado por testes e ops)
-  function __doutor_unhandledRejectionHandler(err: ErrorLike) {
-    const MARCADOR = 'Doutor: unhandled rejection';
+  function __sensei_unhandledRejectionHandler(err: ErrorLike) {
+    const MARCADOR = 'Sensei: unhandled rejection';
     const mensagem = extrairMensagemErro(err);
     console.error(MARCADOR, mensagem);
     if (!process.env.VITEST) {
@@ -96,7 +97,7 @@ export async function mainCli(): Promise<void> {
       process.exit(1);
     }
   }
-  process.on('unhandledRejection', __doutor_unhandledRejectionHandler);
+  process.on('unhandledRejection', __sensei_unhandledRejectionHandler);
 
   // Mantemos handler para exceções não capturadas — garante comportamento crítico em produção
   process.on('uncaughtException', (err: ErrorLike) => {
@@ -119,7 +120,7 @@ export async function mainCli(): Promise<void> {
     if (process.env.NODE_ENV === 'production') {
       try {
         // Em dist/bin, o safe config está na raiz do pacote: subir dois níveis
-        const safeCfgCaminho = join(__dirname, '..', '..', 'doutor.config.safe.json');
+        const safeCfgCaminho = join(__dirname, '..', '..', 'sensei.config.safe.json');
         const raw = await lerArquivoTexto(safeCfgCaminho);
         const safeCfg = raw ? JSON.parse(raw) : {};
         const prod = safeCfg?.productionDefaults;
@@ -161,7 +162,7 @@ export async function mainCli(): Promise<void> {
       console.log(chalk.cyan('\n📊 RESUMO DA CONVERSA'));
       console.log(`Total: ${resumo.totalMessages}`);
       console.log(`Usuário: ${resumo.userMessages}`);
-      console.log(`Doutor: ${resumo.assistantMessages}`);
+      console.log(`Sensei: ${resumo.assistantMessages}`);
       if (resumo.firstMessage) console.log(`Primeira: ${resumo.firstMessage}`);
       if (resumo.lastMessage) console.log(`Última: ${resumo.lastMessage}`);
       console.log('');
@@ -201,8 +202,8 @@ export async function mainCli(): Promise<void> {
 
 // Global handler para reduzir falsos-positivos e capturar rejeições não tratadas.
 // A mensagem contém um marcador único para que testes possam verificar o registro.
-function __doutor_unhandledRejectionHandler(err: ErrorLike) {
-  const MARCADOR = 'Doutor: unhandled rejection';
+function __sensei_unhandledRejectionHandler(err: ErrorLike) {
+  const MARCADOR = 'Sensei: unhandled rejection';
   const mensagem = extrairMensagemErro(err);
   // Mensagem identificável: usada pelos testes unitários para detectar o handler
   // e por operadores para diagnóstico rápido.
@@ -220,7 +221,7 @@ function __doutor_unhandledRejectionHandler(err: ErrorLike) {
     process.exit(1);
   }
 }
-process.on('unhandledRejection', __doutor_unhandledRejectionHandler);
+process.on('unhandledRejection', __sensei_unhandledRejectionHandler);
 
 // Invoca a função principal apenas quando o arquivo for executado como entrypoint.
 // Isso evita efeitos colaterais ao importar o módulo em testes ou ferramentas de análise.

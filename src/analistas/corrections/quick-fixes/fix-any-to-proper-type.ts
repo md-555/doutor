@@ -7,11 +7,14 @@
 import type { Node } from '@babel/types';
 import { buildTypesRelPathPosix } from '@core/config/conventions.js';
 import { MENSAGENS_CORRECAO_TIPOS } from '@core/messages/index.js';
+
 import type { QuickFix, QuickFixResult, TypeSafetyWarning } from '@';
+
 import { isAnyInGenericFunction, isInStringOrComment, isLegacyOrVendorFile, isTypeScriptContext } from '../type-safety/context-analyzer.js';
 import { analyzeTypeUsage } from '../type-safety/type-analyzer.js';
 import { createTypeDefinition } from '../type-safety/type-creator.js';
 import { validateTypeReplacement } from '../type-safety/type-validator.js';
+
 const CONFIANCA_NIVEIS = {
   HIGH: 85,
   MEDIUM: 60,

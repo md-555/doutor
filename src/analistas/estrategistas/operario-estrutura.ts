@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// @doutor-disable tipo-literal-inline-complexo
+// @sensei-disable tipo-literal-inline-complexo
 // Justificativa: tipos locais para operações de estrutura
 import { gerarPlanoEstrategico } from '@analistas/arquitetos/estrategista-estrutura.js';
 import { extrairSinaisAvancados } from '@analistas/arquitetos/sinais-projeto-avancados.js';
@@ -27,13 +27,13 @@ export const OperarioEstrutura = {
     opcoes: OpcoesPlanejamento,
   ): Promise<ResultadoPlanejamento> {
     // 1) Tenta arquétipos, a menos que forçado estrategista.
-    //    Quando preset='doutor', evitamos arquétipos em runtime normal,
+    //    Quando preset='sensei', evitamos arquétipos em runtime normal,
     //    mas permitimos em testes (VITEST) para compatibilidade das suítes.
     const emTeste = !!process.env.VITEST;
     const podeUsarArquetipos =
       !!opcoes.preset &&
       !opcoes.preferEstrategista &&
-      (opcoes.preset !== 'doutor' || emTeste);
+      (opcoes.preset !== 'sensei' || emTeste);
     if (podeUsarArquetipos) {
       try {
         const arqs = await detectarArquetipos(

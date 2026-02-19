@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 import type { ClassDeclaration, ImportDeclaration, Program, Statement, TSEnumDeclaration, TSInterfaceDeclaration, TSTypeAliasDeclaration, VariableDeclaration } from '@babel/types';
+
 import type { ArquetipoEstruturaDef, FileEntryWithAst, PackageJson, ResultadoDeteccaoArquetipo, SinaisProjetoAvancados } from '@';
+
 export function scoreArquetipo(def: ArquetipoEstruturaDef, _arquivos: string[],
 // prefixo _ para ignorar warning de unused
 _sinaisAvancados // prefixo _ para ignorar warning de unused

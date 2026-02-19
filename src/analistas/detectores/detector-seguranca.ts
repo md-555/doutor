@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: MIT
-// @doutor-disable seguranca vulnerabilidade-seguranca
+// @sensei-disable seguranca vulnerabilidade-seguranca
 import type { NodePath } from '@babel/traverse';
 import type { CallExpression, NewExpression, Node } from '@babel/types';
 import { traverse } from '@core/config/traverse.js';
 import { DetectorAgregadosMensagens } from '@core/messages/analistas/detector-agregados-messages.js';
 import { detectarContextoProjeto } from '@shared/contexto-projeto.js';
 import { filtrarOcorrenciasSuprimidas } from '@shared/helpers/suppressao.js';
+
 import type { Analista, Ocorrencia, ProblemaSeguranca } from '@';
 import { criarOcorrencia } from '@';
 

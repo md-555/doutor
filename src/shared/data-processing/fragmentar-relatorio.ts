@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: MIT
 import path from 'node:path';
 import { gzipSync } from 'node:zlib';
+
 import { config } from '@core/config/config.js';
 import { salvarBinario, salvarEstado } from '@shared/persistence/persistencia.js';
+
 import type { FileEntryFragmentacao, FragmentOptions, Manifest, ManifestPartFragmentacao, Ocorrencia, RelatorioCompletoFragmentacao } from '@';
 
 // Aliases para compatibilidade
@@ -35,7 +37,7 @@ export async function fragmentarRelatorio(relatorioFull: RelatorioCompleto, dir:
   // Manifest que descreve as partes geradas
   const manifest: Manifest = {
     generatedAt: new Date().toISOString(),
-    baseNome: `doutor-relatorio-full-${ts}`,
+    baseNome: `sensei-relatorio-full-${ts}`,
     parts: []
   };
 
@@ -48,7 +50,7 @@ export async function fragmentarRelatorio(relatorioFull: RelatorioCompleto, dir:
     delete r.ocorrencias;
     delete r.fileEntries;
   }
-  const metaFilename = `doutor-relatorio-full-${ts}-meta.json.gz`;
+  const metaFilename = `sensei-relatorio-full-${ts}-meta.json.gz`;
   const metaBuf = Buffer.from(JSON.stringify(meta, null, 2), 'utf-8');
   const metaGz = gzipSync(metaBuf);
   await salvarBinario(path.join(dir, metaFilename), metaGz);
@@ -62,7 +64,7 @@ export async function fragmentarRelatorio(relatorioFull: RelatorioCompleto, dir:
   if (ocorrencias.length > 0) {
     const occPedacos = chunkArray(ocorrencias, maxOcorrencias);
     for (let i = 0; i < occPedacos.length; i++) {
-      const fname = `doutor-relatorio-full-${ts}-ocorrencias-part-${i + 1}.json.gz`;
+      const fname = `sensei-relatorio-full-${ts}-ocorrencias-part-${i + 1}.json.gz`;
       const payload = {
         shard: {
           kind: 'ocorrencias',
@@ -117,7 +119,7 @@ export async function fragmentarRelatorio(relatorioFull: RelatorioCompleto, dir:
   if (fileEntries.length > 0) {
     const fePedacos = chunkArray(fileEntries, maxArquivoEntries);
     for (let i = 0; i < fePedacos.length; i++) {
-      const fname = `doutor-relatorio-full-${ts}-fileentries-part-${i + 1}.json.gz`;
+      const fname = `sensei-relatorio-full-${ts}-fileentries-part-${i + 1}.json.gz`;
       const payload = {
         shard: {
           kind: 'fileEntries',
@@ -167,7 +169,7 @@ export async function fragmentarRelatorio(relatorioFull: RelatorioCompleto, dir:
   }
 
   // Salva o manifest final
-  const manifestFilename = `doutor-relatorio-full-${ts}-manifest.json`;
+  const manifestFilename = `sensei-relatorio-full-${ts}-manifest.json`;
   await salvar(path.join(dir, manifestFilename), manifest);
   return {
     manifestFile: manifestFilename,

@@ -1,9 +1,12 @@
 // SPDX-License-Identifier: MIT
 import path from 'node:path';
+
 import { ExcecoesMensagens } from '@core/messages/core/excecoes-messages.js';
 import { RelatorioMensagens } from '@core/messages/index.js';
 import { lerArquivoTexto, salvarEstado } from '@shared/persistence/persistencia.js';
+
 import type { ResultadoDeteccaoArquetipo } from '@';
+
 export async function exportarRelatorioArquetiposMarkdown(destino: string, candidatos: ResultadoDeteccaoArquetipo[], contexto?: {
   origem?: string;
 }, detalhado = false): Promise<void> {
