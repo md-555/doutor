@@ -1,8 +1,12 @@
 // SPDX-License-Identifier: MIT
 import path from 'node:path';
 
-// Normaliza um caminho relativo eliminando tentativas de escape (..), barras duplicadas e separadores inconsistentes
-
+/**
+ * Sanitiza um caminho relativo, eliminando tentativas de escape (..),
+ * barras duplicadas e separadores inconsistentes.
+ * @param rel - Caminho relativo a sanitizar
+ * @returns Caminho normalizado e seguro
+ */
 export function sanitizarRelPath(rel: string): string {
   if (!rel) return '';
   rel = rel.replace(/^[A-Za-z]:\\?/u, '').replace(/^\/+/, '');
@@ -16,11 +20,25 @@ export function sanitizarRelPath(rel: string): string {
   return collapsed.replace(/^\/+/, '');
 }
 
+/**
+ * Verifica se um caminho alvo está contido dentro do diretório base.
+ * Impede acesso a caminhos fora da raiz do projeto.
+ * @param baseDir - Diretório base de referência
+ * @param alvo - Caminho absoluto do alvo a verificar
+ * @returns `true` se o alvo está dentro do baseDir
+ */
 export function estaDentro(baseDir: string, alvo: string): boolean {
   const rel = path.relative(baseDir, alvo);
   return !!rel && !rel.startsWith('..') && !path.isAbsolute(rel);
 }
 
+/**
+ * Resolve o caminho de um plugin de forma segura, verificando se está
+ * dentro da raiz do projeto e se possui extensão permitida.
+ * @param baseDir - Diretório raiz do projeto
+ * @param pluginRel - Caminho relativo do plugin
+ * @returns Objeto com `caminho` resolvido ou `erro` descritivo
+ */
 export function resolverPluginSeguro(
   baseDir: string,
   pluginRel: string,
@@ -44,6 +62,12 @@ export function resolverPluginSeguro(
   }
 }
 
+/**
+ * Valida se um padrão glob é seguro para uso, bloqueando
+ * padrões excessivamente longos ou com muitos wildcards recursivos.
+ * @param padrao - Padrão glob a validar
+ * @returns `true` se o padrão é considerado seguro
+ */
 export function validarGlobBasico(padrao: string): boolean {
   if (padrao.length > 300) return false;
   // Bloqueia mais de 4 ocorrências de '**' mesmo não consecutivas
@@ -51,6 +75,11 @@ export function validarGlobBasico(padrao: string): boolean {
   if (ocorrencias >= 5) return false;
   return true;
 }
+/**
+ * Filtra uma lista de padrões glob, retornando apenas os que são seguros.
+ * @param padroes - Lista de padrões glob a filtrar
+ * @returns Lista contendo apenas os padrões que passaram na validação
+ */
 export function filtrarGlobSeguros(padroes: string[]): string[] {
   return padroes.filter((p) => validarGlobBasico(p));
 }

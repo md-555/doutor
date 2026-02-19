@@ -21,9 +21,9 @@ export type {
   AsyncIssuesArquivo,
 } from './async-analysis.js';
 
-  /* -------------------------- CONSELHEIRO ORACULAR -------------------------- */
+  /* -------------------------- CONSELHEIRO DOUTORAL -------------------------- */
 
-export type { ConselhoContextoOracular } from './conselheiro.js';
+export type { ConselhoContextoDoutoral } from './conselheiro.js';
 
   /* -------------------------- ESTRUTURA -------------------------- */
 
@@ -169,7 +169,7 @@ export interface AlinhamentoItem {
   razao?: string;
 }
 
-  /* -------------------------- CONSELHEIRO ORACULAR -------------------------- */
+  /* -------------------------- CONSELHEIRO DOUTORAL -------------------------- */
 
 /**
  * Contexto para geração de conselhos
@@ -183,7 +183,7 @@ export interface ConselhoContexto {
 }
 
 /**
- * Conselho do sistema oracular
+ * Conselho do sistema doutoral
  */
 export interface Conselho {
   categoria:

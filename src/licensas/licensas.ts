@@ -33,18 +33,7 @@ export interface DisclaimerVerifyResult {
   missing: string[];
 }
 
-export function scanCommand(arg0: { root: string }): Promise<ScanResult> {
-  throw new Error('Function not implemented.');
-}
-
-export function generateNotices(arg0: { root: string; ptBr: boolean; output: string | undefined }): Promise<unknown> {
-  throw new Error('Function not implemented.');
-}
-
-export function addDisclaimer(arg0: { root: string; disclaimerPath: string | undefined; dryRun: boolean }): Promise<DisclaimerAddResult> {
-  throw new Error('Function not implemented.');
-}
-
-export function verifyDisclaimer(arg0: { root: string; disclaimerPath: string | undefined }): Promise<DisclaimerVerifyResult> {
-  throw new Error('Function not implemented.');
-}
+// Re-export real implementations from sibling modules
+export { addDisclaimer, verifyDisclaimer } from './disclaimer.js';
+export { generateNotices } from './generate-notices.js';
+export { scanCommand } from './scanner.js';

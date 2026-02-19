@@ -81,5 +81,9 @@ const resolvedUnknown: unknown =
   (chalkNs as unknown as { default?: unknown }).default ??
   chalkNs;
 
+/**
+ * Instância segura de chalk com API estável e suporte a encadeamento.
+ * Em ambientes sem chalk nativo, fornece fallback de identidade (sem cores).
+ */
 export const chalk: ChalkLike = makeChalkLike(getSourceFns(resolvedUnknown));
 export default chalk;

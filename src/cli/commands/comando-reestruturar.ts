@@ -479,7 +479,7 @@ export function comandoReestruturar(
         if (config.DEV_MODE) console.error(error);
         if (process.env.VITEST) {
           // Testes esperam erro contendo 'exit'
-          return Promise.reject('exit:1');
+          return Promise.reject(new Error('exit:1'));
         } else {
           sair(ExitCode.Failure);
           return;

@@ -153,7 +153,7 @@ export const RelatorioMessages = {
 
   /* -------------------------- RELATÓRIO DE PODA -------------------------- */
   poda: {
-    titulo: `${ICONES_COMANDO.podar} Relatório de Poda Oracular`,
+    titulo: `${ICONES_COMANDO.podar} Relatório de Poda Doutoral`,
     secoes: {
       metadados: {
         data: 'Data',
@@ -206,7 +206,7 @@ export const RelatorioMessages = {
 
   /* -------------------------- RELATÓRIO DE REESTRUTURAÇÃO -------------------------- */
   reestruturar: {
-    titulo: `${ICONES_COMANDO.reestruturar} Relatório de Reestruturação Oracular`,
+    titulo: `${ICONES_COMANDO.reestruturar} Relatório de Reestruturação Doutoral`,
     secoes: {
       metadados: {
         data: 'Data',

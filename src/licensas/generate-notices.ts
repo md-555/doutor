@@ -107,7 +107,7 @@ async function renderPackageBlock(pkgId: string, meta: RenderPackageMeta): Promi
           }
           break;
         }
-      } catch {}
+      } catch { }
     }
   }
 
@@ -121,17 +121,17 @@ export interface GenerateNoticesOptions {
   output?: string;
 }
 
-export async function generateNotices({ root = process.cwd(), ptBr = false, output }: GenerateNoticesOptions = {}): Promise<{output: string; packages: number}> {
+export async function generateNotices({ root = process.cwd(), ptBr = false, output }: GenerateNoticesOptions = {}): Promise<{ output: string; packages: number }> {
   const pkg = JSON.parse(await fs.readFile(path.join(root, 'package.json'), 'utf-8'));
   const projectName = `${pkg.name}@${pkg.version}`;
   const projectLicense = pkg.license || 'UNSPECIFIED';
 
   let results: Record<string, any> | null = null;
-  const cachePath = path.join(root, '.oraculo', 'licenses.json');
+  const cachePath = path.join(root, '.doutor', 'licenses.json');
   try {
     const buf = await fs.readFile(cachePath, 'utf-8');
     results = JSON.parse(buf);
-  } catch {}
+  } catch { }
 
   if (!results) {
     try {
@@ -151,8 +151,9 @@ export async function generateNotices({ root = process.cwd(), ptBr = false, outp
 
   if (!results) {
     try {
-      const cmd = process.platform === 'win32' ? 'npx.cmd' : 'npx';
-      const { stdout } = await execFile(cmd, ['--yes', 'license-checker-rseidelsohn', '--production', '--json'], { maxBuffer: 10 * 1024 * 1024 });
+      const { createRequire } = await import('node:module');
+      const require = createRequire(import.meta.url);
+      const { stdout } = await execFile('npx', ['--yes', 'license-checker-rseidelsohn', '--production', '--json'], { maxBuffer: 10 * 1024 * 1024 });
       results = JSON.parse(stdout);
     } catch (e) {
       try {
@@ -166,10 +167,10 @@ export async function generateNotices({ root = process.cwd(), ptBr = false, outp
   }
 
   try {
-    const dir = path.join(root, '.oraculo');
+    const dir = path.join(root, '.doutor');
     await fs.mkdir(dir, { recursive: true });
     await fs.writeFile(path.join(dir, 'licenses.json'), JSON.stringify(results, null, 2), 'utf-8');
-  } catch {}
+  } catch { }
 
   const entries = Object.entries(results || {})
     .filter(([id]) => !id.startsWith(`${pkg.name}@`))

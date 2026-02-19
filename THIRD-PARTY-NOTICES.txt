@@ -1,9 +1,9 @@
 THIRD-PARTY NOTICES
 ====================
 
-doutor@0.3.0 — Project license: MIT
+doutor@0.3.8 — Project license: MIT
 This file lists third-party components included (production) and their notices/licenses.
-Generated at: 2026-01-15T17:01:52.249Z
+Generated at: 2026-02-19T00:11:07.362Z
 
 Notes:
 - This file is generated automatically; do not edit manually.
@@ -11,7 +11,7 @@ Notes:
 - Third-party license texts are reproduced in their original language to preserve legal validity.
 
 ----------------------------------------------------------------
-Pacote: @babel/code-frame@7.28.6
+Pacote: @babel/code-frame@7.29.0
 Licenças: MIT
 Publicador: The Babel Team
 Repositório: https://github.com/babel/babel
@@ -42,7 +42,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 --- Fim do texto de licença ---
 
 ----------------------------------------------------------------
-Pacote: @babel/generator@7.28.6
+Pacote: @babel/generator@7.29.1
 Licenças: MIT
 Publicador: The Babel Team
 Repositório: https://github.com/babel/babel
@@ -166,7 +166,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 --- Fim do texto de licença ---
 
 ----------------------------------------------------------------
-Pacote: @babel/parser@7.28.6
+Pacote: @babel/parser@7.29.0
 Licenças: MIT
 Publicador: The Babel Team
 Repositório: https://github.com/babel/babel
@@ -225,7 +225,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 --- Fim do texto de licença ---
 
 ----------------------------------------------------------------
-Pacote: @babel/traverse@7.28.6
+Pacote: @babel/traverse@7.29.0
 Licenças: MIT
 Publicador: The Babel Team
 Repositório: https://github.com/babel/babel
@@ -256,7 +256,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 --- Fim do texto de licença ---
 
 ----------------------------------------------------------------
-Pacote: @babel/types@7.28.6
+Pacote: @babel/types@7.29.0
 Licenças: MIT
 Publicador: The Babel Team
 Repositório: https://github.com/babel/babel
@@ -1789,7 +1789,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 --- Fim do texto de licença ---
 
 ----------------------------------------------------------------
-Pacote: commander@14.0.2
+Pacote: commander@14.0.3
 Licenças: MIT
 Publicador: TJ Holowaychuk
 Contato: tj@vision-media.ca
@@ -1821,14 +1821,14 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 --- Fim do texto de licença ---
 
 ----------------------------------------------------------------
-Pacote: css-tree@2.3.1
+Pacote: css-tree@3.1.0
 Licenças: MIT
 Publicador: Roman Dvornov
 Contato: rdvornov@gmail.com
 Repositório: https://github.com/csstree/csstree
 
 --- Início do texto de licença ---
-Copyright (C) 2016-2022 by Roman Dvornov
+Copyright (C) 2016-2024 by Roman Dvornov
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2176,7 +2176,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 --- Fim do texto de licença ---
 
 ----------------------------------------------------------------
-Pacote: entities@4.5.0
+Pacote: entities@7.0.1
 Licenças: BSD-2-Clause
 Publicador: Felix Boehm
 Contato: me@feedic.com
@@ -2197,28 +2197,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 --- Fim do texto de licença ---
 
 ----------------------------------------------------------------
-Pacote: entities@6.0.1
-Licenças: BSD-2-Clause
-Publicador: Felix Boehm
-Contato: me@feedic.com
-Repositório: https://github.com/fb55/entities
-
---- Início do texto de licença ---
-Copyright (c) Felix Böhm
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
-
-Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-
-Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
-
-THIS IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS,
-EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
---- Fim do texto de licença ---
-
-----------------------------------------------------------------
-Pacote: fast-xml-parser@5.3.3
+Pacote: fast-xml-parser@5.3.6
 Licenças: MIT
 Publicador: Amit Gupta
 Repositório: https://github.com/NaturalIntelligence/fast-xml-parser
@@ -2297,7 +2276,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 --- Fim do texto de licença ---
 
 ----------------------------------------------------------------
-Pacote: htmlparser2@10.0.0
+Pacote: htmlparser2@10.1.0
 Licenças: MIT
 Publicador: Felix Boehm
 Contato: me@feedic.com
@@ -2663,7 +2642,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 --- Fim do texto de licença ---
 
 ----------------------------------------------------------------
-Pacote: lodash-es@4.17.21
+Pacote: lodash-es@4.17.23
 Licenças: MIT
 Publicador: John-David Dalton
 Contato: john.david.dalton@gmail.com
@@ -2720,7 +2699,7 @@ terms above.
 --- Fim do texto de licença ---
 
 ----------------------------------------------------------------
-Pacote: lodash@4.17.21
+Pacote: lodash@4.17.23
 Licenças: MIT
 Publicador: John-David Dalton
 Contato: john.david.dalton@gmail.com
@@ -2796,7 +2775,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 --- Fim do texto de licença ---
 
 ----------------------------------------------------------------
-Pacote: mdn-data@2.0.30
+Pacote: mdn-data@2.12.2
 Licenças: CC0-1.0
 Publicador: Mozilla Developer Network
 Repositório: https://github.com/mdn/data
@@ -3018,7 +2997,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 --- Fim do texto de licença ---
 
 ----------------------------------------------------------------
-Pacote: ora@9.0.0
+Pacote: ora@9.3.0
 Licenças: MIT
 Publicador: Sindre Sorhus
 Contato: sindresorhus@gmail.com
@@ -3037,7 +3016,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 --- Fim do texto de licença ---
 
 ----------------------------------------------------------------
-Pacote: p-limit@7.2.0
+Pacote: p-limit@7.3.0
 Licenças: MIT
 Publicador: Sindre Sorhus
 Contato: sindresorhus@gmail.com
@@ -3192,7 +3171,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 --- Fim do texto de licença ---
 
 ----------------------------------------------------------------
-Pacote: stdin-discarder@0.2.2
+Pacote: stdin-discarder@0.3.1
 Licenças: MIT
 Publicador: Sindre Sorhus
 Contato: sindresorhus@gmail.com
@@ -3211,7 +3190,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 --- Fim do texto de licença ---
 
 ----------------------------------------------------------------
-Pacote: string-width@8.1.0
+Pacote: string-width@8.1.1
 Licenças: MIT
 Publicador: Sindre Sorhus
 Contato: sindresorhus@gmail.com

@@ -92,7 +92,7 @@ export function isExtensionAllowed(
   return allowedExtensions.includes(ext);
 }
 
-// Compatibilidade com funções originais
+/** Alias de compatibilidade para {@link normalizePath}. */
 export function normalizarPathLocal(p: string): string {
   return normalizePath(p);
 }
@@ -125,6 +125,11 @@ export function validarCombinacoes(
   return erros;
 }
 
+/**
+ * Sanitiza flags de CLI, lançando erro se houver combinações inválidas.
+ * @param flags - Mapa de flags da linha de comando
+ * @throws Error com detalhes das combinações inválidas encontradas
+ */
 export function sanitizarFlags(flags: Record<string, unknown>): void {
   const erros = validarCombinacoes(flags);
   if (erros.length) {

@@ -23,7 +23,7 @@ dist/
 coverage/
 .nyc_output/
 
-# Oráculo runtime / caches / reports
+# Doutor runtime / caches / reports
 .doutor/
 # TypeScript
 *.tsbuildinfo
