@@ -10,41 +10,41 @@
 
 # Core source code
 
-/src/ @md-555
+/src/ @md-555-37
 
 # CLI commands
 
-/src/cli/ @md-555
+/src/cli/ @md-555-37
 
 # Analysts and detectors
 
-/src/analistas/ @md-555
+/src/analistas/ @md-555-37
 
 # Guardian integrity system
 
-/src/guardian/ @md-555
+/src/guardian/ @md-555-37
 
 # Tests
 
-/tests/ @md-555
+/tests/ @md-555-37
 
 # Documentation
 
-/docs/ @md-555
-\*.md @md-555
+/docs/ @md-555-37
+\*.md @md-555-37
 
 # Configuration files
 
-/_.json @md-555
-/_.ts @md-555
-/\*.js @md-555
+/_.json @md-555-37
+/_.ts @md-555-37
+/\*.js @md-555-37
 
 # CI/CD workflows
 
-/.github/ @md-555
+/.github/ @md-555-37
 
 # Security-sensitive files
 
-/SECURITY.md @md-555
-/.github/workflows/release.yml @md-555
-/.github/workflows/compliance.yml @md-555
+/SECURITY.md @md-555-37
+/.github/workflows/release.yml @md-555-37
+/.github/workflows/compliance.yml @md-555-37

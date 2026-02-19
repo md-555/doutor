@@ -47,7 +47,7 @@ Doutor é uma CLI modular para analisar, diagnosticar e manter projetos (JS/TS e
 
 ```bash
 # Clone o repositório
-git clone https://github.com/md-555/doutor.git
+git clone https://github.com/md-555-37/doutor.git
 cd doutor
 
 # Instale dependências e compile
@@ -61,7 +61,7 @@ node dist/bin/index.js diagnosticar --json
 **Windows (PowerShell):**
 
 ```powershell
-git clone https://github.com/md-555/doutor.git; cd doutor; npm install; npm run build; node dist/bin/index.js diagnosticar --json
+git clone https://github.com/md-555-37/doutor.git; cd doutor; npm install; npm run build; node dist/bin/index.js diagnosticar --json
 ```
 
 ### Instalação Global (Opcional)
@@ -727,5 +727,7 @@ doutor diagnosticar --json
 
 ## 📄 Licença
 
+``
 MIT. Avisos de terceiros: `THIRD-PARTY-NOTICES.txt`.
-````
+``
+### md-555-37
