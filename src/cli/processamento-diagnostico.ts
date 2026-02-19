@@ -33,7 +33,7 @@ import {
 } from '@core/messages/index.js';
 import { aplicarSupressaoOcorrencias } from '@core/parsing/filters.js';
 import { scanSystemIntegrity } from '@guardian/sentinela.js';
-import { emitirConselhoOracular } from '@relatorios/conselheiro-oracular.js';
+import { emitirConselhoDoutoral } from '@relatorios/conselheiro-doutoral.js';
 import { gerarRelatorioMarkdown } from '@relatorios/gerador-relatorio.js';
 import fragmentarRelatorio from '@shared/data-processing/fragmentar-relatorio.js';
 import { stringifyJsonEscaped } from '@shared/data-processing/json.js';
@@ -67,9 +67,9 @@ async function getSalvarEstado(): Promise<
   // Em testes, permitir mock do path .ts para compatibilidade com Vitest
   const candidates = process.env.VITEST
     ? [
-        '@shared/persistence/persistencia.js',
-        '@shared/persistence/persistencia.ts',
-      ]
+      '@shared/persistence/persistencia.js',
+      '@shared/persistence/persistencia.ts',
+    ]
     : ['@shared/persistence/persistencia.js'];
 
   for (const p of candidates) {
@@ -84,7 +84,7 @@ async function getSalvarEstado(): Promise<
         ) => Promise<void>;
         break;
       }
-    } catch {}
+    } catch { }
   }
 
   // Fallback: importar pelo alias oficial
@@ -129,7 +129,7 @@ async function detectarArquetiposComTimeout(
               `Falha detector arquetipos: ${msg}`,
             );
           }
-        } catch {}
+        } catch { }
         return undefined;
       },
     );
@@ -300,9 +300,9 @@ export async function processarDiagnostico(
               ) {
                 nomeProjeto = parsed.name.trim();
               }
-            } catch {}
+            } catch { }
           }
-        } catch {}
+        } catch { }
 
         const estruturaDetectada = Array.from(dirSet);
         const {
@@ -324,8 +324,7 @@ export async function processarDiagnostico(
         }
       } catch (e) {
         log.aviso(
-          `Falha ao gerar/salvar arquétipo personalizado: ${
-            e instanceof Error ? e.message : String(e)
+          `Falha ao gerar/salvar arquétipo personalizado: ${e instanceof Error ? e.message : String(e)
           }`,
         );
       }
@@ -473,12 +472,12 @@ export async function processarDiagnostico(
     const arquetiposResultado:
       | Awaited<ReturnType<typeof detectarArquetipos>>
       | undefined = await detectarArquetiposComTimeout(
-      { arquivos: fileEntriesComAst, baseDir },
-      baseDir,
-      {
-        quiet: opts.json,
-      },
-    );
+        { arquivos: fileEntriesComAst, baseDir },
+        baseDir,
+        {
+          quiet: opts.json,
+        },
+      );
 
     // Continuar com o processamento restante...
     // Em fast-mode, reduz o conjunto de analistas para acelerar
@@ -496,7 +495,7 @@ export async function processarDiagnostico(
         (fmIncludeSrc as Record<string, unknown>)?.analystsInclude,
       )
         ? ((fmIncludeSrc as Record<string, unknown>)
-            .analystsInclude as string[])
+          .analystsInclude as string[])
         : [];
       const fmExcludeSrc: unknown =
         (config as unknown as Record<string, unknown>).fastMode &&
@@ -508,7 +507,7 @@ export async function processarDiagnostico(
         (fmExcludeSrc as Record<string, unknown>)?.analystsExclude,
       )
         ? ((fmExcludeSrc as Record<string, unknown>)
-            .analystsExclude as string[])
+          .analystsExclude as string[])
         : [];
 
       tecnicas = asTecnicas(
@@ -521,12 +520,12 @@ export async function processarDiagnostico(
             const nome = norm(nomeRaw);
             const matchInclude = includeList.length
               ? includeList.some((n) => {
-                  const nn = norm(n);
-                  return (
-                    nome.includes(nn) ||
-                    nomeRaw.toLowerCase().includes(n.toLowerCase())
-                  );
-                })
+                const nn = norm(n);
+                return (
+                  nome.includes(nn) ||
+                  nomeRaw.toLowerCase().includes(n.toLowerCase())
+                );
+              })
               : true;
             const matchExclude = excludeList.some((n) => {
               const nn = norm(n);
@@ -551,7 +550,7 @@ export async function processarDiagnostico(
       );
       (config as unknown as Record<string, unknown>)['SPECIAL_VERIFY_CYCLES'] =
         verifyCycles;
-    } catch {}
+    } catch { }
 
     const resultadoExecucao = await executarInquisicao(
       fileEntriesComAst,
@@ -594,7 +593,7 @@ export async function processarDiagnostico(
             return !cobertas.some((r) => r.test(regra));
           });
         }
-      } catch {}
+      } catch { }
     }
     // Conciliação simples entre analistas: rebaixa severidade em casos de conflito
     try {
@@ -630,7 +629,7 @@ export async function processarDiagnostico(
           }
         }
       }
-    } catch {}
+    } catch { }
     // Aplicar supressões configuradas em doutor.config.json
     ocorrenciasFiltradas = aplicarSupressaoOcorrencias(
       ocorrenciasFiltradas,
@@ -1165,7 +1164,7 @@ export async function processarDiagnostico(
                 linha: typeof oc.linha === 'number' ? oc.linha : undefined,
                 coluna:
                   typeof (oc as unknown as { coluna?: number }).coluna ===
-                  'number'
+                    'number'
                     ? (oc as unknown as { coluna?: number }).coluna
                     : undefined,
               });
@@ -1296,7 +1295,7 @@ export async function processarDiagnostico(
       if (!opts.json && !config.SCAN_ONLY && totalOcorrencias === 0) {
         logRelatorio.repositorioImpecavel();
       }
-    } catch {}
+    } catch { }
 
     // Em ambiente de testes (Vitest) também invocar via import dinâmico o módulo
     // que os testes normalmente mockam (`../../src/nucleo/constelacao/log.js`).
@@ -1480,10 +1479,10 @@ export async function processarDiagnostico(
         // Debug: log se não há candidatos ou arquetiposResultado é undefined
         const candidatosCount = arquetiposResultado
           ? (
-              arquetiposResultado as Awaited<
-                ReturnType<typeof detectarArquetipos>
-              >
-            ).candidatos?.length || 0
+            arquetiposResultado as Awaited<
+              ReturnType<typeof detectarArquetipos>
+            >
+          ).candidatos?.length || 0
           : 0;
         log.info(
           `DEBUG: arquetiposResultado=${!!arquetiposResultado}, candidatos=${candidatosCount}`,
@@ -1616,7 +1615,7 @@ export async function processarDiagnostico(
               JSON.stringify(opts),
             ),
           );
-        } catch {}
+        } catch { }
       }
       if (opts.json) {
         // Agregar ocorrências de TODO_PENDENTE por arquivo
@@ -1946,7 +1945,7 @@ export async function processarDiagnostico(
           totalOcorrenciasAnaliticas: totalOcorrencias,
           integridadeGuardian: guardianResultado?.status || 'nao-verificado',
         };
-        emitirConselhoOracular(contextoConselho);
+        emitirConselhoDoutoral(contextoConselho);
 
         if (config.REPORT_EXPORT_ENABLED) {
           const ts = new Date().toISOString().replace(/[:.]/g, '-');
@@ -2186,7 +2185,7 @@ export async function processarDiagnostico(
             process.env as unknown as Record<string, string>
           ).__DOUTOR_TUDO_PRONTO_EMITIDO = '1';
         }
-      } catch {}
+      } catch { }
     }
 
     // Quando não houve `arquetiposResultado`, ainda precisamos suportar
@@ -2215,7 +2214,7 @@ export async function processarDiagnostico(
         if (!opts.json && !config.SCAN_ONLY && totalOcorrencias === 0) {
           logRelatorio.repositorioImpecavel();
         }
-      } catch {}
+      } catch { }
 
       const todosAgregados: typeof ocorrenciasOriginais = [];
       for (const [, todos] of todosPorArquivo) {
@@ -2343,7 +2342,7 @@ export async function processarDiagnostico(
             const pkgObj = JSON.parse(pkgRaw) as { version?: string };
             if (pkgObj && typeof pkgObj.version === 'string')
               pkgVersion = pkgObj.version;
-          } catch {}
+          } catch { }
           const schemaMeta = {
             schemaVersion: '1.0.0',
             doutorVersion: pkgVersion,
@@ -2434,12 +2433,12 @@ export async function processarDiagnostico(
         : error instanceof Error
           ? error.message
           : (() => {
-              try {
-                return JSON.stringify(error);
-              } catch {
-                return String(error);
-              }
-            })();
+            try {
+              return JSON.stringify(error);
+            } catch {
+              return String(error);
+            }
+          })();
 
     log.erro(CliProcessamentoDiagnosticoMessages.erroFatalDiagnostico(errMsg));
 
@@ -2470,7 +2469,7 @@ export async function processarDiagnostico(
     if (!opts.json && !config.SCAN_ONLY && totalOcorrencias === 0) {
       logRelatorio.repositorioImpecavel();
     }
-  } catch {}
+  } catch { }
 
   // Fallback para garantir que a função sempre retorna um valor
   return {

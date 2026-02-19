@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 import path from 'node:path';
 
-import { exists, findLicenseFile,readPackageJsonSync } from './fs-utils.js';
-import type { ScanOptions,ScanResult } from './licensas.js';
+import { exists, findLicenseFile, readPackageJsonSync } from './fs-utils.js';
+import type { ScanOptions, ScanResult } from './licensas.js';
 import { normalizeLicense } from './normalizer.js';
 
 export async function scan({ root = process.cwd(), includeDev = false } = {} as ScanOptions): Promise<ScanResult> {
@@ -25,12 +25,7 @@ export async function scan({ root = process.cwd(), includeDev = false } = {} as 
     const dirEntries = await fsReaddir(nmDir);
     for (const e of dirEntries) entries.push(e);
   } catch (err) {
-    try {
-      const syncNames = require('node:fs').readdirSync(nmDir, { withFileTypes: true });
-      for (const d of syncNames) entries.push(d.name);
-    } catch {
-      return result;
-    }
+    return result;
   }
 
   for (const entryName of entries) {

@@ -919,7 +919,7 @@ export const logGuardian = {
 };
 
 /**
- * Conselheiro oracular para bem-estar do desenvolvedor
+ * Conselheiro doutoral para bem-estar do desenvolvedor
  */
 export const logConselheiro = {
   volumeAlto(): void {

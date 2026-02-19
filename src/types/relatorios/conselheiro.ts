@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 /**
- * Tipos para o conselheiro oracular
+ * Tipos para o conselheiro doutoral
  */
 
 /**
- * Contexto para emissão de conselhos oráculo
+ * Contexto para emissão de conselhos doutor
  */
-export interface ConselhoContextoOracular {
+export interface ConselhoContextoDoutoral {
   hora?: number;
   arquivosParaCorrigir?: number;
   arquivosParaPodar?: number;

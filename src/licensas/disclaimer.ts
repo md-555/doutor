@@ -9,7 +9,7 @@ export interface DisclaimerOptions {
   dryRun?: boolean;
 }
 
-function execFileAsync(cmd: string, args: string[], opts: Record<string, unknown> = {}): Promise<{stdout: string; stderr: string}> {
+function execFileAsync(cmd: string, args: string[], opts: Record<string, unknown> = {}): Promise<{ stdout: string; stderr: string }> {
   return new Promise((resolve, reject) => {
     _execFile(cmd, args, { shell: false, ...opts }, (err: Error | null, stdout: unknown, stderr: unknown) => {
       if (err) return reject(Object.assign(err, { stdout, stderr }));
@@ -35,7 +35,7 @@ async function listMarkdown(root: string): Promise<string[]> {
       for (const e of entries) {
         const p = path.join(dir, e.name);
         if (e.isDirectory()) {
-          if (/^(node_modules|dist|\.git|pre-public|preview-oraculo|coverage|relatorios|\.oraculo)$/i.test(e.name)) continue;
+          if (/^(node_modules|dist|\.git|pre-public|preview-doutor|coverage|relatorios|\.doutor)$/i.test(e.name)) continue;
           out.push(...(await walk(p)));
         } else if (/\.md$/i.test(e.name)) {
           out.push(path.relative(root, p));
@@ -48,7 +48,7 @@ async function listMarkdown(root: string): Promise<string[]> {
 }
 
 export async function addDisclaimer({ root = process.cwd(), disclaimerPath = defaultDisclaimerPath, dryRun = false }:
-  DisclaimerOptions = {}): Promise<{updatedFiles: string[]}> {
+  DisclaimerOptions = {}): Promise<{ updatedFiles: string[] }> {
   const absDisclaimer = path.join(root, disclaimerPath);
   await fs.access(absDisclaimer).catch(() => { throw new Error(`Disclaimer not found: ${disclaimerPath}`); });
   const disclaimerText = await fs.readFile(absDisclaimer, 'utf8');
@@ -78,9 +78,9 @@ export async function addDisclaimer({ root = process.cwd(), disclaimerPath = def
 }
 
 export async function verifyDisclaimer({ root = process.cwd(), disclaimerPath = defaultDisclaimerPath }:
-  Pick<DisclaimerOptions, 'root' | 'disclaimerPath'> = {}): Promise<{missing: string[]}> {
+  Pick<DisclaimerOptions, 'root' | 'disclaimerPath'> = {}): Promise<{ missing: string[] }> {
   const files = (await listMarkdown(root))
-    .filter((f) => f !== disclaimerPath && !f.startsWith('pre-public/') && !f.startsWith('preview-oraculo/'))
+    .filter((f) => f !== disclaimerPath && !f.startsWith('pre-public/') && !f.startsWith('preview-doutor/'))
     .filter((f) => !f.startsWith('.abandonados/') && !f.startsWith('.deprecados/') && !f.startsWith('coverage/') && !f.startsWith('relatorios/'));
 
   const missing: string[] = [];
